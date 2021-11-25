@@ -1,0 +1,11 @@
+#### Admins
+GET http://localhost:8080/dae_project/api/admins
+Accept: application/json
+
+#### Profissionais Saude
+GET http://localhost:8080/dae_project/api/profissionais
+Accept: application/json
+
+#### Doentes
+GET http://localhost:8080/dae_project/api/doentes
+Accept: application/json
