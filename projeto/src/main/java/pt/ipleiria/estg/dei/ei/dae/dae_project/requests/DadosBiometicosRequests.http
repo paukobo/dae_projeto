@@ -1,0 +1,15 @@
+###
+POST http://localhost:8080/dae_project/api/dadosbiomedicos
+Content-Type: application/json
+
+{ "nome": "3",
+  "descricao": "Engenharia Mecanica",
+  "valorMin": "50",
+  "valorMax": "70",
+  "unidades": "ºC"
+}
+###
+
+###
+GET http://localhost:8080/dae_project/api/dadosbiomedicos
+###
