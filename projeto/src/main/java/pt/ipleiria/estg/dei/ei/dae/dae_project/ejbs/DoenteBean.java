@@ -29,19 +29,19 @@ public class DoenteBean {
         return d.getId();
     }
 
-    public void remove(int id) throws MyEntityNotFoundException{
+    public void remove(long id) throws MyEntityNotFoundException{
         Doente doente = findDoente(id);
         if (doente == null) {
-            throw new MyEntityNotFoundException("Doente nº: " + id + "not found");
+            throw new MyEntityNotFoundException("Doente nº: " + id + " not found");
         }
         em.remove(doente);
     }
 
 
-    public boolean update(int id, String name, String email,String password) throws MyEntityNotFoundException{
+    public boolean update(long id, String name, String email,String password) throws MyEntityNotFoundException{
         Doente doente = findDoente(id);
         if(doente == null){
-            throw new MyEntityNotFoundException("Doente nº: " + id + "not found");
+            throw new MyEntityNotFoundException("Doente nº: " + id + " not found");
         }
 
         em.lock(doente, LockModeType.OPTIMISTIC);

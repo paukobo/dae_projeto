@@ -6,14 +6,15 @@ import pt.ipleiria.estg.dei.ei.dae.dae_project.ejbs.DoenteBean;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.ejbs.ProfissionalSaudeBean;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Doente;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.ProfissionalSaude;
+import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyConstraintViolationException;
+import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.EJB;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,6 +33,40 @@ public class ProfissionalSaudeService {
     @Path("/")
     public List<ProfissionalSaudeDTO> getAllProfissionaisSaudeWS() {
         return toDTOs(profissionalSaudeBean.getAllProfissionaisSaude());
+    }
+
+    @POST
+    @Path("/")
+    public Response createNewProfissionalSaude (ProfissionalSaudeDTO profissionalSaudeDTO) throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
+        long id = profissionalSaudeBean.create(
+                profissionalSaudeDTO.getName(),
+                profissionalSaudeDTO.getEmail(),
+                profissionalSaudeDTO.getPassword()
+        );
+        ProfissionalSaude newProfissionalSaude = profissionalSaudeBean.findProfissional(id);
+        if(newProfissionalSaude == null)
+            throw new MyEntityNotFoundException("Profissional Saúde nº: " + profissionalSaudeDTO.getId() + ", " + profissionalSaudeDTO.getName() + " not found");
+        return Response.status(Response.Status.CREATED).build();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public Response removeProfissionalSaude (@PathParam("id") long id) throws MyEntityNotFoundException{
+        profissionalSaudeBean.remove(id);
+        ProfissionalSaude profissionalSaude = profissionalSaudeBean.findProfissional(id);
+        if(profissionalSaude != null)
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        return Response.status(Response.Status.OK).build();
+    }
+
+
+    @PUT
+    @Path("/{id}")
+    public Response updateProfissionalSaude (@PathParam("id") long id, ProfissionalSaudeDTO profissionalSaudeDTO) throws MyEntityNotFoundException{
+        boolean updated = profissionalSaudeBean.update(id, profissionalSaudeDTO.getName(), profissionalSaudeDTO.getEmail(), profissionalSaudeDTO.getPassword());
+        if(!updated)
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        return Response.status(Response.Status.OK).build();
     }
 
 
