@@ -17,13 +17,9 @@ public class AdminBean {
     @PersistenceContext
     private EntityManager em;
 
-    public void create(int id, String name, String email, String password) throws MyEntityNotFoundException, MyEntityExistsException, MyConstraintViolationException {
-        Admin a = em.find(Admin.class, id);
-        if (a != null){
-            throw new MyEntityExistsException("Admin nº: " + id + ", " + name + " já existe!");
-        }
+    public void create(String name, String email, String password) throws MyEntityNotFoundException, MyEntityExistsException, MyConstraintViolationException {
         try {
-            a = new Admin(id, name, email, password);
+            Admin a = new Admin(name, email, password);
             em.persist(a);
         } catch (ConstraintViolationException e) {
             throw new MyConstraintViolationException(e);

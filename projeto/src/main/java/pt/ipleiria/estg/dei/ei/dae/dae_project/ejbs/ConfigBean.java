@@ -26,10 +26,10 @@ public class ConfigBean {
     @PostConstruct
     public void populateDB() {
         try {
-            doenteBean.create(1, "João", "joao@mail.pt", "1234");
-            adminBean.create(100, "Pedro", "pedro@mail.pt", "12345");
-            profissionalSaudeBean.create(200, "Ana", "ana@mail.pt", "123456");
-            profissionalSaudeBean.create(201, "Ana2", "ana2@mail.pt", "123456");
+            doenteBean.create("João", "joao@mail.pt", "1234");
+            adminBean.create("Pedro", "pedro@mail.pt", "12345");
+            profissionalSaudeBean.create( "Ana", "ana@mail.pt", "123456");
+            profissionalSaudeBean.create("Ana2", "ana2@mail.pt", "123456");
 
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage());

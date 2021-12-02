@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private long id;
 
     @NotNull
     private String name;
@@ -34,8 +34,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(int id, String name, String email, String password) {
-        this.id = id;
+    public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = hashPassword(password);
@@ -80,11 +79,11 @@ public class User implements Serializable {
         return new String(encoded);
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 }

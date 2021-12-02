@@ -17,13 +17,10 @@ public class ProfissionalSaudeBean {
     @PersistenceContext
     private EntityManager em;
 
-    public void create(int id, String name, String email, String password) throws MyEntityNotFoundException, MyEntityExistsException, MyConstraintViolationException {
-        ProfissionalSaude p = em.find(ProfissionalSaude.class, id);
-        if (p != null){
-            throw new MyEntityExistsException("Profissional de Saúde nº: " + id + ", " + name + " já existe!");
-        }
+    public void create(String name, String email, String password) throws MyEntityNotFoundException, MyEntityExistsException, MyConstraintViolationException {
+
         try {
-            p = new ProfissionalSaude(id, name, email, password);
+           ProfissionalSaude p = new ProfissionalSaude(name, email, password);
             em.persist(p);
         } catch (ConstraintViolationException e) {
             throw new MyConstraintViolationException(e);

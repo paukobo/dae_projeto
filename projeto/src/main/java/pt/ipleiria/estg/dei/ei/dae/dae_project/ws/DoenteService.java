@@ -3,14 +3,15 @@ package pt.ipleiria.estg.dei.ei.dae.dae_project.ws;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.DoenteDTO;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.ejbs.DoenteBean;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Doente;
+import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyConstraintViolationException;
+import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.EJB;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,11 +32,55 @@ public class DoenteService {
         return toDTOs(doenteBean.getAllDoentes());
     }
 
+    @POST
+    @Path("/")
+    public Response createNewDoente (DoenteDTO doenteDTO) throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
+        long id = doenteBean.create(
+                doenteDTO.getName(),
+                doenteDTO.getEmail(),
+                doenteDTO.getPassword()
+        );
+        Doente newDoente = doenteBean.findDoente(id);
+        if(newDoente == null)
+            throw new MyEntityNotFoundException("Doente nº: " + doenteDTO.getId() + ", " + doenteDTO.getName() + " not found");
+        return Response.status(Response.Status.CREATED).build();
+    }
+
+//    @GET
+//    @Path("/{username}")
+//    public Response consult (@PathParam("username") String username){
+//        Student student = studentBean.findStudent(username);
+//        if(student==null)
+//            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+//        return Response.status(Response.Status.OK).entity(toDTO(student)).build();
+//    }
+//
+//    @DELETE
+//    @Path("/{username}")
+//    public Response removeStudent (@PathParam("username") String username) throws MyEntityNotFoundException{
+//        studentBean.remove(username);
+//        Student student = studentBean.findStudent(username);
+//        if(student == null)
+//            return Response.status(Response.Status.OK).build();
+//        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+//    }
+//
+//
+//    @PUT
+//    @Path("{username}")
+//    public Response updateStudent (@PathParam("username") String username, StudentDTO studentDTO) throws MyEntityNotFoundException{
+//        boolean updated = studentBean.update(username, studentDTO.getName(),studentDTO.getEmail(),studentDTO.getPassword(),studentDTO.getCourseCode());
+//        if(!updated)
+//            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+//        return Response.status(Response.Status.OK).build();
+//    }
 
     private DoenteDTO toDTO(Doente doente){
         return new DoenteDTO(
+                doente.getId(),
                 doente.getName(),
-                doente.getEmail()
+                doente.getEmail(),
+                doente.getPassword()
         );
     }
 

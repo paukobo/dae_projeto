@@ -22,8 +22,8 @@ public class Doente extends User implements Serializable {
     public Doente() {
     }
 
-    public Doente(int id, String name, String email, String password) {
-        super(id, name, email, password);
+    public Doente(String name, String email, String password) {
+        super(name, email, password);
     }
 
 }

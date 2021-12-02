@@ -37,8 +37,10 @@ public class AdminService {
 
     private AdminDTO toDTO(Admin admin){
         return new AdminDTO(
+                admin.getId(),
                 admin.getName(),
-                admin.getEmail()
+                admin.getEmail(),
+                admin.getPassword()
         );
     }
 

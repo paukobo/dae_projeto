@@ -7,8 +7,8 @@ import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityNotFoundExcept
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
-import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 @Stateless
@@ -17,18 +17,42 @@ public class DoenteBean {
     @PersistenceContext
     private EntityManager em;
 
-    public void create(int id, String name, String email, String password) throws MyEntityNotFoundException, MyEntityExistsException, MyConstraintViolationException {
-        Doente d = em.find(Doente.class, id);
-        if (d != null){
-            throw new MyEntityExistsException("Doente nº:" + id + ", " + name + " já existe!");
-        }
-        try {
-            d = new Doente(id, name, email, password);
-            em.persist(d);
-        } catch (ConstraintViolationException e) {
-            throw new MyConstraintViolationException(e);
-        }
+    public Doente findDoente(long id){
+        return em.find(Doente.class, id);
     }
+
+    public long create(String name, String email, String password) throws MyEntityNotFoundException, MyEntityExistsException, MyConstraintViolationException {
+
+        Doente d = new Doente(name, email, password);
+        em.persist(d);
+
+        return d.getId();
+    }
+
+    public void remove(int id) throws MyEntityNotFoundException{
+        Doente doente = findDoente(id);
+        if (doente == null) {
+            throw new MyEntityNotFoundException("Doente nº: " + id + "not found");
+        }
+        em.remove(doente);
+    }
+
+
+    public boolean update(int id, String name, String email,String password) throws MyEntityNotFoundException{
+        Doente doente = findDoente(id);
+        if(doente == null){
+            throw new MyEntityNotFoundException("Doente nº: " + id + "not found");
+        }
+
+        em.lock(doente, LockModeType.OPTIMISTIC);
+
+        doente.setName(name);
+        doente.setEmail(email);
+        doente.setPassword(password);
+
+        return true;
+    }
+
 
 
     public List<Doente> getAllDoentes() {

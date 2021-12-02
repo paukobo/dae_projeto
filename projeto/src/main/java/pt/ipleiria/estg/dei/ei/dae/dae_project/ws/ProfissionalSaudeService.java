@@ -37,8 +37,10 @@ public class ProfissionalSaudeService {
 
     private ProfissionalSaudeDTO toDTO(ProfissionalSaude profissionalSaude){
         return new ProfissionalSaudeDTO(
+                profissionalSaude.getId(),
                 profissionalSaude.getName(),
-                profissionalSaude.getEmail()
+                profissionalSaude.getEmail(),
+                profissionalSaude.getPassword()
         );
     }
 

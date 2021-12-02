@@ -16,7 +16,7 @@ public class ProfissionalSaude extends User implements Serializable {
     public ProfissionalSaude() {
     }
 
-    public ProfissionalSaude(int id, String name, String email, String password) {
-        super(id, name, email, password);
+    public ProfissionalSaude(String name, String email, String password) {
+        super(name, email, password);
     }
 }
