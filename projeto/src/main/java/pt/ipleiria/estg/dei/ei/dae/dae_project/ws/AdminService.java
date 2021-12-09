@@ -51,6 +51,18 @@ public class AdminService {
         return Response.status(Response.Status.CREATED).build();
     }
 
+    @GET
+    @Path("/{id}")
+    public Response getAdminiDetails(@PathParam("id") int id) {
+        Admin admin = adminBean.findAdmin(id);
+        if (admin != null) {
+            return Response.ok(toDTO(admin)).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity("ERROR_FINDING_ADMIN")
+                .build();
+    }
+
     @DELETE
     @Path("/{id}")
     public Response removeAdmin (@PathParam("id") long id) throws MyEntityNotFoundException{

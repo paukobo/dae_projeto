@@ -3,6 +3,10 @@ GET http://localhost:8080/dae_project/api/admins
 Accept: application/json
 
 ###
+GET http://localhost:8080/dae_project/api/admins/2
+Accept: application/json
+
+###
 POST http://localhost:8080/dae_project/api/admins
 Content-Type: application/json
 
@@ -62,7 +66,9 @@ Content-Type: application/json
 
 { "name": "John Doe doente",
   "email": "johndoedoente@mail.pt",
-  "password": "jddoente"
+  "password": "jddoente",
+  "contact": "900000001",
+  "address": "Rua Teste"
 }
 
 ###

@@ -4,17 +4,17 @@
       <template v-slot:cell(actions)="row">
         <nuxt-link
           class="btn btn-link"
-          :to="`/profissionais/${row.item.id}`">Details</nuxt-link>
+          :to="`/profissionaisSaude/${row.item.id}`">Details</nuxt-link>
       </template>
     </b-table>
     <nuxt-link to="/">Back</nuxt-link>
     <b-container>
       <br>
-      <nuxt-link to="profissionais/create">Create a New Profissional de Saúde</nuxt-link>
+      <nuxt-link to="profissionaisSaude/create">Create a New Profissional de Saúde</nuxt-link>
       <br>
-      <nuxt-link to="profissionais/remove">Remove a Profissional de Saúde</nuxt-link>
+      <nuxt-link to="profissionaisSaude/remove">Remove a Profissional de Saúde</nuxt-link>
       <br>
-      <nuxt-link to="profissionais/update">Update a Profissional de Saúde</nuxt-link>
+      <nuxt-link to="profissionaisSaude/update">Update a Profissional de Saúde</nuxt-link>
       <br>
     </b-container>
   </b-container>

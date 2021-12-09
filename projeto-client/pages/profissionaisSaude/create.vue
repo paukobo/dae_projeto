@@ -122,7 +122,7 @@ export default {
         password: this.password
       })
         .then(() => {
-          this.$router.push('/profissionais')
+          this.$router.push('/profissionaisSaude')
         })
     }
   }

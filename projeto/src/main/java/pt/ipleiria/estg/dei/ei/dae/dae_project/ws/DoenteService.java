@@ -2,6 +2,7 @@ package pt.ipleiria.estg.dei.ei.dae.dae_project.ws;
 
 import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.DoenteDTO;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.ejbs.DoenteBean;
+import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Admin;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Doente;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.CatchAllException;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyConstraintViolationException;
@@ -39,12 +40,26 @@ public class DoenteService {
         long id = doenteBean.create(
                 doenteDTO.getName(),
                 doenteDTO.getEmail(),
-                doenteDTO.getPassword()
+                doenteDTO.getPassword(),
+                doenteDTO.getContact(),
+                doenteDTO.getAddress()
         );
         Doente newDoente = doenteBean.findDoente(id);
         if(newDoente == null)
             throw new MyEntityNotFoundException("Doente nº: " + doenteDTO.getId() + ", " + doenteDTO.getName() + " not found");
         return Response.status(Response.Status.CREATED).build();
+    }
+
+    @GET
+    @Path("/{id}")
+    public Response getDoenteDetails(@PathParam("id") int id) {
+        Doente doente = doenteBean.findDoente(id);
+        if (doente != null) {
+            return Response.ok(toDTO(doente)).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity("ERROR_FINDING_DOENTE")
+                .build();
     }
 
     @DELETE
@@ -61,7 +76,7 @@ public class DoenteService {
     @PUT
     @Path("/{id}")
     public Response updateDoente (@PathParam("id") long id, DoenteDTO doenteDTO) throws MyEntityNotFoundException{
-        boolean updated = doenteBean.update(id, doenteDTO.getName(), doenteDTO.getEmail(), doenteDTO.getPassword());
+        boolean updated = doenteBean.update(id, doenteDTO.getName(), doenteDTO.getEmail(), doenteDTO.getPassword(), doenteDTO.getContact(), doenteDTO.getAddress());
         if(!updated)
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         return Response.status(Response.Status.OK).build();
@@ -72,7 +87,9 @@ public class DoenteService {
                 doente.getId(),
                 doente.getName(),
                 doente.getEmail(),
-                doente.getPassword()
+                doente.getPassword(),
+                doente.getContact(),
+                doente.getAddress()
         );
     }
 

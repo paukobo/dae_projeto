@@ -4,6 +4,7 @@ import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.DoenteDTO;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.ProfissionalSaudeDTO;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.ejbs.DoenteBean;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.ejbs.ProfissionalSaudeBean;
+import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Admin;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Doente;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.ProfissionalSaude;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyConstraintViolationException;
@@ -47,6 +48,18 @@ public class ProfissionalSaudeService {
         if(newProfissionalSaude == null)
             throw new MyEntityNotFoundException("Profissional Saúde nº: " + profissionalSaudeDTO.getId() + ", " + profissionalSaudeDTO.getName() + " not found");
         return Response.status(Response.Status.CREATED).build();
+    }
+
+    @GET
+    @Path("/{id}")
+    public Response getProfissionalSaudeDetails(@PathParam("id") int id) {
+        ProfissionalSaude profissionalSaude = profissionalSaudeBean.findProfissional(id);
+        if (profissionalSaude != null) {
+            return Response.ok(toDTO(profissionalSaude)).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity("ERROR_FINDING_PROFISSIONAL_SAUDE")
+                .build();
     }
 
     @DELETE

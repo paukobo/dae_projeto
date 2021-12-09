@@ -9,7 +9,7 @@
         </b-form-group>
 
         <p class="text-danger" v-show="errorMsg">{{ errorMsg }}</p>
-        <nuxt-link to="/profissionais">Return</nuxt-link>
+        <nuxt-link to="/profissionaisSaude">Return</nuxt-link>
         <button type="reset" @click="reset">RESET</button>
         <button @click.prevent="remove">Remove</button>
       </form>
@@ -32,7 +32,7 @@ export default {
     remove() {
       this.$axios.$delete('/api/profissionais/' + this.id)
         .then(() => {
-          this.$router.push('/profissionais')
+          this.$router.push('/profissionaisSaude')
         })
         .catch((e) => {
           alert(e)

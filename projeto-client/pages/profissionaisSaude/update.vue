@@ -26,7 +26,7 @@
         </b-form-group>
 
         <p class="text-danger" v-show="errorMsg">{{ errorMsg }}</p>
-        <nuxt-link to="/profissionais">Return</nuxt-link>
+        <nuxt-link to="/profissionaisSaude">Return</nuxt-link>
         <button type="reset" @click="reset">Reset</button>
         <button @click.prevent="update" >Update</button>
       </form>
@@ -55,7 +55,7 @@ export default {
         password: this.password,
       })
         .then(() => {
-          this.$router.push('/profissionais')
+          this.$router.push('/profissionaisSaude')
         })
         .catch(()=>{
           alert("Profissional de Saúde with id: " + this.id + " not found")
