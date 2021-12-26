@@ -1,13 +1,13 @@
 <template>
   <div>
 
-    <h1>Create a new Dado Biomedico</h1>
+    <h1>Edit Dado Biomedico</h1>
 
     <form @submit.prevent="create" :disabled="!isFormValid" style="margin-left: 30px">
       <b-form-group
         id="name"
         description="The name is required"
-        label="Enter the name"
+        label="Name"
         label-for="name"
         :invalid-feedback="invalidNameFeedback"
         :state="isNameValid">
@@ -35,10 +35,10 @@
 
       </b-form-group>
       <p v-show="errorMsg">{{ errorMsg }}</p>
-      <nuxt-link to="/dadosbiomedicos">Return</nuxt-link>
+      <a href="#" @click.prevent="back()">Cancel</a>
       <button type="reset" @click="reset">RESET</button>
       <button @click.prevent="create"
-              :disabled="!isFormValid">CREATE</button>
+              :disabled="!isFormValid">SAVE</button>
     </form>
   </div>
 </template>
@@ -48,7 +48,7 @@ import { BIcon, BIconPlus, BIconDash } from 'bootstrap-vue'
 
 class Dado{
   constructor() {
-    this.dadoText = '';
+    this.dadoText = "";
   }
 }
 export default {
@@ -65,11 +65,15 @@ export default {
       valorMax: null,
       unidades: null,
       errorMsg: false,
-      biomedicos: [Dado.constructor()]
+      biomedicos: [Dado.constructor()],
+      dadoBiomedico: {}
     }
   },
 
   computed: {
+    id() {
+      return this.$route.params.id
+    },
     isMinValValid(){
       if(this.valorMin == null || this.valorMin == String() ){
         return false
@@ -142,9 +146,24 @@ export default {
   },
 
   methods: {
+    back(){
+      this.$router.go(-1)
+    },
     reset () {
       this.errorMsg = false
-      this.biomedicos.splice(1,this.biomedicos.length -1)
+      this.name = this.dadoBiomedico.nome;
+      this.unidades = this.dadoBiomedico.unidades;
+      this.description = this.dadoBiomedico.descricao;
+      this.valorMin = this.dadoBiomedico.valorMin;
+      this.valorMax= this.dadoBiomedico.valorMax;
+      this.biomedicos = [];
+
+      for(let i = 0; i < this.dadoBiomedico.valoresQualitativos.length; i++){
+        let dado = Dado.constructor();
+        dado.dadoText = this.dadoBiomedico.valoresQualitativos[i];
+        this.biomedicos.push(dado)
+      }
+    console.log(this.biomedicos);
     },
 
     create() {
@@ -164,7 +183,6 @@ export default {
           array.push(this.biomedicos[i].dadoText)
         }
         data =  {
-
           nome: this.name,
           descricao: this.description,
           valorMin: this.valorMin,
@@ -174,9 +192,9 @@ export default {
         }
       }
 
-        this.$axios.$post('/api/dadosbiomedicos',   data)
+      this.$axios.$put('/api/dadosbiomedicos/'+this.id,   data)
         .then(() => {
-          this.$router.push('/dadosbiomedicos')
+          this.$router.push('/dadosbiomedicos/'+ this.id)
         })
         .catch(error => {
           this.errorMsg = error.response.data
@@ -189,6 +207,13 @@ export default {
     add(){
       this.biomedicos.push(Dado.constructor())
     }
-  }
+  },
+  created() {
+    this.$axios.$get(`api/dadosbiomedicos/${this.id}`)
+      .then((biomedico) => {
+        this.dadoBiomedico = biomedico || {}
+        this.reset()
+      })
+  },
 }
 </script>
