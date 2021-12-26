@@ -19,18 +19,18 @@ public class ProfissionalSaudeBean {
     @PersistenceContext
     private EntityManager em;
 
-    public ProfissionalSaude findProfissional(long id) {
+    public ProfissionalSaude findProfissional(String id) {
         return em.find(ProfissionalSaude.class, id);
     }
 
-    public long create(String name, String email, String password) throws MyEntityNotFoundException, MyEntityExistsException, MyConstraintViolationException {
+    public String create(String name, String email, String password) throws MyEntityNotFoundException, MyEntityExistsException, MyConstraintViolationException {
 
        ProfissionalSaude p = new ProfissionalSaude(name, email, password);
         em.persist(p);
         return p.getId();
     }
 
-    public void remove(long id) throws MyEntityNotFoundException{
+    public void remove(String id) throws MyEntityNotFoundException{
         ProfissionalSaude profissionalSaude = findProfissional(id);
         if (profissionalSaude == null) {
             throw new MyEntityNotFoundException("Profissional Saúde nº: " + id + " not found");
@@ -39,7 +39,7 @@ public class ProfissionalSaudeBean {
     }
 
 
-    public boolean update(long id, String name, String email,String password) throws MyEntityNotFoundException{
+    public boolean update(String id, String name, String email, String password) throws MyEntityNotFoundException{
         ProfissionalSaude profissionalSaude = findProfissional(id);
         if(profissionalSaude == null){
             throw new MyEntityNotFoundException("Profissional de Saúde nº: " + id + " not found");

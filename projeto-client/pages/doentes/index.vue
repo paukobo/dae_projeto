@@ -5,6 +5,9 @@
         <nuxt-link
           class="btn btn-link"
           :to="`/doentes/${row.item.id}`">Details</nuxt-link>
+        <nuxt-link
+          class="btn btn-link"
+          :to="`/doentes/${row.item.id}`">Edit</nuxt-link>
       </template>
     </b-table>
     <nuxt-link to="/">Back</nuxt-link>

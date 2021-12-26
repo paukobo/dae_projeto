@@ -40,7 +40,7 @@ public class AdminService {
     @POST
     @Path("/")
     public Response createNewAdmin (AdminDTO adminDTO) throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
-        long id = adminBean.create(
+        String id = adminBean.create(
                 adminDTO.getName(),
                 adminDTO.getEmail(),
                 adminDTO.getPassword()
@@ -53,7 +53,7 @@ public class AdminService {
 
     @GET
     @Path("/{id}")
-    public Response getAdminiDetails(@PathParam("id") int id) {
+    public Response getAdminiDetails(@PathParam("id") String id) {
         Admin admin = adminBean.findAdmin(id);
         if (admin != null) {
             return Response.ok(toDTO(admin)).build();
@@ -65,7 +65,7 @@ public class AdminService {
 
     @DELETE
     @Path("/{id}")
-    public Response removeAdmin (@PathParam("id") long id) throws MyEntityNotFoundException{
+    public Response removeAdmin (@PathParam("id") String id) throws MyEntityNotFoundException{
         adminBean.remove(id);
         Admin admin = adminBean.findAdmin(id);
         if(admin != null)
@@ -76,7 +76,7 @@ public class AdminService {
 
     @PUT
     @Path("/{id}")
-    public Response updateAdmin (@PathParam("id") long id, AdminDTO adminDTO) throws MyEntityNotFoundException{
+    public Response updateAdmin (@PathParam("id") String id, AdminDTO adminDTO) throws MyEntityNotFoundException{
         boolean updated = adminBean.update(id, adminDTO.getName(), adminDTO.getEmail(), adminDTO.getPassword());
         if(!updated)
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

@@ -39,7 +39,7 @@ public class ProfissionalSaudeService {
     @POST
     @Path("/")
     public Response createNewProfissionalSaude (ProfissionalSaudeDTO profissionalSaudeDTO) throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
-        long id = profissionalSaudeBean.create(
+        String id = profissionalSaudeBean.create(
                 profissionalSaudeDTO.getName(),
                 profissionalSaudeDTO.getEmail(),
                 profissionalSaudeDTO.getPassword()
@@ -52,7 +52,7 @@ public class ProfissionalSaudeService {
 
     @GET
     @Path("/{id}")
-    public Response getProfissionalSaudeDetails(@PathParam("id") int id) {
+    public Response getProfissionalSaudeDetails(@PathParam("id") String id) {
         ProfissionalSaude profissionalSaude = profissionalSaudeBean.findProfissional(id);
         if (profissionalSaude != null) {
             return Response.ok(toDTO(profissionalSaude)).build();
@@ -64,7 +64,7 @@ public class ProfissionalSaudeService {
 
     @DELETE
     @Path("/{id}")
-    public Response removeProfissionalSaude (@PathParam("id") long id) throws MyEntityNotFoundException{
+    public Response removeProfissionalSaude (@PathParam("id") String id) throws MyEntityNotFoundException{
         profissionalSaudeBean.remove(id);
         ProfissionalSaude profissionalSaude = profissionalSaudeBean.findProfissional(id);
         if(profissionalSaude != null)
@@ -75,7 +75,7 @@ public class ProfissionalSaudeService {
 
     @PUT
     @Path("/{id}")
-    public Response updateProfissionalSaude (@PathParam("id") long id, ProfissionalSaudeDTO profissionalSaudeDTO) throws MyEntityNotFoundException{
+    public Response updateProfissionalSaude (@PathParam("id") String id, ProfissionalSaudeDTO profissionalSaudeDTO) throws MyEntityNotFoundException{
         boolean updated = profissionalSaudeBean.update(id, profissionalSaudeDTO.getName(), profissionalSaudeDTO.getEmail(), profissionalSaudeDTO.getPassword());
         if(!updated)
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

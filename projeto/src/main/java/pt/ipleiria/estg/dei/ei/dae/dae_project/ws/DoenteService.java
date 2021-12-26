@@ -37,7 +37,7 @@ public class DoenteService {
     @POST
     @Path("/")
     public Response createNewDoente (DoenteDTO doenteDTO) throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
-        long id = doenteBean.create(
+        String id = doenteBean.create(
                 doenteDTO.getName(),
                 doenteDTO.getEmail(),
                 doenteDTO.getPassword(),
@@ -52,7 +52,7 @@ public class DoenteService {
 
     @GET
     @Path("/{id}")
-    public Response getDoenteDetails(@PathParam("id") int id) {
+    public Response getDoenteDetails(@PathParam("id") String id) {
         Doente doente = doenteBean.findDoente(id);
         if (doente != null) {
             return Response.ok(toDTO(doente)).build();
@@ -64,7 +64,7 @@ public class DoenteService {
 
     @DELETE
     @Path("/{id}")
-    public Response removeDoente (@PathParam("id") long id) throws MyEntityNotFoundException{
+    public Response removeDoente (@PathParam("id") String id) throws MyEntityNotFoundException{
         doenteBean.remove(id);
         Doente doente = doenteBean.findDoente(id);
         if(doente != null)
@@ -75,7 +75,7 @@ public class DoenteService {
 
     @PUT
     @Path("/{id}")
-    public Response updateDoente (@PathParam("id") long id, DoenteDTO doenteDTO) throws MyEntityNotFoundException{
+    public Response updateDoente (@PathParam("id") String id, DoenteDTO doenteDTO) throws MyEntityNotFoundException{
         boolean updated = doenteBean.update(id, doenteDTO.getName(), doenteDTO.getEmail(), doenteDTO.getPassword(), doenteDTO.getContact(), doenteDTO.getAddress());
         if(!updated)
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

@@ -19,18 +19,18 @@ public class AdminBean {
     @PersistenceContext
     private EntityManager em;
 
-    public Admin findAdmin(long id) {
+    public Admin findAdmin(String id) {
         return em.find(Admin.class, id);
     }
 
-    public long create(String name, String email, String password) throws MyEntityNotFoundException, MyEntityExistsException, MyConstraintViolationException {
+    public String create(String name, String email, String password) throws MyEntityNotFoundException, MyEntityExistsException, MyConstraintViolationException {
 
         Admin a = new Admin(name, email, password);
         em.persist(a);
         return a.getId();
     }
 
-    public void remove(long id) throws MyEntityNotFoundException{
+    public void remove(String id) throws MyEntityNotFoundException{
         Admin admin = findAdmin(id);
         if (admin == null) {
             throw new MyEntityNotFoundException("Administrador nº: " + id + " not found");
@@ -39,7 +39,7 @@ public class AdminBean {
     }
 
 
-    public boolean update(long id, String name, String email,String password) throws MyEntityNotFoundException{
+    public boolean update(String id, String name, String email, String password) throws MyEntityNotFoundException{
         Admin admin = findAdmin(id);
         if(admin == null){
             throw new MyEntityNotFoundException("Administrador nº: " + id + " not found");

@@ -18,8 +18,8 @@ import java.util.logging.Logger;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
 
     @NotNull
     private String name;
@@ -82,11 +82,11 @@ public class User implements Serializable {
         return new String(encoded);
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 }

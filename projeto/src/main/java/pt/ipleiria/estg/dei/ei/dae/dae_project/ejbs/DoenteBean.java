@@ -17,11 +17,11 @@ public class DoenteBean {
     @PersistenceContext
     private EntityManager em;
 
-    public Doente findDoente(long id){
+    public Doente findDoente(String id){
         return em.find(Doente.class, id);
     }
 
-    public long create(String name, String email, String password, String contact, String address) throws MyEntityNotFoundException, MyEntityExistsException, MyConstraintViolationException {
+    public String create(String name, String email, String password, String contact, String address) throws MyEntityNotFoundException, MyEntityExistsException, MyConstraintViolationException {
 
         Doente d = new Doente(name, email, password, contact, address);
         em.persist(d);
@@ -29,7 +29,7 @@ public class DoenteBean {
         return d.getId();
     }
 
-    public void remove(long id) throws MyEntityNotFoundException{
+    public void remove(String id) throws MyEntityNotFoundException{
         Doente doente = findDoente(id);
         if (doente == null) {
             throw new MyEntityNotFoundException("Doente nº: " + id + " not found");
@@ -38,7 +38,7 @@ public class DoenteBean {
     }
 
 
-    public boolean update(long id, String name, String email,String password, String contact, String address) throws MyEntityNotFoundException{
+    public boolean update(String id, String name, String email, String password, String contact, String address) throws MyEntityNotFoundException{
         Doente doente = findDoente(id);
         if(doente == null){
             throw new MyEntityNotFoundException("Doente nº: " + id + " not found");
