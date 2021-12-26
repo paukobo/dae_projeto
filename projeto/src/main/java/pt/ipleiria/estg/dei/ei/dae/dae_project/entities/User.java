@@ -31,6 +31,9 @@ public class User implements Serializable {
     @NotNull
     private String password;
 
+    @Version
+    private int version;
+
     public User() {
     }
 

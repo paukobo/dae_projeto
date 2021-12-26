@@ -21,27 +21,27 @@ public class DoenteBean {
         return em.find(Doente.class, id);
     }
 
-    public long create(String name, String email, String password) throws MyEntityNotFoundException, MyEntityExistsException, MyConstraintViolationException {
+    public long create(String name, String email, String password, String contact, String address) throws MyEntityNotFoundException, MyEntityExistsException, MyConstraintViolationException {
 
-        Doente d = new Doente(name, email, password);
+        Doente d = new Doente(name, email, password, contact, address);
         em.persist(d);
 
         return d.getId();
     }
 
-    public void remove(int id) throws MyEntityNotFoundException{
+    public void remove(long id) throws MyEntityNotFoundException{
         Doente doente = findDoente(id);
         if (doente == null) {
-            throw new MyEntityNotFoundException("Doente nº: " + id + "not found");
+            throw new MyEntityNotFoundException("Doente nº: " + id + " not found");
         }
         em.remove(doente);
     }
 
 
-    public boolean update(int id, String name, String email,String password) throws MyEntityNotFoundException{
+    public boolean update(long id, String name, String email,String password, String contact, String address) throws MyEntityNotFoundException{
         Doente doente = findDoente(id);
         if(doente == null){
-            throw new MyEntityNotFoundException("Doente nº: " + id + "not found");
+            throw new MyEntityNotFoundException("Doente nº: " + id + " not found");
         }
 
         em.lock(doente, LockModeType.OPTIMISTIC);
@@ -49,6 +49,8 @@ public class DoenteBean {
         doente.setName(name);
         doente.setEmail(email);
         doente.setPassword(password);
+        doente.setContact(contact);
+        doente.setAddress(address);
 
         return true;
     }

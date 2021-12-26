@@ -32,7 +32,7 @@ public class ConfigBean {
     @PostConstruct
     public void populateDB() {
         try {
-            doenteBean.create("João", "joao@mail.pt", "1234");
+            doenteBean.create("João", "joao@mail.pt", "1234", "912345678", "Rua da Cova nº140");
             adminBean.create("Pedro", "pedro@mail.pt", "12345");
             profissionalSaudeBean.create( "Ana", "ana@mail.pt", "123456");
             profissionalSaudeBean.create("Ana2", "ana2@mail.pt", "123456");

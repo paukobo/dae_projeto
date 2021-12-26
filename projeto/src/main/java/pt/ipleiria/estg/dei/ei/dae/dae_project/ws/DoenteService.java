@@ -2,7 +2,9 @@ package pt.ipleiria.estg.dei.ei.dae.dae_project.ws;
 
 import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.DoenteDTO;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.ejbs.DoenteBean;
+import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Admin;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Doente;
+import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.CatchAllException;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityNotFoundException;
@@ -38,7 +40,9 @@ public class DoenteService {
         long id = doenteBean.create(
                 doenteDTO.getName(),
                 doenteDTO.getEmail(),
-                doenteDTO.getPassword()
+                doenteDTO.getPassword(),
+                doenteDTO.getContact(),
+                doenteDTO.getAddress()
         );
         Doente newDoente = doenteBean.findDoente(id);
         if(newDoente == null)
@@ -46,41 +50,46 @@ public class DoenteService {
         return Response.status(Response.Status.CREATED).build();
     }
 
-//    @GET
-//    @Path("/{username}")
-//    public Response consult (@PathParam("username") String username){
-//        Student student = studentBean.findStudent(username);
-//        if(student==null)
-//            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-//        return Response.status(Response.Status.OK).entity(toDTO(student)).build();
-//    }
-//
-//    @DELETE
-//    @Path("/{username}")
-//    public Response removeStudent (@PathParam("username") String username) throws MyEntityNotFoundException{
-//        studentBean.remove(username);
-//        Student student = studentBean.findStudent(username);
-//        if(student == null)
-//            return Response.status(Response.Status.OK).build();
-//        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-//    }
-//
-//
-//    @PUT
-//    @Path("{username}")
-//    public Response updateStudent (@PathParam("username") String username, StudentDTO studentDTO) throws MyEntityNotFoundException{
-//        boolean updated = studentBean.update(username, studentDTO.getName(),studentDTO.getEmail(),studentDTO.getPassword(),studentDTO.getCourseCode());
-//        if(!updated)
-//            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-//        return Response.status(Response.Status.OK).build();
-//    }
+    @GET
+    @Path("/{id}")
+    public Response getDoenteDetails(@PathParam("id") int id) {
+        Doente doente = doenteBean.findDoente(id);
+        if (doente != null) {
+            return Response.ok(toDTO(doente)).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity("ERROR_FINDING_DOENTE")
+                .build();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public Response removeDoente (@PathParam("id") long id) throws MyEntityNotFoundException{
+        doenteBean.remove(id);
+        Doente doente = doenteBean.findDoente(id);
+        if(doente != null)
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        return Response.status(Response.Status.OK).build();
+    }
+
+
+    @PUT
+    @Path("/{id}")
+    public Response updateDoente (@PathParam("id") long id, DoenteDTO doenteDTO) throws MyEntityNotFoundException{
+        boolean updated = doenteBean.update(id, doenteDTO.getName(), doenteDTO.getEmail(), doenteDTO.getPassword(), doenteDTO.getContact(), doenteDTO.getAddress());
+        if(!updated)
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        return Response.status(Response.Status.OK).build();
+    }
 
     private DoenteDTO toDTO(Doente doente){
         return new DoenteDTO(
                 doente.getId(),
                 doente.getName(),
                 doente.getEmail(),
-                doente.getPassword()
+                doente.getPassword(),
+                doente.getContact(),
+                doente.getAddress()
         );
     }
 

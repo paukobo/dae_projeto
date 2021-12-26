@@ -8,6 +8,15 @@
       </template>
     </b-table>
     <nuxt-link to="/">Back</nuxt-link>
+    <b-container>
+      <br>
+      <nuxt-link to="doentes/create">Create a New Doente</nuxt-link>
+      <br>
+      <nuxt-link to="doentes/remove">Remove a Doente</nuxt-link>
+      <br>
+      <nuxt-link to="doentes/update">Update a Doente</nuxt-link>
+      <br>
+    </b-container>
   </b-container>
 </template>
 <script>

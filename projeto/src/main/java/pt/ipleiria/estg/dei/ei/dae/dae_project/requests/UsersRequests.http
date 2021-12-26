@@ -1,0 +1,85 @@
+#### Admins
+GET http://localhost:8080/dae_project/api/admins
+Accept: application/json
+
+###
+GET http://localhost:8080/dae_project/api/admins/2
+Accept: application/json
+
+###
+POST http://localhost:8080/dae_project/api/admins
+Content-Type: application/json
+
+{ "name": "John Doe the admin",
+  "email": "johndoeadmin@mail.pt",
+  "password": "jdadmin"
+}
+
+###
+PUT http://localhost:8080/dae_project/api/admins/5
+Content-Type: application/json
+
+{ "name": "John Doe admin updated",
+  "email": "johndoeadminupdated@mail.pt",
+  "password": "jdadminupdated"
+}
+
+###
+DELETE http://localhost:8080/dae_project/api/admins/5
+Accept: application/json
+
+///////////////////////////////////////////////////////////////////////////////////
+#### Profissionais Saude
+GET http://localhost:8080/dae_project/api/profissionais
+Accept: application/json
+
+###
+POST http://localhost:8080/dae_project/api/profissionais
+Content-Type: application/json
+
+{ "name": "John Doe medico",
+  "email": "johndoemedico@mail.pt",
+  "password": "jdmedico"
+}
+
+###
+PUT http://localhost:8080/dae_project/api/profissionais/6
+Content-Type: application/json
+
+{ "name": "John Doe medico updated",
+  "email": "johndoemedicoupdated@mail.pt",
+  "password": "jdmedicoupdated"
+}
+
+###
+DELETE http://localhost:8080/dae_project/api/profissionais/6
+Accept: application/json
+
+///////////////////////////////////////////////////////////////////////////////////
+#### Doentes
+GET http://localhost:8080/dae_project/api/doentes
+Accept: application/json
+
+###
+POST http://localhost:8080/dae_project/api/doentes
+Content-Type: application/json
+
+{ "name": "John Doe doente",
+  "email": "johndoedoente@mail.pt",
+  "password": "jddoente",
+  "contact": "900000001",
+  "address": "Rua Teste"
+}
+
+###
+PUT http://localhost:8080/dae_project/api/doentes/7
+Content-Type: application/json
+
+{ "name": "John Doe doente updated",
+  "email": "johndoedoenteupdated@mail.pt",
+  "password": "jddoenteupdated"
+}
+
+###
+DELETE http://localhost:8080/dae_project/api/doentes/7
+Accept: application/json

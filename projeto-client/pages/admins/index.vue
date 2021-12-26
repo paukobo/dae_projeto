@@ -7,6 +7,15 @@
         :to="`/admins/${row.item.id}`">Details</nuxt-link>
     </template>
   </b-table>
+    <b-container>
+      <br>
+      <nuxt-link to="admins/create">Create a New Admin</nuxt-link>
+      <br>
+      <nuxt-link to="admins/remove">Remove a Admin</nuxt-link>
+      <br>
+      <nuxt-link to="admins/update">Update a Admin</nuxt-link>
+      <br>
+    </b-container>
   <nuxt-link to="/">Back</nuxt-link>
   </b-container>
 </template>
@@ -14,7 +23,7 @@
 export default {
   data() {
     return {
-      fields: ["name", "email", "actions"],
+      fields: ["id", "name", "email", "actions"],
       admins: [],
     };
   },
