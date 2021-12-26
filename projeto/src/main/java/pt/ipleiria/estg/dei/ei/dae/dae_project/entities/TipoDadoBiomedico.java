@@ -40,13 +40,20 @@ public class TipoDadoBiomedico {
     }
 
     public TipoDadoBiomedico(String nome, String descricao, double valorMin, double valorMax, String unidades) {
-        this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.valorMin = valorMin;
         this.valorMax = valorMax;
         this.unidades = unidades;
         valoresQualitativos = new HashMap<>();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {

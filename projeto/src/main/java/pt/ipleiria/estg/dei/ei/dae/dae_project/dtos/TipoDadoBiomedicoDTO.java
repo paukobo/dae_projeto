@@ -6,6 +6,8 @@ import java.util.List;
 
 public class TipoDadoBiomedicoDTO implements Serializable {
 
+    private int id;
+
     private String nome;
 
     private String descricao;
@@ -23,7 +25,8 @@ public class TipoDadoBiomedicoDTO implements Serializable {
         valoresQualitativos = new LinkedList<>();
     }
 
-    public TipoDadoBiomedicoDTO(String nome, String descricao, double valorMin, double valorMax, String unidades) {
+    public TipoDadoBiomedicoDTO(int id, String nome, String descricao, double valorMin, double valorMax, String unidades) {
+        this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.valorMin = valorMin;
@@ -32,13 +35,22 @@ public class TipoDadoBiomedicoDTO implements Serializable {
         valoresQualitativos = new LinkedList<>();
     }
 
-    public TipoDadoBiomedicoDTO(String nome, String descricao, double valorMin, double valorMax, String unidades, List<String> valoresQualitativos) {
+    public TipoDadoBiomedicoDTO(int id, String nome, String descricao, double valorMin, double valorMax, String unidades, List<String> valoresQualitativos) {
+        this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.valorMin = valorMin;
         this.valorMax = valorMax;
         this.unidades = unidades;
         this.valoresQualitativos = valoresQualitativos;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
