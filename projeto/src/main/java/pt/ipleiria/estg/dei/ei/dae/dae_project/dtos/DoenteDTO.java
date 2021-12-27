@@ -3,7 +3,6 @@ package pt.ipleiria.estg.dei.ei.dae.dae_project.dtos;
 import java.io.Serializable;
 
 public class DoenteDTO implements Serializable {
-    private String id;
     private String name;
     private String email;
     private String password;
@@ -13,21 +12,12 @@ public class DoenteDTO implements Serializable {
     public DoenteDTO() {
     }
 
-    public DoenteDTO(String id, String name, String email, String password, String contact, String address) {
-        this.id = id;
+    public DoenteDTO(String name, String email, String password, String contact, String address) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.contact = contact;
         this.address = address;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {

@@ -61,6 +61,10 @@ GET http://localhost:8080/dae_project/api/doentes
 Accept: application/json
 
 ###
+GET http://localhost:8080/dae_project/api/doentes/joao@mail.pt
+Accept: application/json
+
+###
 POST http://localhost:8080/dae_project/api/doentes
 Content-Type: application/json
 
@@ -72,12 +76,14 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:8080/dae_project/api/doentes/7
+PUT http://localhost:8080/dae_project/api/doentes/joao@mail.pt
 Content-Type: application/json
 
 { "name": "John Doe doente updated",
   "email": "johndoedoenteupdated@mail.pt",
-  "password": "jddoenteupdated"
+  "password": "jddoenteupdated",
+  "address": "Rua da Cova nº140",
+  "contact": "912345678"
 }
 
 ###

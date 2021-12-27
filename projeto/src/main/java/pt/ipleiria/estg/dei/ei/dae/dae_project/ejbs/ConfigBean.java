@@ -33,6 +33,7 @@ public class ConfigBean {
     public void populateDB() {
         try {
             doenteBean.create("João", "joao@mail.pt", "1234", "912345678", "Rua da Cova nº140");
+            doenteBean.create("João2", "joao2@mail.pt", "12342", "9123456782", "Rua da Cova2 nº1402");
             adminBean.create("Pedro", "pedro@mail.pt", "12345");
             profissionalSaudeBean.create( "Ana", "ana@mail.pt", "123456");
             profissionalSaudeBean.create("Ana2", "ana2@mail.pt", "123456");

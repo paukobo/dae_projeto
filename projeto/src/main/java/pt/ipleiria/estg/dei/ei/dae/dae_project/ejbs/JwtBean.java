@@ -16,6 +16,7 @@ import com.nimbusds.jose.JWSObject;
 import com.nimbusds.jose.JWSSigner;
 import com.nimbusds.jose.Payload;
 import com.nimbusds.jose.crypto.RSASSASigner;
+
 import javax.ejb.Stateless;
 
 @Stateless(name = "JwtEJB")
@@ -28,7 +29,6 @@ public class JwtBean {
         try {
             KeyStore ks = KeyStore.getInstance("JKS");
             String configDir = System.getProperty("jboss.server.config.dir");
-// check .env
             String keystorePath = configDir + File.separator + "jwt.keystore";
             fis = new FileInputStream(keystorePath);
             ks.load(fis, password);
@@ -51,8 +51,8 @@ public class JwtBean {
     private static final PrivateKey privateKey;
     private static final int TOKEN_VALIDITY = 14400;
     private static final String CLAIM_ROLES = "groups";
-    private static final String ISSUER = "quickstart-jwt-issuer"; // check .env
-    private static final String AUDIENCE = "jwt-audience"; // check .env
+    private static final String ISSUER = "quickstart-jwt-issuer";
+    private static final String AUDIENCE = "jwt-audience";
 
     public String createJwt(final String subject, final String[] roles) throws
             Exception {

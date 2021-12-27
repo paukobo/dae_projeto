@@ -46,13 +46,13 @@ public class ProfissionalSaudeService {
         );
         ProfissionalSaude newProfissionalSaude = profissionalSaudeBean.findProfissional(id);
         if(newProfissionalSaude == null)
-            throw new MyEntityNotFoundException("Profissional Saúde nº: " + profissionalSaudeDTO.getId() + ", " + profissionalSaudeDTO.getName() + " not found");
+            throw new MyEntityNotFoundException("Profissional Saúde: " + profissionalSaudeDTO.getName() + " not found");
         return Response.status(Response.Status.CREATED).build();
     }
 
     @GET
-    @Path("/{id}")
-    public Response getProfissionalSaudeDetails(@PathParam("id") String id) {
+    @Path("/{email}")
+    public Response getProfissionalSaudeDetails(@PathParam("email") String id) {
         ProfissionalSaude profissionalSaude = profissionalSaudeBean.findProfissional(id);
         if (profissionalSaude != null) {
             return Response.ok(toDTO(profissionalSaude)).build();
@@ -63,8 +63,8 @@ public class ProfissionalSaudeService {
     }
 
     @DELETE
-    @Path("/{id}")
-    public Response removeProfissionalSaude (@PathParam("id") String id) throws MyEntityNotFoundException{
+    @Path("/{email}")
+    public Response removeProfissionalSaude (@PathParam("email") String id) throws MyEntityNotFoundException{
         profissionalSaudeBean.remove(id);
         ProfissionalSaude profissionalSaude = profissionalSaudeBean.findProfissional(id);
         if(profissionalSaude != null)
@@ -74,8 +74,8 @@ public class ProfissionalSaudeService {
 
 
     @PUT
-    @Path("/{id}")
-    public Response updateProfissionalSaude (@PathParam("id") String id, ProfissionalSaudeDTO profissionalSaudeDTO) throws MyEntityNotFoundException{
+    @Path("/{email}")
+    public Response updateProfissionalSaude (@PathParam("email") String id, ProfissionalSaudeDTO profissionalSaudeDTO) throws MyEntityNotFoundException{
         boolean updated = profissionalSaudeBean.update(id, profissionalSaudeDTO.getName(), profissionalSaudeDTO.getEmail(), profissionalSaudeDTO.getPassword());
         if(!updated)
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
@@ -85,7 +85,6 @@ public class ProfissionalSaudeService {
 
     private ProfissionalSaudeDTO toDTO(ProfissionalSaude profissionalSaude){
         return new ProfissionalSaudeDTO(
-                profissionalSaude.getId(),
                 profissionalSaude.getName(),
                 profissionalSaude.getEmail(),
                 profissionalSaude.getPassword()

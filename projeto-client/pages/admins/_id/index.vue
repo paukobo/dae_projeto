@@ -1,7 +1,6 @@
 <template>
   <b-container>
     <h4>Admin Details</h4>
-    <p>ID: {{ admin.id }}</p>
     <p>Name: {{ admin.name }}</p>
     <p>Email: {{ admin.email }}</p>
 
@@ -13,7 +12,7 @@ export default {
   data() {
     return {
       admin: {},
-      adminFields: [ 'id', 'name', 'email' ]
+      adminFields: [ 'name', 'email' ]
     }
   },
   computed: {

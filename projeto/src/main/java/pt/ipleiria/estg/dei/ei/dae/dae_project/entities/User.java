@@ -17,13 +17,10 @@ import java.util.logging.Logger;
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
-
     @NotNull
     private String name;
 
+    @Id
     @Email
     @NotNull
     private String email;
@@ -80,13 +77,5 @@ public class User implements Serializable {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
         return new String(encoded);
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getId() {
-        return id;
     }
 }

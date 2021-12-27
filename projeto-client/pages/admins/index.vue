@@ -16,6 +16,24 @@
       <nuxt-link to="admins/update">Update a Admin</nuxt-link>
       <br>
     </b-container>
+    <b-container>
+      <br>
+      <nuxt-link to="doentes/create">Create a New Doente</nuxt-link>
+      <br>
+      <nuxt-link to="doentes/remove">Remove a Doente</nuxt-link>
+      <br>
+      <nuxt-link to="doentes/update">Update a Doente</nuxt-link>
+      <br>
+    </b-container>
+    <b-container>
+      <br>
+      <nuxt-link to="profissionaisSaude/create">Create a New Profissional de Saúde</nuxt-link>
+      <br>
+      <nuxt-link to="profissionaisSaude/remove">Remove a Profissional de Saúde</nuxt-link>
+      <br>
+      <nuxt-link to="profissionaisSaude/update">Update a Profissional de Saúde</nuxt-link>
+      <br>
+    </b-container>
   <nuxt-link to="/">Back</nuxt-link>
   </b-container>
 </template>

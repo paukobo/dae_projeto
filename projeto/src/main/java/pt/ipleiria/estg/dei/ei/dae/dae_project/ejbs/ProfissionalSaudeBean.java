@@ -27,7 +27,7 @@ public class ProfissionalSaudeBean {
 
        ProfissionalSaude p = new ProfissionalSaude(name, email, password);
         em.persist(p);
-        return p.getId();
+        return p.getEmail();
     }
 
     public void remove(String id) throws MyEntityNotFoundException{

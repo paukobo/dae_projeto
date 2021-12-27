@@ -46,13 +46,13 @@ public class DoenteService {
         );
         Doente newDoente = doenteBean.findDoente(id);
         if(newDoente == null)
-            throw new MyEntityNotFoundException("Doente nº: " + doenteDTO.getId() + ", " + doenteDTO.getName() + " not found");
+            throw new MyEntityNotFoundException("Doente " + doenteDTO.getName() + " not found");
         return Response.status(Response.Status.CREATED).build();
     }
 
     @GET
-    @Path("/{id}")
-    public Response getDoenteDetails(@PathParam("id") String id) {
+    @Path("/{email}")
+    public Response getDoenteDetails(@PathParam("email") String id) {
         Doente doente = doenteBean.findDoente(id);
         if (doente != null) {
             return Response.ok(toDTO(doente)).build();
@@ -63,8 +63,8 @@ public class DoenteService {
     }
 
     @DELETE
-    @Path("/{id}")
-    public Response removeDoente (@PathParam("id") String id) throws MyEntityNotFoundException{
+    @Path("/{email}")
+    public Response removeDoente (@PathParam("email") String id) throws MyEntityNotFoundException{
         doenteBean.remove(id);
         Doente doente = doenteBean.findDoente(id);
         if(doente != null)
@@ -74,9 +74,9 @@ public class DoenteService {
 
 
     @PUT
-    @Path("/{id}")
-    public Response updateDoente (@PathParam("id") String id, DoenteDTO doenteDTO) throws MyEntityNotFoundException{
-        boolean updated = doenteBean.update(id, doenteDTO.getName(), doenteDTO.getEmail(), doenteDTO.getPassword(), doenteDTO.getContact(), doenteDTO.getAddress());
+    @Path("/{email}")
+    public Response updateDoente (@PathParam("email") String id, DoenteDTO doenteDTO) throws MyEntityNotFoundException{
+        boolean updated = doenteBean.update(doenteDTO.getName(), doenteDTO.getEmail(), doenteDTO.getPassword(), doenteDTO.getContact(), doenteDTO.getAddress());
         if(!updated)
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         return Response.status(Response.Status.OK).build();
@@ -84,7 +84,6 @@ public class DoenteService {
 
     private DoenteDTO toDTO(Doente doente){
         return new DoenteDTO(
-                doente.getId(),
                 doente.getName(),
                 doente.getEmail(),
                 doente.getPassword(),

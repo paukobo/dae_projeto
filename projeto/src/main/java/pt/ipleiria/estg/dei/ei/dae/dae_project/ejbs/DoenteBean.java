@@ -17,8 +17,8 @@ public class DoenteBean {
     @PersistenceContext
     private EntityManager em;
 
-    public Doente findDoente(String id){
-        return em.find(Doente.class, id);
+    public Doente findDoente(String email){
+        return em.find(Doente.class, email);
     }
 
     public String create(String name, String email, String password, String contact, String address) throws MyEntityNotFoundException, MyEntityExistsException, MyConstraintViolationException {
@@ -26,22 +26,22 @@ public class DoenteBean {
         Doente d = new Doente(name, email, password, contact, address);
         em.persist(d);
 
-        return d.getId();
+        return d.getEmail();
     }
 
-    public void remove(String id) throws MyEntityNotFoundException{
-        Doente doente = findDoente(id);
+    public void remove(String email) throws MyEntityNotFoundException{
+        Doente doente = findDoente(email);
         if (doente == null) {
-            throw new MyEntityNotFoundException("Doente nº: " + id + " not found");
+            throw new MyEntityNotFoundException("Doente: " + email + " not found");
         }
         em.remove(doente);
     }
 
 
-    public boolean update(String id, String name, String email, String password, String contact, String address) throws MyEntityNotFoundException{
-        Doente doente = findDoente(id);
+    public boolean update(String name, String email, String password, String contact, String address) throws MyEntityNotFoundException{
+        Doente doente = findDoente(email);
         if(doente == null){
-            throw new MyEntityNotFoundException("Doente nº: " + id + " not found");
+            throw new MyEntityNotFoundException("Doente: " + email + " not found");
         }
 
         em.lock(doente, LockModeType.OPTIMISTIC);

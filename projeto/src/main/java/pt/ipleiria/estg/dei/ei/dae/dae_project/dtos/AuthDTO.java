@@ -2,26 +2,16 @@ package pt.ipleiria.estg.dei.ei.dae.dae_project.dtos;
 
 import java.io.Serializable;
 
-public class AdminDTO implements Serializable {
-    private String name;
+public class AuthDTO implements Serializable {
     private String email;
     private String password;
 
-    public AdminDTO() {
+    public AuthDTO() {
     }
 
-    public AdminDTO(String name, String email, String password) {
-        this.name = name;
+    public AuthDTO(String email, String password) {
         this.email = email;
         this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getEmail() {

@@ -4,22 +4,10 @@
       <template v-slot:cell(actions)="row">
         <nuxt-link
           class="btn btn-link"
-          :to="`/doentes/${row.item.id}`">Details</nuxt-link>
-        <nuxt-link
-          class="btn btn-link"
-          :to="`/doentes/${row.item.id}`">Edit</nuxt-link>
+          :to="`/doentes/${row.item.email}`">Details</nuxt-link>
       </template>
     </b-table>
     <nuxt-link to="/">Back</nuxt-link>
-    <b-container>
-      <br>
-      <nuxt-link to="doentes/create">Create a New Doente</nuxt-link>
-      <br>
-      <nuxt-link to="doentes/remove">Remove a Doente</nuxt-link>
-      <br>
-      <nuxt-link to="doentes/update">Update a Doente</nuxt-link>
-      <br>
-    </b-container>
   </b-container>
 </template>
 <script>

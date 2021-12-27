@@ -27,7 +27,7 @@ public class AdminBean {
 
         Admin a = new Admin(name, email, password);
         em.persist(a);
-        return a.getId();
+        return a.getEmail();
     }
 
     public void remove(String id) throws MyEntityNotFoundException{

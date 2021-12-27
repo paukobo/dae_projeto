@@ -47,13 +47,13 @@ public class AdminService {
         );
         Admin newAdmin = adminBean.findAdmin(id);
         if(newAdmin == null)
-            throw new MyEntityNotFoundException("Administrador nº: " + adminDTO.getId() + ", " + adminDTO.getName() + " not found");
+            throw new MyEntityNotFoundException("Administrador " + adminDTO.getName() + " not found");
         return Response.status(Response.Status.CREATED).build();
     }
 
     @GET
-    @Path("/{id}")
-    public Response getAdminiDetails(@PathParam("id") String id) {
+    @Path("/{email}")
+    public Response getAdminiDetails(@PathParam("email") String id) {
         Admin admin = adminBean.findAdmin(id);
         if (admin != null) {
             return Response.ok(toDTO(admin)).build();
@@ -64,8 +64,8 @@ public class AdminService {
     }
 
     @DELETE
-    @Path("/{id}")
-    public Response removeAdmin (@PathParam("id") String id) throws MyEntityNotFoundException{
+    @Path("/{email}")
+    public Response removeAdmin (@PathParam("email") String id) throws MyEntityNotFoundException{
         adminBean.remove(id);
         Admin admin = adminBean.findAdmin(id);
         if(admin != null)
@@ -75,8 +75,8 @@ public class AdminService {
 
 
     @PUT
-    @Path("/{id}")
-    public Response updateAdmin (@PathParam("id") String id, AdminDTO adminDTO) throws MyEntityNotFoundException{
+    @Path("/{email}")
+    public Response updateAdmin (@PathParam("email") String id, AdminDTO adminDTO) throws MyEntityNotFoundException{
         boolean updated = adminBean.update(id, adminDTO.getName(), adminDTO.getEmail(), adminDTO.getPassword());
         if(!updated)
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
@@ -86,7 +86,6 @@ public class AdminService {
 
     private AdminDTO toDTO(Admin admin){
         return new AdminDTO(
-                admin.getId(),
                 admin.getName(),
                 admin.getEmail(),
                 admin.getPassword()
