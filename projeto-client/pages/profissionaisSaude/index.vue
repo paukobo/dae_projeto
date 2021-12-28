@@ -4,7 +4,7 @@
       <template v-slot:cell(actions)="row">
         <nuxt-link
           class="btn btn-link"
-          :to="`/profissionaisSaude/${row.item.id}`">Details</nuxt-link>
+          :to="`/profissionaisSaude/${row.item.email}`">Details</nuxt-link>
       </template>
     </b-table>
     <nuxt-link to="/">Back</nuxt-link>

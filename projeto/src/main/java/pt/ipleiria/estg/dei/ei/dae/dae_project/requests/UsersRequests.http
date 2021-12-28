@@ -76,16 +76,16 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:8080/dae_project/api/doentes/joao@mail.pt
+PUT http://localhost:8080/dae_project/api/doentes/johndoedoente@mail.pt
 Content-Type: application/json
 
 { "name": "John Doe doente updated",
-  "email": "johndoedoenteupdated@mail.pt",
+  "email": "johndoedoente@mail.pt",
   "password": "jddoenteupdated",
   "address": "Rua da Cova nº140",
   "contact": "912345678"
 }
 
 ###
-DELETE http://localhost:8080/dae_project/api/doentes/7
+DELETE http://localhost:8080/dae_project/api/doentes/johndoedoente@mail.pt
 Accept: application/json

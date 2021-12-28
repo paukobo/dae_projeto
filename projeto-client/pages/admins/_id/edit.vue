@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <h1>Edit Doente</h1>
+    <h1>Edit Administrator</h1>
 
     <form @submit.prevent="create" :disabled="!isFormValid" style="margin-left: 30px">
       <b-form-group
@@ -15,13 +15,6 @@
         <br>
         <label>Email</label>
         <b-input  v-model="email" required disabled/>
-        <br>
-        <label>Address</label>
-        <b-input type="text" v-model.trim="address" :state="isAddressValid"/>
-        <br>
-        <label>Contact</label>
-        <b-input v-model.trim="contact" required/>
-        <br>
       </b-form-group>
       <p v-show="errorMsg">{{ errorMsg }}</p>
       <a href="#" @click.prevent="back()">Cancel</a>
@@ -45,11 +38,9 @@ export default {
     return {
       name: null,
       email: null,
-      address: null,
-      contact: null,
       password: null,
       errorMsg: false,
-      doente: {}
+      admin: {}
     }
   },
 
@@ -77,16 +68,6 @@ export default {
       }
       return true
     },
-    isAddressValid(){
-      if (!this.address) {
-        return null
-      }
-      let addressLen = this.address.length
-      if (addressLen < 3 || addressLen > 50) {
-        return false
-      }
-      return true
-    },
     isFormValid () {
 
       if (! this.isNameValid) {
@@ -102,28 +83,24 @@ export default {
     },
     reset () {
       this.errorMsg = false
-      this.name = this.doente.name;
-      this.email = this.doente.email;
-      this.contact = this.doente.contact;
-      this.password = this.doente.password;
-      this.address = this.doente.address;
+      this.name = this.admin.name;
+      this.email = this.admin.email;
+      this.password = this.admin.password;
     },
 
     create() {
       let data = {
         name: this.name,
         email: this.email,
-        password: this.password,
-        address: this.address,
-        contact: this.contact,
+        password: this.password
       }
 
       console.log(data)
 
-      this.$axios.$put('/api/doentes/'+this.id,   data)
+      this.$axios.$put('/api/admins/'+this.id,   data)
         .then(() => {
-          this.$toast.success('Doente successfully updated!').goAway(2000)
-          this.$router.push('/doentes/'+ this.id)
+          this.$toast.success('Admin successfully updated!').goAway(2000)
+          this.$router.push('/admins/'+ this.id)
         })
         .catch(error => {
           this.errorMsg = error.response.data
@@ -132,9 +109,9 @@ export default {
     },
   },
   created() {
-    this.$axios.$get(`api/doentes/${this.id}`)
-      .then((doente) => {
-        this.doente = doente || {}
+    this.$axios.$get(`api/admins/${this.id}`)
+      .then((admin) => {
+        this.admin = admin || {}
         this.reset()
       })
   },

@@ -28,6 +28,7 @@ export default {
     deleteDoente(){
       this.$axios.$delete(`api/doentes/${this.id}`)
         .then(() => {
+          this.$toast.success('Doente successfully deleted!').goAway(2000)
           this.$router.push('/doentes')
         })
         .catch(error => {

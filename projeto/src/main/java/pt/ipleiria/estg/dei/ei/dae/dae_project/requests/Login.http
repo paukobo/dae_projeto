@@ -1,8 +1,12 @@
 ### Get JWT token
 POST http://localhost:8080/dae_project/api/auth/login
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 
-email=joao@mail.pt&password=1234
+{
+  "email": "joao@mail.com",
+  "password": "1234"
+}
+
 
 ### Who am I?
 GET http://localhost:8080/dae_project/api/auth/user
