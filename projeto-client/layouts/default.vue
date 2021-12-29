@@ -4,7 +4,7 @@
       <b-navbar-brand href="#">DAE PRC Handling</b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
+        <b-navbar-nav v-if="$auth.loggedIn">
           <b-nav-item href="/dadosbiomedicos">Dados Biomédicos</b-nav-item>
           <b-nav-item href="/doentes">Doentes</b-nav-item>
           <b-nav-item href="/admins">Administradores</b-nav-item>

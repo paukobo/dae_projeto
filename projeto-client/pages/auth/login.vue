@@ -59,3 +59,9 @@ export default {
   }
 }
 </script>
+
+<script>
+export default {
+  layout: false,
+};
+</script>
