@@ -26,34 +26,13 @@ public class LoginService {
     @EJB
     UserBean userBean;
 
-//    @POST
-//    @Path("/login")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-//    public Response authenticateUser(@FormParam("email") String username, @FormParam("password") String password) {
-//        try {
-//            User user = userBean.authenticate(username, password);
-//            if (user != null) {
-//                if (user.getEmail() != null) {
-//                    log.info("Generating JWT for user " + user.getEmail());
-//                }
-//                String token = jwtBean.createJwt(user.getEmail(), new
-//                        String[]{user.getClass().getSimpleName()});
-//                return Response.ok(new Jwt(token)).build();
-//            }
-//        } catch (Exception e) {
-//            log.info(e.getMessage());
-//        }
-//        return Response.status(Response.Status.UNAUTHORIZED).build();
-//    }
-
     @POST
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response authenticateUser(AuthDTO authDTO) {
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Response authenticateUser(@FormParam("email") String username, @FormParam("password") String password) {
         try {
-            User user = userBean.authenticate(authDTO.getEmail(), authDTO.getPassword());
+            User user = userBean.authenticate(username, password);
             if (user != null) {
                 if (user.getEmail() != null) {
                     log.info("Generating JWT for user " + user.getEmail());
@@ -67,6 +46,27 @@ public class LoginService {
         }
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }
+
+//    @POST
+//    @Path("/login")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response authenticateUser(AuthDTO authDTO) {
+//        try {
+//            User user = userBean.authenticate(authDTO.getEmail(), authDTO.getPassword());
+//            if (user != null) {
+//                if (user.getEmail() != null) {
+//                    log.info("Generating JWT for user " + user.getEmail());
+//                }
+//                String token = jwtBean.createJwt(user.getEmail(), new
+//                        String[]{user.getClass().getSimpleName()});
+//                return Response.ok(new Jwt(token)).build();
+//            }
+//        } catch (Exception e) {
+//            log.info(e.getMessage());
+//        }
+//        return Response.status(Response.Status.UNAUTHORIZED).build();
+//    }
 
     @GET
     @Path("/user")

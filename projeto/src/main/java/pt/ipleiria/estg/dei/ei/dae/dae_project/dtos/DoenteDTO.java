@@ -8,16 +8,18 @@ public class DoenteDTO implements Serializable {
     private String password;
     private String contact;
     private String address;
+    private String profissionalEmail;
 
     public DoenteDTO() {
     }
 
-    public DoenteDTO(String name, String email, String password, String contact, String address) {
+    public DoenteDTO(String name, String email, String password, String contact, String address, String profissionalEmail) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.contact = contact;
         this.address = address;
+        this.profissionalEmail = profissionalEmail;
     }
 
     public String getName() {
@@ -58,5 +60,13 @@ public class DoenteDTO implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getProfissionalEmail() {
+        return profissionalEmail;
+    }
+
+    public void setProfissionalEmail(String profissionalEmail) {
+        this.profissionalEmail = profissionalEmail;
     }
 }

@@ -24,6 +24,7 @@
 </template>
 <script>
 export default {
+  layout: false,
   auth: false,
   data() {
     return {
@@ -42,7 +43,7 @@ export default {
       promise.then(() => {
         this.$toast.success('You are logged in!').goAway(3000)
         // check if the user $auth.user object is set
-        console.log(this.$auth.user)
+        console.log(this.$auth.user.groups[0])
 
 
         this.$router.push('/')
@@ -58,10 +59,4 @@ export default {
     }
   }
 }
-</script>
-
-<script>
-export default {
-  layout: false,
-};
 </script>

@@ -72,7 +72,8 @@ Content-Type: application/json
   "email": "johndoedoente@mail.pt",
   "password": "jddoente",
   "contact": "900000001",
-  "address": "Rua Teste"
+  "address": "Rua Teste",
+  "profissionalEmail": "ana@mail.pt"
 }
 
 ###
@@ -89,3 +90,7 @@ Content-Type: application/json
 ###
 DELETE http://localhost:8080/dae_project/api/doentes/johndoedoente@mail.pt
 Accept: application/json
+
+### Enroll student in a subject - run after the previous POST
+PUT http://localhost:8080/academics/api/doentes/joao@mail.pt/subjects/enroll/11
+Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbl9wZWRybyIsImlzcyI6InF1aWNrc3RhcnQtand0LWlzc3VlciIsImF1ZCI6Imp3dC1hdWRpZW5jZSIsImdyb3VwcyI6WyJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTYzNjY2Mjc1OH0.AJLhnhNkRxhPt6jYqpyGEewe7rT2S-JW0J83iJiDR2s_rKqOUBMUcJGZJMk6TOQkFVHvbsBKBmQqyFpbSQEsGlBluu5Rl3PkuUyaO2jpmCWBv-Pz6BQ1-T4sfTKIs5S1YnolUSGTVkqvt6XzXAuvs5PGfgU35Re1SeYh-jFqvOrhp8y-aXpG_M2o4HdRa_gOs4mO2KgrUHv6smB99nocbHsmnT9fgJzGVh2e8rz9krD7NC7btvfOwPb6n7E_rFpsZrmUY9ByoZJAogrhG7i3luHQwBNvHDVmv-YJO6lM7pso4wZnmUzXoznpakoLM2ujCzxgvpCkybHhUQghrIQvlw

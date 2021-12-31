@@ -42,7 +42,8 @@ public class DoenteService {
                 doenteDTO.getEmail(),
                 doenteDTO.getPassword(),
                 doenteDTO.getContact(),
-                doenteDTO.getAddress()
+                doenteDTO.getAddress(),
+                doenteDTO.getProfissionalEmail()
         );
         Doente newDoente = doenteBean.findDoente(id);
         if(newDoente == null)
@@ -82,13 +83,32 @@ public class DoenteService {
         return Response.status(Response.Status.OK).build();
     }
 
+    @PUT
+    @Path("{email}/profissionalSaude/associate/{email_medico}")
+    public Response associateDoenteToProfissional (@PathParam("email") String email, @PathParam("email_medico") String email_medico) throws MyEntityNotFoundException{
+        boolean updated = doenteBean.associateDoenteToProfissional(email, email_medico);
+        if(!updated)
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        return Response.status(Response.Status.OK).build();
+    }
+
+    @PUT
+    @Path("{email}/profissionalSaude/disassociate/{email_medico}")
+    public Response disassociateDoenteToProfissional (@PathParam("email") String email, @PathParam("email_medico") String email_medico) throws MyEntityNotFoundException{
+        boolean updated = doenteBean.disassociateDoenteToProfissional(email, email_medico);
+        if(!updated)
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        return Response.status(Response.Status.OK).build();
+    }
+
     private DoenteDTO toDTO(Doente doente){
         return new DoenteDTO(
                 doente.getName(),
                 doente.getEmail(),
                 doente.getPassword(),
                 doente.getContact(),
-                doente.getAddress()
+                doente.getAddress(),
+                doente.getProfissionalSaude().getEmail()
         );
     }
 
