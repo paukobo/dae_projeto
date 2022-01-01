@@ -9,13 +9,13 @@
         </b-form-group>
 
         <b-form-group description="The data inicial is required" label="Enter data inicial" label-for="dataInicio"
-                      :invalid-feedback="invalidDateInicialFeedback" :state="isDateInicialValid">
-          <b-input ref="dataInicio" v-model.trim="dataInicio" type="date" :state="isDateInicialValid" required placeholder="Enter data inicial"/>
+                      :invalid-feedback="invalidDatesFeedback" :state="isDateValid">
+          <b-input ref="dataInicio" v-model.trim="dataInicio" type="date" :state="isDateValid" required placeholder="Enter data inicial"/>
         </b-form-group>
 
         <b-form-group description="The data final is required" label="Enter data final" label-for="dataFim"
-                      :invalid-feedback="invalidDateFinalFeedback" :state="isDateFinalValid">
-          <b-input ref="dataFim" v-model.trim="dataFim" type="date" :state="isDateFinalValid" required placeholder="Enter data final"/>
+                      :invalid-feedback="invalidDatesFeedback" :state="isDateValid">
+          <b-input ref="dataFim" v-model.trim="dataFim" type="date" :state="isDateValid" required placeholder="Enter data final"/>
         </b-form-group>
 
         <b-form-group description="The duração is required" label="Enter duração" label-for="duracao"
@@ -33,6 +33,8 @@
   </b-container>
 </template>
 <script>
+import moment from "moment";
+
 export default {
   data() {
     return {
@@ -83,38 +85,53 @@ export default {
       }
       return true
     },
-    invalidDateInicialFeedback() {
+    invalidDatesFeedback() {
       if (!this.dataInicio) {
         return null
       }
-      return ''
-    },
-    isDateInicialValid() {
-      if (!this.dataInicio) {
-        return null
-      }
-      return true
-    },
-    invalidDateFinalFeedback() {
       if (!this.dataFim) {
         return null
       }
       return ''
     },
-    isDateFinalValid() {
+    isDateValid() {
+      if (!this.dataInicio) {
+        return null
+      }
       if (!this.dataFim) {
         return null
       }
       return true
     },
+    // invalidDateInicialFeedback() {
+    //   if (!this.dataInicio) {
+    //     return null
+    //   }
+    //   return ''
+    // },
+    // isDateInicialValid() {
+    //   if (!this.dataInicio) {
+    //     return null
+    //   }
+    //   return true
+    // },
+    // invalidDateFinalFeedback() {
+    //   if (!this.dataFim) {
+    //     return null
+    //   }
+    //   return ''
+    // },
+    // isDateFinalValid() {
+    //   if (!this.dataFim) {
+    //     return null
+    //   }
+    //   return true
+    // },
     isFormValid() {
       if (!this.isDescricaoValid) {
         return false
       }
-      if (!this.isDateInicialValid) {
-        return false
-      }
-      if (!this.isDateFinalValid) {
+      if (!this.isDateValid) {
         return false
       }
       if (!this.isDuracaoValid) {
@@ -134,6 +151,13 @@ export default {
       this.errorMsg = false
     },
     create() {
+      if (this.calcDate()==="1") {
+        this.$toast.error("[ERRO] A data de início não pode ser anterior à data de hoje!").goAway(3000)
+      }
+      if (this.calcDate()==="2"){
+        this.$toast.error("[ERRO] A data de fim não pode ser anterior à data de início!").goAway(3000)
+      }
+      if (this.calcDate()==="0"){
       this.$axios.$post('/api/prescricoes', {
         descricao: this.descricao,
         dataInicio: this.dataInicio,
@@ -144,6 +168,26 @@ export default {
           this.$toast.success("Prescrição created successfully!").goAway(2000)
           this.$router.push('/prescricoes')
         })
+    }
+    },
+    calcDate() {
+      let nowDate = moment();
+      let startDate = moment(this.dataInicio, 'YYYY-MM-DD');
+      let endDate = moment(this.dataFim, 'YYYY-MM-DD');
+      let dateDiffStart = moment.duration(nowDate.diff(startDate));
+      let dateDiffEnd = moment.duration(startDate.diff(endDate));
+
+      if(dateDiffStart.years()>0
+      || dateDiffStart.years()===0 && dateDiffStart.months()>0
+      || dateDiffStart.years()===0 && dateDiffStart.months()===0 && dateDiffStart.days()>0){
+        return "1";
+      }
+      if(dateDiffEnd.years()>0
+        || dateDiffEnd.years()===0 && dateDiffEnd.months()>0
+        || dateDiffEnd.years()===0 && dateDiffEnd.months()===0 && dateDiffEnd.days()>0) {
+        return "2";
+      }
+      return "0";
     }
   }
 }

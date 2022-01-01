@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="803f6821-dae5-4888-8d56-514c2b4428ce" name="Default Changelist" comment="" />
+    <list default="true" id="803f6821-dae5-4888-8d56-514c2b4428ce" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto-client/nuxt.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/projeto-client/nuxt.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto-client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/projeto-client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto-client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/projeto-client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto-client/pages/prescricoes/create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/projeto-client/pages/prescricoes/create.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,7 +29,10 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/projeto" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="D:\IntelliJ IDEA 2021.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
+    <property name="vuejs.nuxt.types-notification-shown" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -34,6 +43,7 @@
       <option name="presentableId" value="Default" />
       <updated>1637854431166</updated>
       <workItem from="1637854433831" duration="26000" />
+      <workItem from="1641059086276" duration="7914000" />
     </task>
     <servers />
   </component>
