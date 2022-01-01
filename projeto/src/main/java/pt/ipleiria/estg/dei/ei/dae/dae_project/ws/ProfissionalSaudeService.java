@@ -2,9 +2,7 @@ package pt.ipleiria.estg.dei.ei.dae.dae_project.ws;
 
 import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.DoenteDTO;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.ProfissionalSaudeDTO;
-import pt.ipleiria.estg.dei.ei.dae.dae_project.ejbs.DoenteBean;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.ejbs.ProfissionalSaudeBean;
-import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Admin;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Doente;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.ProfissionalSaude;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyConstraintViolationException;
@@ -20,7 +18,7 @@ import javax.ws.rs.core.SecurityContext;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Path("profissionais")
+@Path("profissionaisSaude")
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
 public class ProfissionalSaudeService {
@@ -34,6 +32,17 @@ public class ProfissionalSaudeService {
     @Path("/")
     public List<ProfissionalSaudeDTO> getAllProfissionaisSaudeWS() {
         return toDTOs(profissionalSaudeBean.getAllProfissionaisSaude());
+    }
+
+    @GET
+    @Path("{email}/doentes")
+    public Response getDoentesProfissionaisSaude(@PathParam("email") String email) {
+        ProfissionalSaude profissionalSaude = profissionalSaudeBean.findProfissional(email);
+        if (profissionalSaude != null) {
+            var dtos = doentesToDTOs(profissionalSaude.getDoentes());
+            return Response.ok(dtos).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).entity("ERROR_FINDING_STUDENT").build();
     }
 
     @POST
@@ -87,11 +96,27 @@ public class ProfissionalSaudeService {
         return new ProfissionalSaudeDTO(
                 profissionalSaude.getName(),
                 profissionalSaude.getEmail(),
-                profissionalSaude.getPassword()
+                profissionalSaude.getPassword(),
+                doentesToDTOs(profissionalSaude.getDoentes())
         );
     }
 
     private List<ProfissionalSaudeDTO> toDTOs(List<ProfissionalSaude> profissionaisSaude){
         return profissionaisSaude.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
+    private DoenteDTO doenteToDTO(Doente doente){
+        return new DoenteDTO(
+                doente.getName(),
+                doente.getEmail(),
+                doente.getPassword(),
+                doente.getContact(),
+                doente.getAddress(),
+                doente.getProfissionalSaude().getEmail()
+        );
+    }
+
+    private List<DoenteDTO> doentesToDTOs(List<Doente> doentes){
+        return doentes.stream().map(this::doenteToDTO).collect(Collectors.toList());
     }
 }

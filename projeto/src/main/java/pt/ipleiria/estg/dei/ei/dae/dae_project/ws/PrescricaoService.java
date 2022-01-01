@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.dae_project.ws;
 
+import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.DoenteDTO;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.PrescricaoDTO;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.PrescricaoDTO;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.ejbs.PrescricaoBean;
@@ -33,6 +34,17 @@ public class PrescricaoService {
     @Path("/")
     public List<PrescricaoDTO> getAllPrescricoesWS() {
         return toDTOs(prescricaoBean.getAllPrescricoes());
+    }
+
+    @GET
+    @Path("{id}/doentes")
+    public Response getPrescricoesDoente(@PathParam("id") int id) {
+        Prescricao prescricao = prescricaoBean.findPrescricao(id);
+        if (prescricao != null) {
+            var dtos = doentesToDTOs(prescricao.getDoentes());
+            return Response.ok(dtos).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).entity("ERROR_FINDING_PRESCRICAO").build();
     }
 
     @POST
@@ -112,5 +124,21 @@ public class PrescricaoService {
 
     private List<PrescricaoDTO> toDTOs(List<Prescricao> prescricoes){
         return prescricoes.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
+    private DoenteDTO doenteToDTO(Doente doente){
+        return new DoenteDTO(
+                doente.getName(),
+                doente.getEmail(),
+                doente.getPassword(),
+                doente.getContact(),
+                doente.getAddress(),
+                doente.getProfissionalSaude().getEmail(),
+                toDTOs(doente.getPrescricoes())
+        );
+    }
+
+    private List<DoenteDTO> doentesToDTOs(List<Doente> doentes){
+        return doentes.stream().map(this::doenteToDTO).collect(Collectors.toList());
     }
 }

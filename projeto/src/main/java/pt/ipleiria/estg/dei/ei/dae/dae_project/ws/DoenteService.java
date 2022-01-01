@@ -1,9 +1,11 @@
 package pt.ipleiria.estg.dei.ei.dae.dae_project.ws;
 
 import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.DoenteDTO;
+import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.PrescricaoDTO;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.ejbs.DoenteBean;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Admin;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Doente;
+import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Prescricao;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.CatchAllException;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityExistsException;
@@ -32,6 +34,17 @@ public class DoenteService {
     @Path("/")
     public List<DoenteDTO> getAllDoentesWS() {
         return toDTOs(doenteBean.getAllDoentes());
+    }
+
+    @GET
+    @Path("{email}/prescricoes")
+    public Response getDoentePrescricoes(@PathParam("email") String email) {
+        Doente doente = doenteBean.findDoente(email);
+        if (doente != null) {
+            var dtos = prescricoesToDTOs(doente.getPrescricoes());
+            return Response.ok(dtos).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).entity("ERROR_FINDING_STUDENT").build();
     }
 
     @POST
@@ -108,11 +121,26 @@ public class DoenteService {
                 doente.getPassword(),
                 doente.getContact(),
                 doente.getAddress(),
-                doente.getProfissionalSaude().getEmail()
+                doente.getProfissionalSaude().getEmail(),
+                prescricoesToDTOs(doente.getPrescricoes())
         );
     }
 
     private List<DoenteDTO> toDTOs(List<Doente> doentes){
         return doentes.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
+    private PrescricaoDTO prescricaoToDTO(Prescricao prescricao){
+        return new PrescricaoDTO(
+                prescricao.getId(),
+                prescricao.getDescricao(),
+                prescricao.getDataInicio(),
+                prescricao.getDataFim(),
+                prescricao.getDuracao()
+        );
+    }
+
+    private List<PrescricaoDTO> prescricoesToDTOs(List<Prescricao> prescricoes){
+        return prescricoes.stream().map(this::prescricaoToDTO).collect(Collectors.toList());
     }
 }

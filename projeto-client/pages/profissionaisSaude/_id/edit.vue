@@ -98,7 +98,7 @@ export default {
 
       console.log(data)
 
-      this.$axios.$put('/api/profissionais/'+this.id,   data)
+      this.$axios.$put('/api/profissionaisSaude/'+this.id,   data)
         .then(() => {
           this.$toast.success('Profissional de Saúde successfully updated!').goAway(2000)
           this.$router.push('/profissionaisSaude/'+ this.id)
@@ -110,7 +110,7 @@ export default {
     },
   },
   created() {
-    this.$axios.$get(`api/profissionais/${this.id}`)
+    this.$axios.$get(`api/profissionaisSaude/${this.id}`)
       .then((profissional) => {
         this.profissional = profissional || {}
         this.reset()

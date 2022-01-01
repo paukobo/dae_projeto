@@ -106,7 +106,7 @@ export default {
     }
   },
   created() {
-    this.$axios.$get('/api/profissionais')
+    this.$axios.$get('/api/profissionaisSaude')
       .then(profissionais => {
         this.profissionais = profissionais
       })
@@ -116,7 +116,7 @@ export default {
       this.errorMsg = false
     },
     create() {
-      this.$axios.$post('/api/profissionais', {
+      this.$axios.$post('/api/profissionaisSaude', {
         name: this.name,
         email: this.email,
         password: this.password
