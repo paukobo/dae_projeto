@@ -1,0 +1,39 @@
+#### Prescricoes
+GET http://localhost:8080/dae_project/api/prescricoes
+Accept: application/json
+
+###
+GET http://localhost:8080/dae_project/api/prescricoes/2
+Accept: application/json
+
+###
+POST http://localhost:8080/dae_project/api/prescricoes
+Content-Type: application/json
+
+{ "descricao": "teste de uma descricao para uma descricao 2",
+  "dataInicio": "11-11-2021",
+  "dataFim": "12-12-2021",
+  "duracao": 1232
+}
+
+###
+PUT http://localhost:8080/dae_project/api/prescricoes/3
+Content-Type: application/json
+
+{ "descricao": "teste de uma descricao para uma 22",
+  "dataInicio": "11-11-2021",
+  "dataFim": "12-12-2021",
+  "duracao": 12322
+}
+
+###
+GET http://localhost:8080/dae_project/api/prescricoes/2/doentes
+Accept: application/json
+
+###
+DELETE http://localhost:8080/dae_project/api/prescricoes/3
+Accept: application/json
+
+### Associate a prescricao to a doente - run after the previous POST
+PUT http://localhost:8080/dae_project/api/prescricoes/2/doente/associate/joao@mail.pt
+Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb2FvQG1haWwucHQiLCJpc3MiOiJxdWlja3N0YXJ0LWp3dC1pc3N1ZXIiLCJhdWQiOiJqd3QtYXVkaWVuY2UiLCJncm91cHMiOlsiRG9lbnRlIl0sImV4cCI6MTY0MDk3OTY0NX0.bWlSjrOl5tgJ4zLQxSIEhIFxDc5VrypCaSOJ7xx2RWhckCL9HeEONbm4qTE7d9OkW1f8n079yv-aZ5Z6RTnyGcy2tif0-zGc4AG7ngcQw81m6bkBu95oI312jE0EDW-XG2Rec2lPW7Bow69mQsp_9IrLN4o5EA_pgFuIfsxB4gW5Xslat7ivdO8AhqiVHZCNT-Tw2dMO7RCyFPBXuK5rjgQGEfRKBXPB6xYEAbqO7FImQA-BB6fxJaSANeMGyTycAA_ziJ1b_k7PNMeHG7u4EjB1uOVR1B5lY3FPdrP0B_nOlBwlo3CpysOlJ9zh-KTSWEfQbPh1USF1Qd4J0hpMZQ

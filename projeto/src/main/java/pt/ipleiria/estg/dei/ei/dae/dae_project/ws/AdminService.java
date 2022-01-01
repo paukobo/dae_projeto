@@ -12,6 +12,7 @@ import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyConstraintViolationE
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityNotFoundException;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -33,12 +34,14 @@ public class AdminService {
 
     @GET
     @Path("/")
+    @RolesAllowed({"Admin"})
     public List<AdminDTO> getAllAdminsWS() {
         return toDTOs(adminBean.getAllAdmins());
     }
 
     @POST
     @Path("/")
+    @RolesAllowed({"Admin"})
     public Response createNewAdmin (AdminDTO adminDTO) throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
         String id = adminBean.create(
                 adminDTO.getName(),
@@ -53,6 +56,7 @@ public class AdminService {
 
     @GET
     @Path("/{email}")
+    @RolesAllowed({"Admin"})
     public Response getAdminiDetails(@PathParam("email") String id) {
         Admin admin = adminBean.findAdmin(id);
         if (admin != null) {
@@ -65,6 +69,7 @@ public class AdminService {
 
     @DELETE
     @Path("/{email}")
+    @RolesAllowed({"Admin"})
     public Response removeAdmin (@PathParam("email") String id) throws MyEntityNotFoundException{
         adminBean.remove(id);
         Admin admin = adminBean.findAdmin(id);
@@ -76,6 +81,7 @@ public class AdminService {
 
     @PUT
     @Path("/{email}")
+    @RolesAllowed({"Admin"})
     public Response updateAdmin (@PathParam("email") String id, AdminDTO adminDTO) throws MyEntityNotFoundException{
         boolean updated = adminBean.update(id, adminDTO.getName(), adminDTO.getEmail(), adminDTO.getPassword());
         if(!updated)

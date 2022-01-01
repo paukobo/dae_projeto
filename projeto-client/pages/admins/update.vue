@@ -1,29 +1,34 @@
 <template>
   <b-container>
     <div>
-      <h1>Create a new Profissional de Saúde</h1>
-      <form @submit.prevent="create" :disabled="!isFormValid">
-        <b-form-group description="The name is required" label="Enter your name" label-for="name"
-                      :invalid-feedback="invalidNameFeedback" :state="isNameValid">
-          <b-input v-model.trim="name" required :state="isNameValid" placeholder="Enter your name"/>
+      <h1>Update an Administrator</h1>
+      <form @submit.prevent="update">
+
+        <b-form-group label="Enter ID" label-for="id">
+          <b-input v-model.trim="id" placeholder="Enter the admin ID you want to edit" type="number"> </b-input>
         </b-form-group>
 
-        <b-form-group description="The email is required" label="Enter your email" label-for="email"
+        <b-form-group description="The new name is required" label="Enter your new name" label-for="name"
+                      :invalid-feedback="invalidNameFeedback" :state="isNameValid">
+          <b-input v-model.trim="name" required :state="isNameValid" placeholder="Enter your new name"/>
+        </b-form-group>
+
+        <b-form-group description="The new email is required" label="Enter your new email" label-for="email"
                       :invalid-feedback="invalidEmailFeedback" :state="isEmailValid">
           <b-input ref="email" v-model.trim="email" type="email" :state="isEmailValid" required
-                   pattern=".+@my.ipleiria.pt" placeholder="Enter your e-mail"/>
+                   pattern=".+@my.ipleiria.pt" placeholder="Enter your new e-mail"/>
         </b-form-group>
 
-        <b-form-group description="The password is required" label="Enter your password" label-for="password"
+        <b-form-group description="The new password is required" label="Enter your new password" label-for="password"
                       :invalid-feedback="invalidPasswordFeedback" :state="isPasswordValid">
           <b-input v-model="password" type="password" :state="isPasswordValid" required
-                   placeholder="Enter your password"/>
+                   placeholder="Enter your new password"/>
         </b-form-group>
 
         <p class="text-danger" v-show="errorMsg">{{ errorMsg }}</p>
-        <nuxt-link to="/profissionaisSaude">Return</nuxt-link>
-        <button type="reset" @click="reset">RESET</button>
-        <button @click.prevent="create" :disabled="!isFormValid">CREATE</button>
+        <nuxt-link to="/admins">Return</nuxt-link>
+        <button type="reset" @click="reset">Reset</button>
+        <button @click.prevent="update" >Update</button>
       </form>
     </div>
   </b-container>
@@ -32,14 +37,30 @@
 export default {
   data() {
     return {
-      password: null,
+      id: null,
       name: null,
       email: null,
-      profissionais: [],
+      password: null,
       errorMsg: false
     }
   },
-  computed: {
+  methods: {
+    reset() {
+      this.errorMsg = false
+    },
+    update() {
+      this.$axios.$put('/api/admins/' + this.id, {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+      })
+        .then(() => {
+          this.$router.push('/admins')
+        })
+        .catch(()=>{
+          alert("Admin with id: " + this.id + " not found")
+        })
+    },
     invalidPasswordFeedback() {
       if (!this.password) {
         return null
@@ -103,27 +124,6 @@ export default {
         return false
       }
       return true
-    }
-  },
-  created() {
-    this.$axios.$get('/api/profissionaisSaude')
-      .then(profissionais => {
-        this.profissionais = profissionais
-      })
-  },
-  methods: {
-    reset() {
-      this.errorMsg = false
-    },
-    create() {
-      this.$axios.$post('/api/profissionaisSaude', {
-        name: this.name,
-        email: this.email,
-        password: this.password
-      })
-        .then(() => {
-          this.$router.push('/profissionaisSaude')
-        })
     }
   }
 }

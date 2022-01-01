@@ -18,8 +18,9 @@ import java.util.List;
 public class Doente extends User implements Serializable {
     //doente tem 1 médico --> 1 médico tem vários doentes
     @ManyToOne
+    @JoinColumn(name = "MEDICO_ID")
     @NotNull
-    private ProfissionalSaude medico;
+    private ProfissionalSaude profissionalSaude;
 
     private String contact;
 
@@ -27,8 +28,12 @@ public class Doente extends User implements Serializable {
     @OneToMany(mappedBy = "doente", cascade = CascadeType.REMOVE)
     private List<DadoBiomedico> dadosBiomedicos;
 
+    @ManyToMany(mappedBy = "doentes")
+    private List<Prescricao> prescricoes;
+
     public Doente() {
         dadosBiomedicos = new LinkedList<>();
+        this.prescricoes = new LinkedList<>();
     }
 
     public Doente(String name, String email, String password, String contact, String address) {
@@ -36,6 +41,16 @@ public class Doente extends User implements Serializable {
         this.contact = contact;
         this.address = address;
         dadosBiomedicos = new LinkedList<>();
+        this.prescricoes = new LinkedList<>();
+    }
+
+    public Doente(String name, String email, String password, String contact, String address, ProfissionalSaude profissionalSaude) {
+        super(name, email, password);
+        this.profissionalSaude = profissionalSaude;
+        this.contact = contact;
+        this.address = address;
+        dadosBiomedicos = new LinkedList<>();
+        this.prescricoes = new LinkedList<>();
     }
 
     public String getContact() {
@@ -52,5 +67,35 @@ public class Doente extends User implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public ProfissionalSaude getProfissionalSaude() {
+        return profissionalSaude;
+    }
+
+    public void setProfissionalSaude(ProfissionalSaude profissionalSaude) {
+        this.profissionalSaude = profissionalSaude;
+    }
+
+    public List<Prescricao> getPrescricoes() {
+        return prescricoes;
+    }
+
+    public void setPrescricoes(List<Prescricao> prescricoes) {
+        this.prescricoes = prescricoes;
+    }
+
+    public void addPrescricao(Prescricao prescricao){
+        if (prescricoes.contains(prescricao)){
+            return;
+        }
+        this.prescricoes.add(prescricao);
+    }
+
+    public void removePrescricao(Prescricao prescricao){
+        if (!prescricoes.contains(prescricao)){
+            return;
+        }
+        this.prescricoes.remove(prescricao);
     }
 }

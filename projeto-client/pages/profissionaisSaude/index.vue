@@ -8,6 +8,11 @@
       </template>
     </b-table>
     <nuxt-link to="/">Back</nuxt-link>
+    <nuxt-link to="/prescricoes">Ver Prescrições</nuxt-link>
+    <b-container>
+      <br>
+      <nuxt-link to="prescricoes/create">Create a New Prescrição</nuxt-link>
+    </b-container>
   </b-container>
 </template>
 <script>
@@ -20,7 +25,7 @@ export default {
   },
   created() {
     this.$axios
-      .$get("http://localhost:8080/dae_project/api/profissionais")
+      .$get("http://localhost:8080/dae_project/api/profissionaisSaude")
       .then((profissionais) => {
         this.profissionais = profissionais;
       });
