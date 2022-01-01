@@ -19,6 +19,7 @@ public class TipoDadoBiomedicoBean {
     private EntityManager em;
 
     public void create(String nome, String descricao, double valorMin, double valorMax, String unidades, List<String> valorQualitativo){
+
         TipoDadoBiomedico d = new TipoDadoBiomedico(nome, descricao, valorMin, valorMax, unidades);
 
         if(valorQualitativo != null){
@@ -72,7 +73,6 @@ public class TipoDadoBiomedicoBean {
     public TipoDadoBiomedico findTipoDadoBiomedico(String name){
         try {
              TipoDadoBiomedico dado = (TipoDadoBiomedico) em.createNamedQuery("getTipoDadoBiomedicoByNome").setParameter("nome", name).getSingleResult();
-            System.out.println(dado);
             return dado;
         }catch(Exception e){
             return null;

@@ -1,10 +1,11 @@
 package pt.ipleiria.estg.dei.ei.dae.dae_project.ws;
 
+import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.DadoBiomedicoDTO;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.DoenteDTO;
+import pt.ipleiria.estg.dei.ei.dae.dae_project.ejbs.DadoBiomedicoBean;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.ejbs.DoenteBean;
-import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Admin;
+import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.DadoBiomedico;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Doente;
-import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.CatchAllException;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityNotFoundException;
@@ -15,6 +16,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +27,8 @@ import java.util.stream.Collectors;
 public class DoenteService {
     @EJB
     private DoenteBean doenteBean;
-
+    @EJB
+    private DadoBiomedicoBean dadoBiomedicoBean;
     @Context
     private SecurityContext securityContext;
 
@@ -48,6 +52,25 @@ public class DoenteService {
         if(newDoente == null)
             throw new MyEntityNotFoundException("Doente " + doenteDTO.getName() + " not found");
         return Response.status(Response.Status.CREATED).build();
+    }
+
+    @POST
+    @Path("/{email}/dadosbiomedicos")
+    public Response createNewDadoBiomedico (@PathParam("email") String id,DadoBiomedicoDTO dadoBiomedicoDTO) throws MyEntityNotFoundException, ParseException {
+        dadoBiomedicoBean.create(dadoBiomedicoDTO,id);
+        return Response.status(Response.Status.CREATED).build();
+    }
+
+    @GET
+    @Path("/{email}/dadosbiomedicos")
+    public Response getDadosBiomedicos (@PathParam("email") String id){
+        Doente doente = doenteBean.findDoente(id);
+        if (doente != null) {
+            return Response.ok(toDadoBiomedicoDTOs(dadoBiomedicoBean.getAllDadosBiomedicos(id))).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity("ERROR_FINDING_DOENTE")
+                .build();
     }
 
     @GET
@@ -95,4 +118,22 @@ public class DoenteService {
     private List<DoenteDTO> toDTOs(List<Doente> doentes){
         return doentes.stream().map(this::toDTO).collect(Collectors.toList());
     }
+
+    private DadoBiomedicoDTO toDadoBiomedicoDTO(DadoBiomedico dadoBiomedico){
+        String  date = new SimpleDateFormat("yyyy/MM/dd HH:mm").format(dadoBiomedico.getDate());
+        return new DadoBiomedicoDTO(
+                dadoBiomedico.getDoente().getEmail(),
+                dadoBiomedico.getNome(),
+                dadoBiomedico.getTipoId().getId(),
+                dadoBiomedico.getValorQuantitativo(),
+                dadoBiomedico.getUnidades(),
+                dadoBiomedico.getValoreQualitativo(),
+                date
+        );
+    }
+
+    private List<DadoBiomedicoDTO> toDadoBiomedicoDTOs(List<DadoBiomedico> dadosBiomedicos){
+        return dadosBiomedicos.stream().map(this::toDadoBiomedicoDTO).collect(Collectors.toList());
+    }
+
 }

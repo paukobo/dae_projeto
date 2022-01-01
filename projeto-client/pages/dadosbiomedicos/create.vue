@@ -17,16 +17,16 @@
         <b-input  v-model="description"  required/>
         <br>
         <label>Minimum value</label>
-        <b-input type="number" :state="isMinValValid" v-model.trim="valorMin"/>
+        <b-input type="number" :state="isValuesValid" v-model.trim="valorMin"/>
         <br>
         <label>Max value</label>
-        <b-input type="number" v-model.trim="valorMax" :state="isMaxValValid"/>
+        <b-input type="number" v-model.trim="valorMax" :state="isValuesValid"/>
         <br>
         <label>Unidades</label>
         <b-input v-model.trim="unidades" required/>
         <br>
         <label>Qualitative Values</label>
-        <div v-for="(dado, index) in biomedicos" style="display: grid;grid-template-columns: 40px 500px 40px 50px">
+        <div v-for="(dado, index) in qualitativos" style="display: grid;grid-template-columns: 40px 500px 40px 50px">
           <label style="grid-row-start:1; grid-column-start:2">{{index + 1}}º Qualitative Value</label>
           <b-input v-model.trim="dado.dadoText" required style="grid-row-start:2; grid-column-start:2"/>
           <b-button v-on:click="remove(index)" style="grid-row-start:2; grid-column-start:4"><b-icon icon="dash"/></b-button>
@@ -65,29 +65,31 @@ export default {
       valorMax: null,
       unidades: null,
       errorMsg: false,
-      biomedicos: [Dado.constructor()]
+      qualitativos: []
     }
   },
 
   computed: {
-    isMinValValid(){
+    isMinValFiled(){
       if(this.valorMin == null || this.valorMin == String() ){
-        return false
-      }
-      if(!(this.valorMax > this.valorMin)){
         return false
       }
       return true
     },
-    isMaxValValid(){
+    isMaxValFiled(){
 
       if(this.valorMax == null || this.valorMax == String() ){
         return false
       }
-      if(!(this.valorMax > this.valorMin)){
-        return false
-      }
       return true
+    },
+    isValuesValid(){
+      if(this.isMinValFiled && this.isMaxValFiled){
+        return Number(this.valorMax) >= Number(this.valorMin);
+
+      }
+      return !this.isMinValFiled && !this.isMaxValFiled;
+
     },
     invalidNameFeedback () {
       if (!this.name) {
@@ -106,20 +108,16 @@ export default {
         return null
       }
       let nameLen = this.description.length
-      if (nameLen < 3 || nameLen > 50) {
-        return false
-      }
-      return true
+      return !(nameLen < 3 || nameLen > 50);
+
     },
     isNameValid () {
       if (!this.name) {
         return null
       }
       let nameLen = this.name.length
-      if (nameLen < 3 || nameLen > 25) {
-        return false
-      }
-      return true
+      return !(nameLen < 3 || nameLen > 25);
+
     },
 
     isFormValid () {
@@ -131,10 +129,7 @@ export default {
       if (! this.isDescriptionValid) {
         return false
       }
-      if(!this.isMaxValValid){
-        return false
-      }
-      if(!this.isMinValValid){
+      if(!this.isValuesValid || ((!this.isMinValFiled && !this.isMaxValFiled) && this.qualitativos.length == 0)){
         return false
       }
       return true
@@ -144,36 +139,47 @@ export default {
   methods: {
     reset () {
       this.errorMsg = false
-      this.biomedicos.splice(1,this.biomedicos.length -1)
+      this.qualitativos.splice(1,this.qualitativos.length -1)
     },
 
     create() {
       let data
-      if(this.biomedicos.length == 0){
+      let maxValue = 0
+      let minValue = 0
+      if(this.isMaxValFiled){
+        maxValue = this.valorMax
+      }
+      if(this.isMinValFiled){
+        minValue = this.valorMin
+      }
+
+      if(this.qualitativos.length == 0){
         data =  {
           nome: this.name,
           descricao: this.description,
-          valorMin: this.valorMin,
-          valorMax: this.valorMax,
+          valorMin: minValue,
+          valorMax: maxValue,
           unidades: this.unidades,
         }
       }else{
+
         let i = 0
         let array = []
-        for(i; i < this.biomedicos.length;i++){
-          array.push(this.biomedicos[i].dadoText)
+        for(i; i < this.qualitativos.length; i++){
+
+          array.push(this.qualitativos[i].dadoText)
         }
         data =  {
 
           nome: this.name,
           descricao: this.description,
-          valorMin: this.valorMin,
-          valorMax: this.valorMax,
+
+          valorMin: minValue,
+          valorMax: maxValue,
           unidades: this.unidades,
-          valoresQualitativos: array
+          valoresQualitativos: array,
         }
       }
-
         this.$axios.$post('/api/dadosbiomedicos',   data)
         .then(() => {
           this.$router.push('/dadosbiomedicos')
@@ -184,10 +190,10 @@ export default {
 
     },
     remove(index) {
-      this.biomedicos.splice(index,1)
+      this.qualitativos.splice(index,1)
     },
     add(){
-      this.biomedicos.push(Dado.constructor())
+      this.qualitativos.push(Dado.constructor())
     }
   }
 }

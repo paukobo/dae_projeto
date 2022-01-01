@@ -74,24 +74,26 @@ export default {
     id() {
       return this.$route.params.id
     },
-    isMinValValid(){
+    isMinValFiled(){
       if(this.valorMin == null || this.valorMin == String() ){
-        return false
-      }
-      if(!(this.valorMax > this.valorMin)){
         return false
       }
       return true
     },
-    isMaxValValid(){
+    isMaxValFiled(){
 
       if(this.valorMax == null || this.valorMax == String() ){
         return false
       }
-      if(!(this.valorMax > this.valorMin)){
-        return false
-      }
       return true
+    },
+    isValuesValid(){
+      if(this.isMinValFiled && this.isMaxValFiled){
+        return Number(this.valorMax) >= Number(this.valorMin);
+
+      }
+      return !this.isMinValFiled && !this.isMaxValFiled;
+
     },
     invalidNameFeedback () {
       if (!this.name) {
@@ -135,10 +137,7 @@ export default {
       if (! this.isDescriptionValid) {
         return false
       }
-      if(!this.isMaxValValid){
-        return false
-      }
-      if(!this.isMinValValid){
+      if(!this.isValuesValid || ((!this.isMinValFiled && !this.isMaxValFiled) && this.qualitativos.length == 0)){
         return false
       }
       return true
@@ -168,27 +167,40 @@ export default {
 
     create() {
       let data
-      if(this.biomedicos.length == 0){
+      let maxValue = 0
+      let minValue = 0
+      if(this.isMaxValFiled){
+        maxValue = this.valorMax
+      }
+      if(this.isMinValFiled){
+        minValue = this.valorMin
+      }
+
+      if(this.qualitativos.length == 0){
         data =  {
           nome: this.name,
           descricao: this.description,
-          valorMin: this.valorMin,
-          valorMax: this.valorMax,
+          valorMin: minValue,
+          valorMax: maxValue,
           unidades: this.unidades,
         }
       }else{
+
         let i = 0
         let array = []
-        for(i; i < this.biomedicos.length;i++){
-          array.push(this.biomedicos[i].dadoText)
+        for(i; i < this.qualitativos.length; i++){
+
+          array.push(this.qualitativos[i].dadoText)
         }
         data =  {
+
           nome: this.name,
           descricao: this.description,
-          valorMin: this.valorMin,
-          valorMax: this.valorMax,
+
+          valorMin: minValue,
+          valorMax: maxValue,
           unidades: this.unidades,
-          valoresQualitativos: array
+          valoresQualitativos: array,
         }
       }
 

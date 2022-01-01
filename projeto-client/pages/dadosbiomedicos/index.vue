@@ -33,6 +33,7 @@ export default {
   created () {
     this.$axios.$get('api/dadosbiomedicos')
       .then((biomedicos) => {
+        console.log(biomedicos)
         this.biomedicos = biomedicos
       })
   }

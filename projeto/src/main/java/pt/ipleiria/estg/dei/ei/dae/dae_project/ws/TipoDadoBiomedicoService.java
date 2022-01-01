@@ -42,6 +42,7 @@ public class TipoDadoBiomedicoService {
     @POST
     @Path("/")
     public Response createNewDadoBiomedico (TipoDadoBiomedicoDTO biomedicoDTO){
+        System.out.println(biomedicoDTO.getValoresQualitativos());
         biomedicoBean.create(
                 biomedicoDTO.getNome(),
                 biomedicoDTO.getDescricao(),

@@ -105,6 +105,13 @@
     "_name": "_0c855e4d"
   },
   {
+    "name": "doentes-id-dadosbiomedicos",
+    "path": "/doentes/:id/dadosbiomedicos",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\doentes\\\\_id\\\\dadosbiomedicos\\\\index.vue",
+    "chunkName": "pages/doentes/_id/dadosbiomedicos/index",
+    "_name": "_6b259fa7"
+  },
+  {
     "name": "doentes-id-edit",
     "path": "/doentes/:id/edit",
     "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\doentes\\\\_id\\\\edit.vue",
@@ -117,6 +124,13 @@
     "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\profissionaisSaude\\\\_id\\\\edit.vue",
     "chunkName": "pages/profissionaisSaude/_id/edit",
     "_name": "_4ade52a9"
+  },
+  {
+    "name": "doentes-id-dadosbiomedicos-create",
+    "path": "/doentes/:id/dadosbiomedicos/create",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\doentes\\\\_id\\\\dadosbiomedicos\\\\create.vue",
+    "chunkName": "pages/doentes/_id/dadosbiomedicos/create",
+    "_name": "_21429ff7"
   },
   {
     "name": "index",

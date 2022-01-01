@@ -5,6 +5,8 @@ import io.smallrye.common.constraint.NotNull;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @NamedQueries({
@@ -19,19 +21,21 @@ public class Doente extends User implements Serializable {
     @NotNull
     private ProfissionalSaude medico;
 
-    //doente tem vários dados biomédicos --> vários dados biomédicos têm vários doentes
-
     private String contact;
 
     private String address;
+    @OneToMany(mappedBy = "doente", cascade = CascadeType.REMOVE)
+    private List<DadoBiomedico> dadosBiomedicos;
 
     public Doente() {
+        dadosBiomedicos = new LinkedList<>();
     }
 
     public Doente(String name, String email, String password, String contact, String address) {
         super(name, email, password);
         this.contact = contact;
         this.address = address;
+        dadosBiomedicos = new LinkedList<>();
     }
 
     public String getContact() {

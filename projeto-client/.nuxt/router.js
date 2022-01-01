@@ -19,8 +19,10 @@ const _458ce620 = () => interopDefault(import('..\\pages\\doentes\\_id\\index.vu
 const _52a3bc43 = () => interopDefault(import('..\\pages\\profissionaisSaude\\_id\\index.vue' /* webpackChunkName: "pages/profissionaisSaude/_id/index" */))
 const _0f62965a = () => interopDefault(import('..\\pages\\admins\\_id\\edit.vue' /* webpackChunkName: "pages/admins/_id/edit" */))
 const _0c855e4d = () => interopDefault(import('..\\pages\\dadosbiomedicos\\_id\\edit.vue' /* webpackChunkName: "pages/dadosbiomedicos/_id/edit" */))
+const _6b259fa7 = () => interopDefault(import('..\\pages\\doentes\\_id\\dadosbiomedicos\\index.vue' /* webpackChunkName: "pages/doentes/_id/dadosbiomedicos/index" */))
 const _2969f92c = () => interopDefault(import('..\\pages\\doentes\\_id\\edit.vue' /* webpackChunkName: "pages/doentes/_id/edit" */))
 const _4ade52a9 = () => interopDefault(import('..\\pages\\profissionaisSaude\\_id\\edit.vue' /* webpackChunkName: "pages/profissionaisSaude/_id/edit" */))
+const _21429ff7 = () => interopDefault(import('..\\pages\\doentes\\_id\\dadosbiomedicos\\create.vue' /* webpackChunkName: "pages/doentes/_id/dadosbiomedicos/create" */))
 const _b4ffa328 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -95,6 +97,10 @@ export const routerOptions = {
     component: _0c855e4d,
     name: "dadosbiomedicos-id-edit"
   }, {
+    path: "/doentes/:id/dadosbiomedicos",
+    component: _6b259fa7,
+    name: "doentes-id-dadosbiomedicos"
+  }, {
     path: "/doentes/:id/edit",
     component: _2969f92c,
     name: "doentes-id-edit"
@@ -102,6 +108,10 @@ export const routerOptions = {
     path: "/profissionaisSaude/:id/edit",
     component: _4ade52a9,
     name: "profissionaisSaude-id-edit"
+  }, {
+    path: "/doentes/:id/dadosbiomedicos/create",
+    component: _21429ff7,
+    name: "doentes-id-dadosbiomedicos-create"
   }, {
     path: "/",
     component: _b4ffa328,

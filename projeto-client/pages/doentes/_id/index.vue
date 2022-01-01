@@ -8,6 +8,7 @@
 
     <div style="margin-top: 20px">
       <nuxt-link to="/doentes">Back</nuxt-link>
+      <nuxt-link :to="`/doentes/${id}/dadosbiomedicos`">Dados Biomedicos</nuxt-link>
       <nuxt-link :to=editUrl>Edit</nuxt-link>
       <p v-show="errorMsg">{{ errorMsg }}</p>
       <button style="float: right" @click.prevent="deleteDoente">Delete</button>
@@ -16,6 +17,7 @@
   </b-container>
 </template>
 <script>
+
 export default {
   data() {
     return {

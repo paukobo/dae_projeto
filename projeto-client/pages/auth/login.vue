@@ -22,13 +22,15 @@
     </b-form>
   </b-container>
 </template>
+
 <script>
 export default {
+  layout: false,
   auth: false,
   data() {
     return {
-      email: null,
-      password: null
+      email: "",
+      password: ""
     }
   },
   methods: {
@@ -53,15 +55,10 @@ export default {
       })
     },
     onReset() {
-      this.email = null
-      this.password = null
+      this.email = ""
+      this.password = ""
     }
   }
 }
 </script>
 
-<script>
-export default {
-  layout: false,
-};
-</script>
