@@ -7,6 +7,10 @@
           :to="`/prescricoes/${row.item.id}`">Details</nuxt-link>
       </template>
     </b-table>
+    <b-container>
+      <br>
+      <nuxt-link to="prescricoes/create">Create a New Prescrição</nuxt-link>
+    </b-container>
     <nuxt-link to="/">Back</nuxt-link>
   </b-container>
 </template>

@@ -11,12 +11,14 @@ import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyConstraintViolationE
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityNotFoundException;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +34,7 @@ public class DoenteService {
 
     @GET
     @Path("/")
+    @RolesAllowed({"Admin","ProfissionalSaude"})
     public List<DoenteDTO> getAllDoentesWS() {
         return toDTOs(doenteBean.getAllDoentes());
     }
@@ -49,6 +52,7 @@ public class DoenteService {
 
     @POST
     @Path("/")
+    @RolesAllowed({"Admin","ProfissionalSaude"})
     public Response createNewDoente (DoenteDTO doenteDTO) throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
         String id = doenteBean.create(
                 doenteDTO.getName(),
@@ -67,6 +71,12 @@ public class DoenteService {
     @GET
     @Path("/{email}")
     public Response getDoenteDetails(@PathParam("email") String id) {
+
+        Principal principal = securityContext.getUserPrincipal();
+        if(!(securityContext.isUserInRole("Admin") || securityContext.isUserInRole("Doente") || securityContext.isUserInRole("ProfissionalSaude") && principal.getName().equals(id))) {
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
+
         Doente doente = doenteBean.findDoente(id);
         if (doente != null) {
             return Response.ok(toDTO(doente)).build();
@@ -78,6 +88,7 @@ public class DoenteService {
 
     @DELETE
     @Path("/{email}")
+    @RolesAllowed({"Admin","ProfissionalSaude"})
     public Response removeDoente (@PathParam("email") String id) throws MyEntityNotFoundException{
         doenteBean.remove(id);
         Doente doente = doenteBean.findDoente(id);
@@ -89,6 +100,7 @@ public class DoenteService {
 
     @PUT
     @Path("/{email}")
+    @RolesAllowed({"Admin","ProfissionalSaude"})
     public Response updateDoente (@PathParam("email") String id, DoenteDTO doenteDTO) throws MyEntityNotFoundException{
         boolean updated = doenteBean.update(doenteDTO.getName(), doenteDTO.getEmail(), doenteDTO.getPassword(), doenteDTO.getContact(), doenteDTO.getAddress());
         if(!updated)
@@ -98,6 +110,7 @@ public class DoenteService {
 
     @PUT
     @Path("{email}/profissionalSaude/associate/{email_medico}")
+    @RolesAllowed({"Admin","ProfissionalSaude"})
     public Response associateDoenteToProfissional (@PathParam("email") String email, @PathParam("email_medico") String email_medico) throws MyEntityNotFoundException{
         boolean updated = doenteBean.associateDoenteToProfissional(email, email_medico);
         if(!updated)
@@ -107,6 +120,7 @@ public class DoenteService {
 
     @PUT
     @Path("{email}/profissionalSaude/disassociate/{email_medico}")
+    @RolesAllowed({"Admin","ProfissionalSaude"})
     public Response disassociateDoenteToProfissional (@PathParam("email") String email, @PathParam("email_medico") String email_medico) throws MyEntityNotFoundException{
         boolean updated = doenteBean.disassociateDoenteToProfissional(email, email_medico);
         if(!updated)

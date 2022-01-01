@@ -9,6 +9,10 @@
     </b-table>
     <nuxt-link to="/">Back</nuxt-link>
     <nuxt-link to="/prescricoes">Ver Prescrições</nuxt-link>
+    <b-container>
+      <br>
+      <nuxt-link to="prescricoes/create">Create a New Prescrição</nuxt-link>
+    </b-container>
   </b-container>
 </template>
 <script>

@@ -9,6 +9,7 @@ import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyConstraintViolationE
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityNotFoundException;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -30,12 +31,14 @@ public class ProfissionalSaudeService {
 
     @GET
     @Path("/")
+    @RolesAllowed({"Admin"})
     public List<ProfissionalSaudeDTO> getAllProfissionaisSaudeWS() {
         return toDTOs(profissionalSaudeBean.getAllProfissionaisSaude());
     }
 
     @GET
     @Path("{email}/doentes")
+    @RolesAllowed({"Admin","ProfissionalSaude"})
     public Response getDoentesProfissionaisSaude(@PathParam("email") String email) {
         ProfissionalSaude profissionalSaude = profissionalSaudeBean.findProfissional(email);
         if (profissionalSaude != null) {
@@ -47,6 +50,7 @@ public class ProfissionalSaudeService {
 
     @POST
     @Path("/")
+    @RolesAllowed({"Admin"})
     public Response createNewProfissionalSaude (ProfissionalSaudeDTO profissionalSaudeDTO) throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
         String id = profissionalSaudeBean.create(
                 profissionalSaudeDTO.getName(),
@@ -61,6 +65,7 @@ public class ProfissionalSaudeService {
 
     @GET
     @Path("/{email}")
+    @RolesAllowed({"Admin","ProfissionalSaude"})
     public Response getProfissionalSaudeDetails(@PathParam("email") String id) {
         ProfissionalSaude profissionalSaude = profissionalSaudeBean.findProfissional(id);
         if (profissionalSaude != null) {
@@ -72,7 +77,7 @@ public class ProfissionalSaudeService {
     }
 
     @DELETE
-    @Path("/{email}")
+    @Path("/{email}")@RolesAllowed({"Admin"})
     public Response removeProfissionalSaude (@PathParam("email") String id) throws MyEntityNotFoundException{
         profissionalSaudeBean.remove(id);
         ProfissionalSaude profissionalSaude = profissionalSaudeBean.findProfissional(id);
@@ -84,6 +89,7 @@ public class ProfissionalSaudeService {
 
     @PUT
     @Path("/{email}")
+    @RolesAllowed({"Admin"})
     public Response updateProfissionalSaude (@PathParam("email") String id, ProfissionalSaudeDTO profissionalSaudeDTO) throws MyEntityNotFoundException{
         boolean updated = profissionalSaudeBean.update(id, profissionalSaudeDTO.getName(), profissionalSaudeDTO.getEmail(), profissionalSaudeDTO.getPassword());
         if(!updated)
