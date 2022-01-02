@@ -39,6 +39,7 @@ export default {
       return this.id + "/edit"
     },
     doentes() {
+      console.log(this.profissional)
       return this.profissional.doentesDTOList || []
     }
   },

@@ -33,8 +33,15 @@ public class Prescricao implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "DOENTE_EMAIL", referencedColumnName = "EMAIL"))
     private List<Doente> doentes;
 
+    @ManyToMany
+    @JoinTable(name = "PLANOS_PRESCRICOES",
+            joinColumns = @JoinColumn(name = "PRESCRIPTION_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "PLANO_ID", referencedColumnName = "IDPLANO"))
+    private List<Plano> planos;
+
     public Prescricao() {
         this.doentes = new LinkedList<>();
+        this.planos = new LinkedList<>();
     }
 
     public Prescricao(String descricao, String dataInicio, String dataFim, int duracao) {
@@ -43,6 +50,7 @@ public class Prescricao implements Serializable {
         this.dataFim = dataFim;
         this.duracao = duracao;
         this.doentes = new LinkedList<>();
+       this.planos = new LinkedList<>();
     }
 
     public int getId() {
@@ -93,6 +101,14 @@ public class Prescricao implements Serializable {
         this.doentes = doentes;
     }
 
+    public List<Plano> getPlanos() {
+        return planos;
+    }
+
+    public void setPlanos(List<Plano> planos) {
+        this.planos = planos;
+    }
+
     public void addDoente(Doente doente){
         if(doentes.contains(doente)){
             return;
@@ -105,5 +121,19 @@ public class Prescricao implements Serializable {
             return;
         }
         doentes.remove(doente);
+    }
+
+    public void addPlano(Plano plano){
+        if(planos.contains(plano)){
+            return;
+        }
+        planos.add(plano);
+    }
+
+    public void removePlano(Plano plano){
+        if(!planos.contains(plano)){
+            return;
+        }
+        planos.remove(plano);
     }
 }

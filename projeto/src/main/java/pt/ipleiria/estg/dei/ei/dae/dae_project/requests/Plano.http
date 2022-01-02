@@ -1,0 +1,35 @@
+#### Planos
+GET http://localhost:8080/dae_project/api/planos
+Accept: application/json
+
+###
+GET http://localhost:8080/dae_project/api/planos/3
+Accept: application/json
+
+###
+POST http://localhost:8080/dae_project/api/planos
+Content-Type: application/json
+
+{ "descricao": "teste de uma descricao para um plano",
+  "duracao": 12
+}
+
+###
+PUT http://localhost:8080/dae_project/api/planos/5
+Content-Type: application/json
+
+{ "descricao": "teste de uma descricao para um plano 22",
+  "duracao": 1222
+}
+
+###
+GET http://localhost:8080/dae_project/api/planos/3/prescricoes
+Accept: application/json
+
+###
+DELETE http://localhost:8080/dae_project/api/planos/4
+Accept: application/json
+
+### Associate a plano to a prescrição - run after the previous POST
+PUT http://localhost:8080/dae_project/api/planos/3/prescricao/associate/2
+Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJwZWRyb0BtYWlsLnB0IiwiaXNzIjoicXVpY2tzdGFydC1qd3QtaXNzdWVyIiwiYXVkIjoiand0LWF1ZGllbmNlIiwiZ3JvdXBzIjpbIkFkbWluIl0sImV4cCI6MTY0MTE1NTA0MH0.O1BiZ87L-Cy_g5hiy3EDyylyotblv1nRkQfdig9Y2eaURHlUHAC9lbribUe00pYwq2eghFZgPWe7pjFulGGZ0AE9XSbRYJisE7x5r-21s3KrCG0BgS5HWDG0dQXm8MJexLaeAiVaKexeaadaRp_YN92cZfnzQK1q42rkF59SLqNJe28SUdL28SY0tZ8doLJwfXJQcm7464mvEvswUcL-AwhzksfbireuP4o6_3kkTITQZzvmiZ5j3dGLQxUA66YCrU8exxX2AsOErtAN3AhBF8mV54VIbTRbwg71QDCEmRT5vez4h_phxDDfHB8Z87JTgmEZrfZyPkwksPm0FuLXSg
