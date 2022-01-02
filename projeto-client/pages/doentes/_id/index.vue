@@ -12,7 +12,7 @@
       <template v-slot:cell(actions)="row">
         <nuxt-link
           class="btn btn-link"
-          :to="`/api/prescricoes/${row.item.id}/doentes`">Details</nuxt-link>
+          :to="`/api/prescricoes/${row.item.id}`">Details</nuxt-link>
       </template>
     </b-table>
     <p v-else>No prescrições associated.</p>

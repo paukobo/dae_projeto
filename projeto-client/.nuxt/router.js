@@ -26,6 +26,7 @@ const _02e49a79 = () => interopDefault(import('..\\pages\\profissionaisSaude\\up
 const _5b7b0312 = () => interopDefault(import('..\\pages\\admins\\_id\\index.vue' /* webpackChunkName: "pages/admins/_id/index" */))
 const _fb8efa0c = () => interopDefault(import('..\\pages\\dadosbiomedicos\\_id\\index.vue' /* webpackChunkName: "pages/dadosbiomedicos/_id/index" */))
 const _05444efb = () => interopDefault(import('..\\pages\\doentes\\_id\\index.vue' /* webpackChunkName: "pages/doentes/_id/index" */))
+const _062fd840 = () => interopDefault(import('..\\pages\\planos\\_id\\index.vue' /* webpackChunkName: "pages/planos/_id/index" */))
 const _06918e11 = () => interopDefault(import('..\\pages\\prescricoes\\_id\\index.vue' /* webpackChunkName: "pages/prescricoes/_id/index" */))
 const _2ab3cc88 = () => interopDefault(import('..\\pages\\profissionaisSaude\\_id\\index.vue' /* webpackChunkName: "pages/profissionaisSaude/_id/index" */))
 const _700479f5 = () => interopDefault(import('..\\pages\\admins\\_id\\edit.vue' /* webpackChunkName: "pages/admins/_id/edit" */))
@@ -33,6 +34,7 @@ const _4e6b4ddc = () => interopDefault(import('..\\pages\\dadosbiomedicos\\_id\\
 const _6cb39af9 = () => interopDefault(import('..\\pages\\doentes\\_id\\associateDoenteWithPrescricao.vue' /* webpackChunkName: "pages/doentes/_id/associateDoenteWithPrescricao" */))
 const _c610afa8 = () => interopDefault(import('..\\pages\\doentes\\_id\\dadosbiomedicos\\index.vue' /* webpackChunkName: "pages/doentes/_id/dadosbiomedicos/index" */))
 const _45f6ee1e = () => interopDefault(import('..\\pages\\doentes\\_id\\edit.vue' /* webpackChunkName: "pages/doentes/_id/edit" */))
+const _24df79e8 = () => interopDefault(import('..\\pages\\planos\\_id\\edit.vue' /* webpackChunkName: "pages/planos/_id/edit" */))
 const _4eb2dfe6 = () => interopDefault(import('..\\pages\\prescricoes\\_id\\associatePlanoWithPrescricao.vue' /* webpackChunkName: "pages/prescricoes/_id/associatePlanoWithPrescricao" */))
 const _40280f1b = () => interopDefault(import('..\\pages\\prescricoes\\_id\\edit.vue' /* webpackChunkName: "pages/prescricoes/_id/edit" */))
 const _5a18a5c4 = () => interopDefault(import('..\\pages\\profissionaisSaude\\_id\\edit.vue' /* webpackChunkName: "pages/profissionaisSaude/_id/edit" */))
@@ -139,6 +141,10 @@ export const routerOptions = {
     component: _05444efb,
     name: "doentes-id"
   }, {
+    path: "/planos/:id",
+    component: _062fd840,
+    name: "planos-id"
+  }, {
     path: "/prescricoes/:id",
     component: _06918e11,
     name: "prescricoes-id"
@@ -166,6 +172,10 @@ export const routerOptions = {
     path: "/doentes/:id/edit",
     component: _45f6ee1e,
     name: "doentes-id-edit"
+  }, {
+    path: "/planos/:id/edit",
+    component: _24df79e8,
+    name: "planos-id-edit"
   }, {
     path: "/prescricoes/:id/associatePlanoWithPrescricao",
     component: _4eb2dfe6,

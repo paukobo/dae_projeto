@@ -5,13 +5,13 @@
       <form @submit.prevent="create" :disabled="!isFormValid">
         <b-form-group description="The name is required" label="Enter your name" label-for="name"
                       :invalid-feedback="invalidNameFeedback" :state="isNameValid">
-          <b-input v-model.trim="name" required :state="isNameValid" placeholder="Enter your name"/>
+          <b-input v-model="name" required :state="isNameValid" placeholder="Enter your name"/>
         </b-form-group>
 
         <b-form-group description="The email is required" label="Enter your email" label-for="email"
                       :invalid-feedback="invalidEmailFeedback" :state="isEmailValid">
-          <b-input ref="email" v-model.trim="email" type="email" :state="isEmailValid" required
-                   pattern=".+@my.ipleiria.pt" placeholder="Enter your e-mail"/>
+          <b-input ref="email" v-model="email" type="email" :state="isEmailValid" required
+                   placeholder="Enter your e-mail"/>
         </b-form-group>
 
         <b-form-group description="The password is required" label="Enter your password" label-for="password"
@@ -19,6 +19,28 @@
           <b-input v-model="password" type="password" :state="isPasswordValid" required
                    placeholder="Enter your password"/>
         </b-form-group>
+
+        <b-form-group description="The contact is required" label="Enter your contact" label-for="contact"
+                      :invalid-feedback="invalidContactFeedback" :state="isContactValid">
+          <b-input type="tel" pattern="[9]{1}[1|2|3|6]{1}[0-9]{7}" v-model="contact" required :state="isContactValid" placeholder="Enter your contact"/>
+        </b-form-group>
+
+        <b-form-group description="The address is required" label="Enter your address" label-for="address"
+                      :invalid-feedback="invalidAddressFeedback" :state="isAddressValid">
+          <b-input v-model="address" required :state="isAddressValid" placeholder="Enter your address"/>
+        </b-form-group>
+
+        <b-form-group>
+          <label>Profissionais de Saúde:</label>
+            <b-form-select v-model="profissionalEmail">
+              <template v-for="item in profissionais">
+                <option :key="item.email" :value="item.email">
+                  {{ item.email }}
+                </option>
+              </template>
+            </b-form-select>
+        </b-form-group>
+
 
         <p class="text-danger" v-show="errorMsg">{{ errorMsg }}</p>
         <nuxt-link to="/doentes">Return</nuxt-link>
@@ -35,7 +57,11 @@ export default {
       password: null,
       name: null,
       email: null,
+      contact: null,
+      address: null,
+      profissionalEmail: null,
       doentes: [],
+      profissionais: [],
       errorMsg: false
     }
   },
@@ -92,6 +118,46 @@ export default {
       }
       return this.$refs.email.checkValidity()
     },
+    invalidContactFeedback() {
+      if (!this.contact) {
+        return null
+      }
+      let contactLen = this.contact.length
+      if (contactLen != 9) {
+        return 'The contact must have 9 digits.'
+      }
+      return ''
+    },
+    isContactValid() {
+      if (!this.contact) {
+        return null
+      }
+      let contactLen = this.contact.length
+      if (contactLen != 9) {
+        return false
+      }
+      return true
+    },
+    invalidAddressFeedback() {
+      if (!this.address) {
+        return null
+      }
+      let addressLen = this.address.length
+      if (addressLen < 2 || addressLen > 75) {
+        return 'The adress must have between [2-75] characters.'
+      }
+      return ''
+    },
+    isAddressValid() {
+      if (!this.address) {
+        return null
+      }
+      let addressLen = this.address.length
+      if (addressLen < 2 || addressLen > 75) {
+        return false
+      }
+      return true
+    },
     isFormValid() {
       if (!this.isPasswordValid) {
         return false
@@ -102,6 +168,12 @@ export default {
       if (!this.isEmailValid) {
         return false
       }
+      if (!this.isContactValid) {
+        return false
+      }
+      if (!this.isAddressValid) {
+        return false
+      }
       return true
     }
   },
@@ -109,6 +181,11 @@ export default {
     this.$axios.$get('/api/doentes')
       .then(doentes => {
         this.doentes = doentes
+      })
+
+    this.$axios.$get('/api/profissionaisSaude')
+      .then(profissionais => {
+        this.profissionais = profissionais
       })
   },
   methods: {
@@ -119,9 +196,13 @@ export default {
       this.$axios.$post('/api/doentes', {
         name: this.name,
         email: this.email,
-        password: this.password
+        password: this.password,
+        contact: this.contact,
+        address: this.address,
+        profissionalEmail: this.profissionalEmail
       })
         .then(() => {
+          this.$toast.success("Doente created successfully!").goAway(2000)
           this.$router.push('/doentes')
         })
     }
