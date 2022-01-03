@@ -35,10 +35,10 @@
 
       </b-form-group>
       <p v-show="errorMsg">{{ errorMsg }}</p>
-      <a href="#" @click.prevent="back()">Cancel</a>
-      <button type="reset" @click="reset">RESET</button>
-      <button @click.prevent="create"
-              :disabled="!isFormValid">SAVE</button>
+      <b-button variant="secondary" @click.prevent="back">Voltar</b-button>
+      <b-button variant="secondary" type="reset" @click="reset">Reset</b-button>
+      <b-button variant="success" @click.prevent="create"
+              :disabled="!isFormValid">Save</b-button>
     </form>
   </div>
 </template>

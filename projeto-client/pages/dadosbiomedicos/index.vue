@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Dados Biomedicos</h1>
+    <h1 style="text-align: center">Dados Biomedicos</h1>
     <b-container>
       <b-table striped over :items="biomedicos" :fields="fields">
         <template v-slot:cell(valoresQualitativos)="row">
@@ -11,19 +11,31 @@
 
         </template>
         <template v-slot:cell(actions)="row">
-          <nuxt-link
-            class="btn btn-link"
-            :to="`/dadosbiomedicos/${row.item.id}`">Details</nuxt-link>
+          <b-button
+            variant="info"
+            :to="`/dadosbiomedicos/${row.item.id}`">
+            <b-icon icon="eyeFill"></b-icon>
+          </b-button>
         </template>
       </b-table>
-
+      <b-button variant="secondary" to="/">Voltar</b-button>
+      <b-button variant="success" @click.prevent="routeCreate">Criar Novo Tipo Dado Biomedico</b-button>
     </b-container>
-    <nuxt-link to="/">Back</nuxt-link>
-    <nuxt-link to="/dadosbiomedicos/create">Create a New Dado Biomedico</nuxt-link>
+
   </div>
+
 </template>
 <script>
+import { BIcon, BIconPlus, BIconDash, BIconEyeFill } from 'bootstrap-vue'
+
+
 export default {
+  components: {
+    BIcon,
+    BIconPlus,
+    BIconDash,
+    BIconEyeFill
+  },
   data () {
     return {
       fields: ['nome', 'descricao', 'valorMin','valorMax', 'unidades', 'valoresQualitativos', 'actions'],
@@ -36,6 +48,11 @@ export default {
         console.log(biomedicos)
         this.biomedicos = biomedicos
       })
+  },
+  methods:{
+    routeCreate(){
+      this.$router.push("/dadosbiomedicos/create")
+    }
   }
 }
 </script>

@@ -35,10 +35,10 @@
 
       </b-form-group>
       <p v-show="errorMsg">{{ errorMsg }}</p>
-      <nuxt-link to="/dadosbiomedicos">Return</nuxt-link>
-      <button type="reset" @click="reset">RESET</button>
-      <button @click.prevent="create"
-              :disabled="!isFormValid">CREATE</button>
+      <b-button to="/dadosbiomedicos">Voltar</b-button>
+      <b-button variant="secondary" type="reset" @click="reset">Reset</b-button>
+      <b-button variant="success" @click.prevent="create"
+                :disabled="!isFormValid">Criar</b-button>
     </form>
   </div>
 </template>

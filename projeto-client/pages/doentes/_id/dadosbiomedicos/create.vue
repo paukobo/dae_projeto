@@ -37,10 +37,10 @@
 
     </b-form-group>
     <p v-show="errorMsg">{{ errorMsg }}</p>
-    <nuxt-link :to="`/doentes/${id}/dadosbiomedicos`">Return</nuxt-link>
-    <button type="reset" @click="reset">RESET</button>
-    <button @click.prevent="create"
-            :disabled="!isFormValid">CREATE</button>
+    <b-button variant="secondary" @click.prevent="back">Voltar</b-button>
+    <b-button variant="secondary" type="reset" @click="reset">Reset</b-button>
+    <b-button variant="success" @click.prevent="create"
+            :disabled="!isFormValid">Criar</b-button>
   </form>
   </div>
 </template>
@@ -66,6 +66,9 @@ export default {
     })
   },
   methods: {
+    back(){
+      this.$router.go(-1)
+    },
     reset(){
       this.valor = null
       this.valorQualitativo = null

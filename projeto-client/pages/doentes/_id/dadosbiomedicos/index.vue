@@ -1,17 +1,19 @@
 <template>
   <div class="overflow-auto">
     <div v-if="rows == 0">
+      <br>
       <h2>Sem dados!</h2>
+      <br>
     </div>
     <div v-else>
-      <label>Dado Type</label>
+      <label>Tipo Dado</label>
       <b-select v-model="tipoId" :options="tipos" value-field="id" text-field="nome">
         <template v-slot:first>
-          <option :value="null">-- No Type Filter --</option>
+          <option :value="null">-- Sem Filtro --</option>
         </template>
       </b-select>
 
-      <p class="mt-3">Current Page: {{ currentPage }}</p>
+      <p class="mt-3">Pagina: {{ currentPage }}</p>
       <b-table
         id="my-table"
         :items="dados"
@@ -31,14 +33,22 @@
         aria-controls="my-table"
       ></b-pagination>
     </div>
-    <nuxt-link :to="`/doentes/${id}`">Back</nuxt-link>
-    <nuxt-link :to="`/doentes/${id}/dadosbiomedicos/create`">Create a New Dado Biomedico</nuxt-link>
+    <b-button variant="secondary" @click.prevent="back">Voltar</b-button>
+    <b-button variant="success"@click.prevent="addDado"><b-icon icon="plusCircle"/>Adicionar Dado Biomedico</b-button>
   </div>
 </template>
 
 <script>
+import {BIconPlusCircle,BIcon, BIconPlus, BIconDash} from 'bootstrap-vue'
+
 export default {
   name: "dadosbiomedicos",
+  components:{
+    BIcon,
+    BIconPlus,
+    BIconDash,
+    BIconPlusCircle
+  },
   data(){
     return{
       perPage: 10,
@@ -68,6 +78,12 @@ export default {
       })
   },
   methods:{
+    addDado(){
+      this.$router.push(`/doentes/${this.id}/dadosbiomedicos/create`)
+    },
+    back(){
+      this.$router.push(`/doentes/${this.id}`)
+    },
     filterTipo(row, filter){
       if(filter == "null"){
         return true

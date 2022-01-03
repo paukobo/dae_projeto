@@ -2,282 +2,205 @@
   {
     "name": "admins",
     "path": "/admins",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\admins\\\\index.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\admins\\\\index.vue",
     "chunkName": "pages/admins/index"
   },
   {
     "name": "dadosbiomedicos",
     "path": "/dadosbiomedicos",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\dadosbiomedicos\\\\index.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\dadosbiomedicos\\\\index.vue",
     "chunkName": "pages/dadosbiomedicos/index"
   },
   {
     "name": "doentes",
     "path": "/doentes",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\doentes\\\\index.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\doentes\\\\index.vue",
     "chunkName": "pages/doentes/index"
   },
   {
     "name": "planos",
     "path": "/planos",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\planos\\\\index.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\planos\\\\index.vue",
     "chunkName": "pages/planos/index"
   },
   {
     "name": "prescricoes",
     "path": "/prescricoes",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\prescricoes\\\\index.vue",
-    "chunkName": "pages/prescricoes/index"
-  },
-  {
-    "name": "prescricoes",
-    "path": "/prescricoes",
     "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\prescricoes\\\\index.vue",
-    "chunkName": "pages/prescricoes/index",
-    "_name": "_7a2730e4"
+    "chunkName": "pages/prescricoes/index"
   },
   {
     "name": "profissionaisSaude",
     "path": "/profissionaisSaude",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\profissionaisSaude\\\\index.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\profissionaisSaude\\\\index.vue",
     "chunkName": "pages/profissionaisSaude/index"
   },
   {
     "name": "admins-create",
     "path": "/admins/create",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\admins\\\\create.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\admins\\\\create.vue",
     "chunkName": "pages/admins/create"
   },
   {
     "name": "admins-remove",
     "path": "/admins/remove",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\admins\\\\remove.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\admins\\\\remove.vue",
     "chunkName": "pages/admins/remove"
   },
   {
     "name": "admins-update",
     "path": "/admins/update",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\admins\\\\update.vue",
-    "chunkName": "pages/admins/update"
-  },
-  {
-    "name": "admins-remove",
-    "path": "/admins/remove",
-    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\admins\\\\remove.vue",
-    "chunkName": "pages/admins/remove",
-    "_name": "_4a3a6844"
-  },
-  {
-    "name": "admins-update",
-    "path": "/admins/update",
     "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\admins\\\\update.vue",
-    "chunkName": "pages/admins/update",
-    "_name": "_f0773cba"
+    "chunkName": "pages/admins/update"
   },
   {
     "name": "auth-login",
     "path": "/auth/login",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\auth\\\\login.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\auth\\\\login.vue",
     "chunkName": "pages/auth/login"
   },
   {
     "name": "dadosbiomedicos-create",
     "path": "/dadosbiomedicos/create",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\dadosbiomedicos\\\\create.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\dadosbiomedicos\\\\create.vue",
     "chunkName": "pages/dadosbiomedicos/create"
   },
   {
     "name": "doentes-create",
     "path": "/doentes/create",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\doentes\\\\create.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\doentes\\\\create.vue",
     "chunkName": "pages/doentes/create"
   },
   {
     "name": "planos-create",
     "path": "/planos/create",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\planos\\\\create.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\planos\\\\create.vue",
     "chunkName": "pages/planos/create"
   },
   {
     "name": "prescricoes-create",
     "path": "/prescricoes/create",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\prescricoes\\\\create.vue",
-    "chunkName": "pages/prescricoes/create"
-  },
-  {
-    "name": "doentes-remove",
-    "path": "/doentes/remove",
-    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\doentes\\\\remove.vue",
-    "chunkName": "pages/doentes/remove",
-    "_name": "_45d8aa4c"
-  },
-  {
-    "name": "doentes-update",
-    "path": "/doentes/update",
-    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\doentes\\\\update.vue",
-    "chunkName": "pages/doentes/update",
-    "_name": "_1a8b7fde"
-  },
-  {
-    "name": "prescricoes-create",
-    "path": "/prescricoes/create",
     "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\prescricoes\\\\create.vue",
-    "chunkName": "pages/prescricoes/create",
-    "_name": "_1b19934c"
+    "chunkName": "pages/prescricoes/create"
   },
   {
     "name": "profissionaisSaude-create",
     "path": "/profissionaisSaude/create",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\profissionaisSaude\\\\create.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\profissionaisSaude\\\\create.vue",
     "chunkName": "pages/profissionaisSaude/create"
   },
   {
     "name": "profissionaisSaude-remove",
     "path": "/profissionaisSaude/remove",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\profissionaisSaude\\\\remove.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\profissionaisSaude\\\\remove.vue",
     "chunkName": "pages/profissionaisSaude/remove"
   },
   {
     "name": "profissionaisSaude-update",
     "path": "/profissionaisSaude/update",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\profissionaisSaude\\\\update.vue",
-    "chunkName": "pages/profissionaisSaude/update"
-  },
-  {
-    "name": "profissionaisSaude-remove",
-    "path": "/profissionaisSaude/remove",
-    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\profissionaisSaude\\\\remove.vue",
-    "chunkName": "pages/profissionaisSaude/remove",
-    "_name": "_ec83ec22"
-  },
-  {
-    "name": "profissionaisSaude-update",
-    "path": "/profissionaisSaude/update",
     "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\profissionaisSaude\\\\update.vue",
-    "chunkName": "pages/profissionaisSaude/update",
-    "_name": "_369f9fb4"
+    "chunkName": "pages/profissionaisSaude/update"
   },
   {
     "name": "admins-id",
     "path": "/admins/:id",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\admins\\\\_id\\\\index.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\admins\\\\_id\\\\index.vue",
     "chunkName": "pages/admins/_id/index"
   },
   {
     "name": "dadosbiomedicos-id",
     "path": "/dadosbiomedicos/:id",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\dadosbiomedicos\\\\_id\\\\index.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\dadosbiomedicos\\\\_id\\\\index.vue",
     "chunkName": "pages/dadosbiomedicos/_id/index"
   },
   {
     "name": "doentes-id",
     "path": "/doentes/:id",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\doentes\\\\_id\\\\index.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\doentes\\\\_id\\\\index.vue",
     "chunkName": "pages/doentes/_id/index"
   },
   {
     "name": "planos-id",
     "path": "/planos/:id",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\planos\\\\_id\\\\index.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\planos\\\\_id\\\\index.vue",
     "chunkName": "pages/planos/_id/index"
   },
   {
     "name": "prescricoes-id",
     "path": "/prescricoes/:id",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\prescricoes\\\\_id\\\\index.vue",
-    "chunkName": "pages/prescricoes/_id/index"
-  },
-  {
-    "name": "prescricoes-id",
-    "path": "/prescricoes/:id",
     "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\prescricoes\\\\_id\\\\index.vue",
-    "chunkName": "pages/prescricoes/_id/index",
-    "_name": "_34c00ab6"
+    "chunkName": "pages/prescricoes/_id/index"
   },
   {
     "name": "profissionaisSaude-id",
     "path": "/profissionaisSaude/:id",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\profissionaisSaude\\\\_id\\\\index.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\profissionaisSaude\\\\_id\\\\index.vue",
     "chunkName": "pages/profissionaisSaude/_id/index"
   },
   {
     "name": "admins-id-edit",
     "path": "/admins/:id/edit",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\admins\\\\_id\\\\edit.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\admins\\\\_id\\\\edit.vue",
     "chunkName": "pages/admins/_id/edit"
   },
   {
     "name": "dadosbiomedicos-id-edit",
     "path": "/dadosbiomedicos/:id/edit",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\dadosbiomedicos\\\\_id\\\\edit.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\dadosbiomedicos\\\\_id\\\\edit.vue",
     "chunkName": "pages/dadosbiomedicos/_id/edit"
   },
   {
     "name": "doentes-id-associateDoenteWithPrescricao",
     "path": "/doentes/:id/associateDoenteWithPrescricao",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\doentes\\\\_id\\\\associateDoenteWithPrescricao.vue",
-    "chunkName": "pages/doentes/_id/associateDoenteWithPrescricao"
-  },
-  {
-    "name": "doentes-id-associateDoenteWithPrescricao",
-    "path": "/doentes/:id/associateDoenteWithPrescricao",
     "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\doentes\\\\_id\\\\associateDoenteWithPrescricao.vue",
-    "chunkName": "pages/doentes/_id/associateDoenteWithPrescricao",
-    "_name": "_253b59c4"
+    "chunkName": "pages/doentes/_id/associateDoenteWithPrescricao"
   },
   {
     "name": "doentes-id-dadosbiomedicos",
     "path": "/doentes/:id/dadosbiomedicos",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\doentes\\\\_id\\\\dadosbiomedicos\\\\index.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\doentes\\\\_id\\\\dadosbiomedicos\\\\index.vue",
     "chunkName": "pages/doentes/_id/dadosbiomedicos/index"
   },
   {
     "name": "doentes-id-edit",
     "path": "/doentes/:id/edit",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\doentes\\\\_id\\\\edit.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\doentes\\\\_id\\\\edit.vue",
     "chunkName": "pages/doentes/_id/edit"
   },
   {
     "name": "planos-id-edit",
     "path": "/planos/:id/edit",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\planos\\\\_id\\\\edit.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\planos\\\\_id\\\\edit.vue",
     "chunkName": "pages/planos/_id/edit"
   },
   {
     "name": "prescricoes-id-associatePlanoWithPrescricao",
     "path": "/prescricoes/:id/associatePlanoWithPrescricao",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\prescricoes\\\\_id\\\\associatePlanoWithPrescricao.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\prescricoes\\\\_id\\\\associatePlanoWithPrescricao.vue",
     "chunkName": "pages/prescricoes/_id/associatePlanoWithPrescricao"
   },
   {
     "name": "prescricoes-id-edit",
     "path": "/prescricoes/:id/edit",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\prescricoes\\\\_id\\\\edit.vue",
-    "chunkName": "pages/prescricoes/_id/edit"
-  },
-  {
-    "name": "prescricoes-id-edit",
-    "path": "/prescricoes/:id/edit",
     "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\prescricoes\\\\_id\\\\edit.vue",
-    "chunkName": "pages/prescricoes/_id/edit",
-    "_name": "_00d62c54"
+    "chunkName": "pages/prescricoes/_id/edit"
   },
   {
     "name": "profissionaisSaude-id-edit",
     "path": "/profissionaisSaude/:id/edit",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\profissionaisSaude\\\\_id\\\\edit.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\profissionaisSaude\\\\_id\\\\edit.vue",
     "chunkName": "pages/profissionaisSaude/_id/edit"
   },
   {
     "name": "doentes-id-dadosbiomedicos-create",
     "path": "/doentes/:id/dadosbiomedicos/create",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\doentes\\\\_id\\\\dadosbiomedicos\\\\create.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\doentes\\\\_id\\\\dadosbiomedicos\\\\create.vue",
     "chunkName": "pages/doentes/_id/dadosbiomedicos/create"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\index.vue",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\index.vue",
     "chunkName": "pages/index"
   }
 ]
