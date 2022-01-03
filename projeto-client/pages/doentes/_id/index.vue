@@ -37,7 +37,7 @@
         Back
       </b-button>
       <b-button :to="`/doentes/${id}/dadosbiomedicos`">Dados Biomedicos</b-button>
-      <b-button variant="primary" :to=editUrl>Edit</b-button>
+      <b-button variant="primary" :to=editUrl>Editar</b-button>
       <b-button variant="success" v-if="$auth.user.groups[0] == 'Admin' || $auth.user.groups[0] == 'ProfissionalSaude'"
                 :to="newPrescricao">Associar prescrição
       </b-button>
@@ -46,6 +46,8 @@
                 style="float: right" @click.prevent="deleteDoente">Delete
       </b-button>
     </div>
+    <br>
+    <b-button @click.prevent="$router.go(-1)">Voltar</b-button>
   </b-container>
 </template>
 <script>
