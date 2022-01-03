@@ -55,6 +55,10 @@ Content-Type: application/json
 DELETE http://localhost:8080/dae_project/api/profissionaisSaude/6
 Accept: application/json
 
+###
+GET http://localhost:8080/dae_project/api/profissionaisSaude/ana@mail.pt/doentes
+Accept: application/json
+
 ///////////////////////////////////////////////////////////////////////////////////
 #### Doentes
 GET http://localhost:8080/dae_project/api/doentes

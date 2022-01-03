@@ -1,6 +1,16 @@
 <template>
   <b-container>
-    <b-table striped over :items="doentes" :fields="fields">
+    <h1 style="text-align: center">Doentes</h1>
+    <b-table v-if="$auth.user.groups[0] == 'Admin'" striped over :items="doentes" :fields="fields">
+      <template v-slot:cell(actions)="row">
+        <b-button
+          variant="info"
+          :to="`/doentes/${row.item.email}`">
+          <b-icon icon="eyeFill"></b-icon>
+        </b-button>
+      </template>
+    </b-table>
+    <b-table v-else-if="$auth.user.groups[0] == 'ProfissionalSaude'" striped over :items="doentesProfissional" :fields="fields">
       <template v-slot:cell(actions)="row">
         <b-button
           variant="info"
@@ -10,9 +20,9 @@
       </template>
     </b-table>
     <div v-if="$auth.user.groups[0] == 'Admin' || $auth.user.groups[0] == 'ProfissionalSaude'">
-      <b-button variant="success" to="/doentes/create">Novo doente</b-button>
+      <b-button style="float: right" variant="success" to="/doentes/create">Novo doente</b-button>
     </div>
-    <b-button @click.prevent="back">Back</b-button>
+    <b-button to="/">Back</b-button>
   </b-container>
 </template>
 <script>
@@ -39,6 +49,7 @@ export default {
         label: "Detalhes"
       }],
       doentes: [],
+      doentesProfissional: []
     };
   },
   methods:{
@@ -51,6 +62,12 @@ export default {
       .$get("http://localhost:8080/dae_project/api/doentes")
       .then((doentes) => {
         this.doentes = doentes;
+      });
+
+    this.$axios
+      .$get("http://localhost:8080/dae_project/api/profissionaisSaude/" + this.$auth.user.sub + "/doentes")
+      .then((doentesProfissional) => {
+        this.doentesProfissional = doentesProfissional;
       });
   },
 };

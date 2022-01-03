@@ -1,29 +1,29 @@
 <template>
   <b-container>
     <div>
-      <h1>Create a new Profissional de Saúde</h1>
+      <h1>Criar novo Profissional de Saúde</h1>
       <form @submit.prevent="create" :disabled="!isFormValid">
-        <b-form-group description="The name is required" label="Enter your name" label-for="name"
+        <b-form-group description="O nome é obrigatório" label="Inserir nome" label-for="name"
                       :invalid-feedback="invalidNameFeedback" :state="isNameValid">
-          <b-input v-model.trim="name" required :state="isNameValid" placeholder="Enter your name"/>
+          <b-input v-model.trim="name" required :state="isNameValid" placeholder="Inserir nome"/>
         </b-form-group>
 
-        <b-form-group description="The email is required" label="Enter your email" label-for="email"
+        <b-form-group description="O email é obrigatório" label="Inserir email" label-for="email"
                       :invalid-feedback="invalidEmailFeedback" :state="isEmailValid">
           <b-input ref="email" v-model.trim="email" type="email" :state="isEmailValid" required
-                   placeholder="Enter your e-mail"/>
+                   placeholder="Inserir email"/>
         </b-form-group>
 
-        <b-form-group description="The password is required" label="Enter your password" label-for="password"
+        <b-form-group description="A password é obrigatória" label="Inserir password" label-for="password"
                       :invalid-feedback="invalidPasswordFeedback" :state="isPasswordValid">
           <b-input v-model="password" type="password" :state="isPasswordValid" required
-                   placeholder="Enter your password"/>
+                   placeholder="Inserir password"/>
         </b-form-group>
 
         <p class="text-danger" v-show="errorMsg">{{ errorMsg }}</p>
-        <nuxt-link to="/profissionaisSaude">Return</nuxt-link>
-        <button type="reset" @click="reset">RESET</button>
-        <button @click.prevent="create" :disabled="!isFormValid">CREATE</button>
+        <b-button @click="$router.go(-1)">Voltar</b-button>
+        <b-button variant="danger" type="reset" @click="reset">Reset</b-button>
+        <b-button variant="success" @click.prevent="create" :disabled="!isFormValid">Criar</b-button>
       </form>
     </div>
   </b-container>

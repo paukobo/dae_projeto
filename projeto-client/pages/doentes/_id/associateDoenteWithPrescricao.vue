@@ -1,21 +1,25 @@
 <template>
   <form @submit.prevent="associate">
-    <div>
-      Email: <input v-model="this.id" type="text" disabled>
-    </div>
-    <div>
-      Prescrições:
-      <select v-model="prescricao">
+    <b-container>
+      <h1>Associar prescrição ao doente {{this.id}}</h1>
+
+      <label>Prescrição</label>
+      <b-select v-model="prescricao">
         <template v-for="item in prescricoes">
           <option :key="item.id" :value="item.id">
             {{ item.id }} : {{ item.descricao }}
           </option>
         </template>
-      </select>
-    </div>
-    <nuxt-link to="/doentes">Return</nuxt-link>
-    <button type="reset">RESET</button>
-    <button @click.prevent="associate">Associate</button>
+      </b-select>
+    </b-container>
+
+    <br>
+
+    <b-container>
+      <b-button to="/doentes">Voltar</b-button>
+      <b-button variant="success" @click.prevent="associate">Associar</b-button>
+    </b-container>
+
   </form>
 </template>
 <script>
@@ -37,10 +41,10 @@ export default {
       this.$axios.$put('/api/prescricoes/' + this.prescricao + '/doente/associate/' + this.id)
         .then(() => {
           this.$toast.success('Prescrição adicionada com sucesso!').goAway(2000)
-          this.$router.push('/doentes')
+          this.$router.go(-1)
         })
-        .catch((e)=>{
-          alert(e)
+        .catch(()=>{
+          this.$toast.error('Não foi possível adicionar a prescrição!').goAway(2000)
         })
     },
   },

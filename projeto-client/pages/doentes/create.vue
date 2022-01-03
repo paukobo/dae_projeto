@@ -49,8 +49,8 @@
 
 
         <p class="text-danger" v-show="errorMsg">{{ errorMsg }}</p>
-        <b-button variant="danger" to="/doentes">Return</b-button>
-        <b-button type="reset" @click="reset">Reset</b-button>
+        <b-button @click="$router.go(-1)">Voltar</b-button>
+        <b-button variant="danger" type="reset" @click="reset">Reset</b-button>
         <b-button variant="success" @click.prevent="create" :disabled="!isFormValid">Criar</b-button>
       </form>
     </div>
@@ -223,7 +223,7 @@ export default {
         })
           .then(() => {
             this.$toast.success("Doente created successfully!").goAway(2000)
-            this.$router.push('/doentes')
+            this.$router.go(-1)
           })
       }
 

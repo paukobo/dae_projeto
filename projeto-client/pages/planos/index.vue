@@ -1,24 +1,49 @@
 <template>
   <b-container>
+    <h1 style="text-align: center">Planos</h1>
     <b-table striped over :items="planos" :fields="fields">
       <template v-slot:cell(actions)="row">
-        <nuxt-link
-          class="btn btn-link"
-          :to="`/planos/${row.item.id}`">Details</nuxt-link>
+        <b-button
+          variant="info"
+          :to="`/planos/${row.item.id}`"><b-icon icon="eyeFill"></b-icon>
+        </b-button>
       </template>
     </b-table>
     <b-container>
       <br>
-      <nuxt-link to="planos/create">Create a New Plano</nuxt-link>
+      <b-button variant="success" to="planos/create"><b-icon icon="plusCircle"></b-icon> Plano</b-button>
     </b-container>
-    <nuxt-link to="/">Back</nuxt-link>
+    <br>
+    <b-button @click="$router.go(-1)">Voltar</b-button>
   </b-container>
 </template>
 <script>
+import { BIcon, BIconPlus, BIconDash, BIconPlusCircle, BIconEyeFill } from 'bootstrap-vue'
+
 export default {
+  components: {
+    BIcon,
+    BIconPlus,
+    BIconDash,
+    BIconPlusCircle,
+    BIconEyeFill
+  },
   data() {
     return {
-      fields: ["descricao", "duracao", "actions"],
+      fields: [
+        {
+          key: "descricao",
+          label: "Descrição"
+        },
+        {
+          key: "duracao",
+          label: "Duração"
+        },
+        {
+          key: "actions",
+          label: "Detalhes"
+        },
+      ],
       planos: [],
     };
   },

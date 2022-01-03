@@ -37,7 +37,7 @@
         Back
       </b-button>
       <b-button :to="`/doentes/${id}/dadosbiomedicos`">Dados Biomedicos</b-button>
-      <b-button variant="info" :to=editUrl>Edit</b-button>
+      <b-button variant="primary" :to=editUrl>Edit</b-button>
       <b-button variant="success" v-if="$auth.user.groups[0] == 'Admin' || $auth.user.groups[0] == 'ProfissionalSaude'"
                 :to="newPrescricao">Associar prescrição
       </b-button>
@@ -81,10 +81,11 @@ export default {
       this.$axios.$delete(`api/doentes/${this.id}`)
         .then(() => {
           this.$toast.success('Doente successfully deleted!').goAway(2000)
-          this.$router.push('/doentes')
+          this.$router.go(-1)
         })
         .catch(error => {
           this.errorMsg = error.response.data
+          this.$toast.error('Não foi possível eliminar o doente!').goAway(2000)
         })
     },
   },

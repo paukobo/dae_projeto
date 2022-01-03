@@ -1,12 +1,10 @@
 <template>
   <div>
-
-    <h1>Edit Administrator</h1>
-
-    <form @submit.prevent="create" :disabled="!isFormValid" style="margin-left: 30px">
+    <h1>Editar Administrador</h1>
+    <form @submit.prevent="edit" :disabled="!isFormValid" style="margin-left: 30px">
       <b-form-group
         id="name"
-        description="The name is required"
+        description="O nome é obrigatório"
         label="Name"
         label-for="name"
         :invalid-feedback="invalidNameFeedback"
@@ -17,10 +15,9 @@
         <b-input  v-model="email" required disabled/>
       </b-form-group>
       <p v-show="errorMsg">{{ errorMsg }}</p>
-      <a href="#" @click.prevent="back()">Cancel</a>
-      <button type="reset" @click="reset">RESET</button>
-      <button @click.prevent="create"
-              :disabled="!isFormValid">SAVE</button>
+      <b-button @click.prevent="back">Cancel</b-button>
+      <b-button variant="danger" type="reset" @click="reset">Reset</b-button>
+      <b-button variant="success" @click.prevent="edit" :disabled="!isFormValid">Guardar</b-button>
     </form>
   </div>
 </template>
@@ -88,14 +85,12 @@ export default {
       this.password = this.admin.password;
     },
 
-    create() {
+    edit() {
       let data = {
         name: this.name,
         email: this.email,
         password: this.password
       }
-
-      console.log(data)
 
       this.$axios.$put('/api/admins/'+this.id,   data)
         .then(() => {

@@ -1,21 +1,23 @@
 <template>
   <form @submit.prevent="associate">
-    <div>
-      ID Prescrição: <input v-model="this.id" type="text" disabled>
-    </div>
-    <div>
-      Planos:
-      <select v-model="plano">
+    <b-container>
+      <h1>Associar plano à prescrição #{{this.id}}</h1>
+
+      <label>Plano</label>
+      <b-select v-model="plano">
         <template v-for="item in planos">
           <option :key="item.id" :value="item.id">
-            {{ item.id }} : {{ item.descricao }}
+            {{ item.id }}: {{ item.descricao }}
           </option>
         </template>
-      </select>
-    </div>
-    <nuxt-link to="/prescricoes">Return</nuxt-link>
-    <button type="reset">RESET</button>
-    <button @click.prevent="associate">Associate</button>
+      </b-select>
+    </b-container>
+    <br>
+    <br>
+    <b-container>
+      <b-button to="/prescricoes">Voltar</b-button>
+      <b-button variant="success" @click.prevent="associate">Associar</b-button>
+    </b-container>
   </form>
 </template>
 <script>
@@ -37,10 +39,10 @@ export default {
       this.$axios.$put('/api/planos/' + this.plano + '/prescricao/associate/' + this.id)
         .then(() => {
           this.$toast.success('Plano adicionado com sucesso!').goAway(2000)
-          this.$router.push('/prescricoes')
+          this.$router.go(-1)
         })
-        .catch((e)=>{
-          alert(e)
+        .catch(()=>{
+          this.$toast.error('Não foi possível adicionar o plano!').goAway(2000)
         })
     },
   },

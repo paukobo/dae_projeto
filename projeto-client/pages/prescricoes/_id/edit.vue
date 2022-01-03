@@ -1,18 +1,18 @@
 <template>
   <div>
 
-    <h1>Edit Prescricao</h1>
+    <h1>Editar Prescrição</h1>
 
-    <form @submit.prevent="create" :disabled="!isFormValid" style="margin-left: 30px">
+    <form @submit.prevent="edit" :disabled="!isFormValid" style="margin-left: 30px">
       <b-form-group
         id="descricao"
-        label="Descricao"
+        label="Descrição"
         label-for="descricao"
         :invalid-feedback="invalidDescricaoFeedback"
         :state="isDescricaoValid">
         <b-input id="descricao" v-model.trim="descricao" :state="isDescricaoValid" trim/>
         <br>
-        <label>Data Inicio</label>
+        <label>Data Início</label>
         <b-input  v-model="dataInicio" required/>
         <br>
         <label>Data Fim</label>
@@ -22,10 +22,10 @@
         <b-input  v-model="duracao" required/>
       </b-form-group>
       <p v-show="errorMsg">{{ errorMsg }}</p>
-      <a href="#" @click.prevent="back()">Cancel</a>
-      <button type="reset" @click="reset">RESET</button>
-      <button @click.prevent="create"
-              :disabled="!isFormValid">SAVE</button>
+      <b-button @click="back">Cancel</b-button>
+      <b-button variant="danger" type="reset" @click="reset">Reset</b-button>
+      <b-button variant="success" @click.prevent="edit"
+              :disabled="!isFormValid">Guardar</b-button>
     </form>
   </div>
 </template>
@@ -94,7 +94,7 @@ export default {
       this.duracao = this.prescricao.duracao;
     },
 
-    create() {
+    edit() {
       let data = {
         descricao: this.descricao,
         dataInicio: this.dataInicio,
@@ -106,7 +106,7 @@ export default {
 
       this.$axios.$put('/api/prescricoes/'+this.id,   data)
         .then(() => {
-          this.$toast.success('Prescrição successfully updated!').goAway(2000)
+          this.$toast.success('Prescrição editada com sucesso!').goAway(2000)
           this.$router.push('/prescricoes/'+ this.id)
         })
         .catch(error => {

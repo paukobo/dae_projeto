@@ -1,27 +1,54 @@
 <template>
   <b-container>
+    <h1 style="text-align: center">Profissionais Saúde</h1>
     <b-table striped over :items="profissionais" :fields="fields">
       <template v-slot:cell(actions)="row">
-        <nuxt-link
-          class="btn btn-link"
-          :to="`/profissionaisSaude/${row.item.email}`">Details</nuxt-link>
+        <b-button
+          variant="info"
+          :to="`/profissionaisSaude/${row.item.email}`">
+          <b-icon icon="eyeFill"></b-icon>
+        </b-button>
       </template>
     </b-table>
-    <nuxt-link to="/">Back</nuxt-link>
-    <nuxt-link to="/prescricoes">Ver Prescrições</nuxt-link>
-    <nuxt-link to="/planos">Ver Planos</nuxt-link>
+    <b-container>
+      <b-button variant="success" to="prescricoes/create"><b-icon icon="plusCircle"/> Prescrição</b-button>
+      <b-button variant="primary" to="/prescricoes">Ver Prescrições</b-button>
+      <b-button variant="primary" to="/planos">Ver Planos</b-button>
+    </b-container>
     <b-container>
       <br>
-      <nuxt-link to="prescricoes/create">Create a New Prescrição</nuxt-link>
+      <b-button to="/">Voltar</b-button>
     </b-container>
   </b-container>
 </template>
+
 <script>
+import { BIcon, BIconPlus, BIconDash, BIconEyeFill, BIconPlusCircle } from 'bootstrap-vue'
+
 export default {
+  components: {
+    BIcon,
+    BIconPlus,
+    BIconDash,
+    BIconEyeFill,
+    BIconPlusCircle
+  },
   data() {
     return {
-      fields: ["name", "email", "actions"],
+      fields: [
+        {
+          key: "name",
+          label: "Nome"
+        },{
+          key: "email",
+          label: "Email"
+        },{
+          key: "actions",
+          label: "Detalhes"
+        },
+      ],
       profissionais: [],
+      profissionaisDoentes: [],
     };
   },
   created() {

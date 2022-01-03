@@ -1,36 +1,65 @@
 <template>
   <b-container>
-    <h4>Prescrições Details</h4>
-    <p>Descrição: {{ prescricao.descricao }}</p>
-    <p>Data Inicio: {{ prescricao.dataInicio }}</p>
-    <p>Data Fim: {{ prescricao.dataFim }}</p>
-    <p>Duração: {{ prescricao.duracao }}</p>
+    <h4>Detalhes Prescrições</h4>
+    <label>Descrição</label>
+    <b-input disabled v-model="prescricao.descricao"></b-input>
+    <label>Data Início</label>
+    <b-input disabled v-model="prescricao.dataInicio"></b-input>
+    <label>Data Fim</label>
+    <b-input disabled v-model="prescricao.dataFim"></b-input>
+    <label>Duração</label>
+    <b-input disabled v-model="prescricao.duracao"></b-input>
+
+    <br>
+    <br>
 
     <h4>Planos</h4>
     <b-table v-if="planos.length" striped over :items="planos" :fields="planoFields">
       <template v-slot:cell(actions)="row">
-        <nuxt-link
-          class="btn btn-link"
-          :to="`/api/prescricoes/${row.item.id}/doentes`">Details</nuxt-link>
+        <b-button
+          variant="info"
+          :to="`/planos/${row.item.id}`"><b-icon icon="eyeFill"/></b-button>
       </template>
     </b-table>
     <p v-else>No planos associated.</p>
 
     <div style="margin-top: 20px">
-      <nuxt-link to="/prescricoes">Back</nuxt-link>
-      <nuxt-link :to=editUrl>Edit</nuxt-link>
-      <nuxt-link :to="newPlano">Associate plano with prescrição</nuxt-link>
+      <b-button @click="$router.go(-1)">Voltar</b-button>
+      <b-button variant="primary" :to=editUrl>Editar</b-button>
+      <b-button variant="success" :to="newPlano">Associar plano</b-button>
       <p v-show="errorMsg">{{ errorMsg }}</p>
-      <button style="float: right" @click.prevent="deletePrescricao">Delete</button>
+      <b-button variant="danger" style="float: right" @click.prevent="deletePrescricao">Delete</b-button>
     </div>
   </b-container>
 </template>
 <script>
+import { BIcon, BIconPlus, BIconDash, BIconEyeFill, BIconPlusCircle } from 'bootstrap-vue'
+
 export default {
+  components: {
+    BIcon,
+    BIconPlus,
+    BIconDash,
+    BIconEyeFill,
+    BIconPlusCircle
+  },
   data() {
     return {
       prescricao: {},
-      planoFields: [ 'descricao', 'duracao' ],
+      planoFields: [
+        {
+          key: "descricao",
+          label: "Descrição"
+        },
+        {
+          key: "duracao",
+          label: "Duração"
+        },
+        {
+          key: "actions",
+          label: "Detalhes"
+        },
+      ],
       errorMsg: false,
     }
   },
@@ -38,8 +67,8 @@ export default {
     deletePrescricao(){
       this.$axios.$delete(`api/prescricoes/${this.id}`)
         .then(() => {
-          this.$toast.success('Prescrição successfully deleted!').goAway(2000)
-          this.$router.push('/prescricoes')
+          this.$toast.success('Prescrição eliminada com sucesso!').goAway(2000)
+          this.$router.go(-1)
         })
         .catch(error => {
           this.errorMsg = error.response.data
@@ -57,7 +86,6 @@ export default {
       return this.id + "/associatePlanoWithPrescricao"
     },
     planos() {
-      console.log(this.prescricao)
       return this.prescricao.planosDTOList == null ? [] : this.prescricao.planosDTOList
     }
   },

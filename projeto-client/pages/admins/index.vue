@@ -1,34 +1,66 @@
 <template>
   <b-container>
+    <h1 style="text-align: center">Administradores</h1>
   <b-table striped over :items="admins" :fields="fields">
     <template v-slot:cell(actions)="row">
-      <nuxt-link
-        class="btn btn-link"
-        :to="`/admins/${row.item.email}`">Details</nuxt-link>
+      <b-button
+        variant="info"
+        :to="`/admins/${row.item.email}`">
+        <b-icon icon="eyeFill"></b-icon>
+      </b-button>
+
     </template>
   </b-table>
+  <div style="display: inline-grid; grid-template-columns: 30% 30% 50%;">
     <b-container>
       <br>
-      <nuxt-link to="admins/create">Create a New Admin</nuxt-link>
+      <b-button variant="success" to="admins/create"><b-icon icon="plusCircle"/> Admin</b-button>
     </b-container>
     <b-container>
       <br>
-      <nuxt-link to="doentes/create">Create a New Doente</nuxt-link>
+      <b-button variant="success" to="doentes/create"><b-icon icon="plusCircle"/> Doente</b-button>
     </b-container>
     <b-container>
       <br>
-      <nuxt-link to="profissionaisSaude/create">Create a New Profissional de Saúde</nuxt-link>
+      <b-button variant="success" to="profissionaisSaude/create"><b-icon icon="plusCircle"/> Profissional de Saúde</b-button>
     </b-container>
-  <nuxt-link to="/">Back</nuxt-link>
+  </div>
+  <div>
+    <b-button style="margin-top: 50px" variant="secondary" to="/">Voltar</b-button>
+  </div>
   </b-container>
 </template>
 <script>
+import { BIcon, BIconPlus, BIconDash, BIconEyeFill, BIconPlusCircle } from 'bootstrap-vue'
+
+
 export default {
+  components: {
+    BIcon,
+    BIconPlus,
+    BIconDash,
+    BIconEyeFill,
+    BIconPlusCircle
+  },
   data() {
     return {
-      fields: ["name", "email", "actions"],
+      fields: [{
+        key: "name",
+        label: "Nome"
+      },{
+        key: "email",
+        label: "Email"
+      },{
+        key: "actions",
+        label: "Detalhes"
+      },],
       admins: [],
     };
+  },
+  methods: {
+    back(){
+      this.$router.go(-1)
+    }
   },
   created() {
   this.$axios

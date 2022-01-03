@@ -1,12 +1,12 @@
 <template>
   <div>
 
-    <h1>Edit Plano</h1>
+    <h1>Editar Plano</h1>
 
-    <form @submit.prevent="create" :disabled="!isFormValid" style="margin-left: 30px">
+    <form @submit.prevent="edit" :disabled="!isFormValid" style="margin-left: 30px">
       <b-form-group
         id="descricao"
-        label="Descricao"
+        label="Descrição"
         label-for="descricao"
         :invalid-feedback="invalidDescricaoFeedback"
         :state="isDescricaoValid">
@@ -16,10 +16,10 @@
         <b-input  v-model="duracao" required/>
       </b-form-group>
       <p v-show="errorMsg">{{ errorMsg }}</p>
-      <a href="#" @click.prevent="back()">Cancel</a>
-      <button type="reset" @click="reset">RESET</button>
-      <button @click.prevent="create"
-              :disabled="!isFormValid">SAVE</button>
+      <b-button @click="back">Cancel</b-button>
+      <b-button variant="danger" type="reset" @click="reset">Reset</b-button>
+      <b-button variant="success" @click.prevent="edit"
+                :disabled="!isFormValid">Guardar</b-button>
     </form>
   </div>
 </template>
@@ -84,7 +84,7 @@ export default {
       this.duracao = this.plano.duracao;
     },
 
-    create() {
+    edit() {
       let data = {
         descricao: this.descricao,
         duracao: this.duracao
@@ -92,11 +92,12 @@ export default {
 
       this.$axios.$put('/api/planos/'+this.id,   data)
         .then(() => {
-          this.$toast.success('Plano successfully updated!').goAway(2000)
+          this.$toast.success('Plano editado com sucesso!').goAway(2000)
           this.$router.push('/planos/'+ this.id)
         })
         .catch(error => {
           this.errorMsg = error.response.data
+          this.$toast.error('Não foi possível editar o plano!').goAway(2000)
         })
 
     },

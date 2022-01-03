@@ -1,14 +1,16 @@
 <template>
   <b-container>
-    <h4>Admin Details</h4>
-    <p>Name: {{ admin.name }}</p>
-    <p>Email: {{ admin.email }}</p>
+    <h4>Detalhes Administrador</h4>
+    <label>Nome</label>
+    <b-input v-model="admin.name" disabled/>
+    <label>Email</label>
+    <b-input v-model="admin.email" disabled/>
 
     <div style="margin-top: 20px">
-      <nuxt-link to="/admins">Back</nuxt-link>
-      <nuxt-link :to=editUrl>Edit</nuxt-link>
+      <b-button to="/admins">Voltar</b-button>
+      <b-button :to=editUrl variant="primary">Edit</b-button>
       <p v-show="errorMsg">{{ errorMsg }}</p>
-      <button style="float: right" @click.prevent="deleteAdmin">Delete</button>
+      <b-button style="float: right" variant="danger" @click.prevent="deleteAdmin">Delete</b-button>
     </div>
   </b-container>
 </template>
@@ -17,19 +19,27 @@ export default {
   data() {
     return {
       admin: {},
-      adminFields: [ 'name', 'email' ],
+      adminFields: [{
+          key: "name",
+          label: "Nome"
+        }, {
+          key: "email",
+          label: "Email"
+        },
+      ],
       errorMsg: false,
     }
   },
-  methods:{
-    deleteAdmin(){
+  methods: {
+    deleteAdmin() {
       this.$axios.$delete(`api/admins/${this.id}`)
         .then(() => {
-          this.$toast.success('Admin successfully deleted!').goAway(2000)
+          this.$toast.success('Administrador eliminado com sucesso!').goAway(2000)
           this.$router.push('/admins')
         })
         .catch(error => {
           this.errorMsg = error.response.data
+          this.$toast.error('Não foi possível eliminar o administrador!').goAway(2000)
         })
     }
   },
@@ -37,7 +47,7 @@ export default {
     id() {
       return this.$route.params.id
     },
-    editUrl(){
+    editUrl() {
       return this.id + "/edit"
     },
   },

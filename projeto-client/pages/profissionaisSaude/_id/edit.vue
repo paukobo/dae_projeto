@@ -3,11 +3,11 @@
 
     <h1>Edit Profissional de Saúde</h1>
 
-    <form @submit.prevent="create" :disabled="!isFormValid" style="margin-left: 30px">
+    <form @submit.prevent="edit" :disabled="!isFormValid" style="margin-left: 30px">
       <b-form-group
         id="name"
-        description="The name is required"
-        label="Name"
+        description="O nome é obrigatório"
+        label="Nome"
         label-for="name"
         :invalid-feedback="invalidNameFeedback"
         :state="isNameValid">
@@ -18,10 +18,9 @@
         <br>
       </b-form-group>
       <p v-show="errorMsg">{{ errorMsg }}</p>
-      <a href="#" @click.prevent="back()">Cancel</a>
-      <button type="reset" @click="reset">RESET</button>
-      <button @click.prevent="create"
-              :disabled="!isFormValid">SAVE</button>
+      <b-button variant="danger" @click.prevent="back">Cancel</b-button>
+      <b-button type="reset" @click="reset">Reset</b-button>
+      <b-button variant="success" @click.prevent="edit" :disabled="!isFormValid">Guardar</b-button>
     </form>
   </div>
 </template>
@@ -89,7 +88,7 @@ export default {
       this.password = this.profissional.password;
     },
 
-    create() {
+    edit() {
       let data = {
         name: this.name,
         email: this.email,

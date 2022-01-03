@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 style="text-align: center">Dados Biomedicos</h1>
+    <h1 style="text-align: center">Dados Biomédicos</h1>
     <b-container>
       <b-table striped over :items="biomedicos" :fields="fields">
         <template v-slot:cell(valoresQualitativos)="row">
