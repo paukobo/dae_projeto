@@ -37,7 +37,6 @@ export default {
     '@nuxtjs/toast',
     '@nuxtjs/auth'
   ],
-
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,

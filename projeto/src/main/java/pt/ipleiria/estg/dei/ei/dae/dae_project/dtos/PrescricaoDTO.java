@@ -1,5 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.dae_project.dtos;
 
+import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Plano;
+
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,9 +13,11 @@ public class PrescricaoDTO implements Serializable {
     private String dataFim;
     private int duracao;
     private List<DoenteDTO> doentesDTOList;
+    private List<PlanoDTO> planosDTOList;
 
     public PrescricaoDTO() {
         this.doentesDTOList = new LinkedList<>();
+        this.planosDTOList = new LinkedList<>();
     }
 
     public PrescricaoDTO(int id, String descricao, String dataInicio, String dataFim, int duracao) {
@@ -22,6 +26,8 @@ public class PrescricaoDTO implements Serializable {
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.duracao = duracao;
+        this.doentesDTOList = new LinkedList<>();
+        this.planosDTOList = new LinkedList<>();
     }
 
     public PrescricaoDTO(int id, String descricao, String dataInicio, String dataFim, int duracao, List<DoenteDTO> doentesDTOList) {
@@ -31,6 +37,16 @@ public class PrescricaoDTO implements Serializable {
         this.dataFim = dataFim;
         this.duracao = duracao;
         this.doentesDTOList = new LinkedList<>(doentesDTOList);
+    }
+
+    public PrescricaoDTO(int id, String descricao, String dataInicio, String dataFim, int duracao, List<DoenteDTO> doentesDTOList, List<PlanoDTO> planosDTOList) {
+        this.id = id;
+        this.descricao = descricao;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+        this.duracao = duracao;
+        this.doentesDTOList = new LinkedList<>(doentesDTOList);
+        this.planosDTOList = new LinkedList<>(planosDTOList);
     }
 
     public int getId() {
@@ -79,5 +95,13 @@ public class PrescricaoDTO implements Serializable {
 
     public void setDoentesDTOList(List<DoenteDTO> doentesDTOList) {
         this.doentesDTOList = doentesDTOList;
+    }
+
+    public List<PlanoDTO> getPlanosDTOList() {
+        return planosDTOList;
+    }
+
+    public void setPlanosDTOList(List<PlanoDTO> planosDTOList) {
+        this.planosDTOList = planosDTOList;
     }
 }

@@ -1,47 +1,83 @@
 <template>
   <b-container>
-    <h4>Doente Details</h4>
-    <p>Name: {{ doente.name }}</p>
-    <p>Email: {{ doente.email }}</p>
-    <p>Contact: {{ doente.contact }}</p>
-    <p>Address: {{ doente.address }}</p>
-    <p>Médico: {{ doente.profissionalEmail }}</p>
+    <h4>Detalhes Doente</h4>
+
+    <label>Nome:</label>
+    <b-input v-model="doente.name" disabled></b-input>
+
+    <label>Email:</label>
+    <b-input v-model="doente.email" disabled></b-input>
+
+    <label>Contacto:</label>
+    <b-input v-model="doente.contact" disabled></b-input>
+
+    <label>Morada:</label>
+    <b-input v-model="doente.address" disabled></b-input>
+
+    <label>Médico:</label>
+    <b-input v-model="doente.profissionalEmail" disabled></b-input>
+
+    <br>
+    <br>
 
     <h4>Prescrições</h4>
     <b-table v-if="prescricoes.length" striped over :items="prescricoes" :fields="prescricoesFields">
       <template v-slot:cell(actions)="row">
-        <nuxt-link
-          class="btn btn-link"
-          :to="`/api/prescricoes/${row.item.id}/doentes`">Details</nuxt-link>
+        <b-button
+          variant="info"
+          :to="`/prescricoes/${row.item.id}`">
+          <b-icon icon="eyeFill"></b-icon>
+        </b-button>
       </template>
     </b-table>
     <p v-else>No prescrições associated.</p>
 
-    <div style="margin-top: 20px">
-      <nuxt-link to="/doentes">Back</nuxt-link>
-      <nuxt-link :to="`/doentes/${id}/dadosbiomedicos`">Dados Biomedicos</nuxt-link>
-      <nuxt-link :to=editUrl>Edit</nuxt-link>
-      <nuxt-link :to="newPrescricao">Associate doente with prescrição</nuxt-link>
+    <div style="margin-top: 20px" v-if="$auth.loggedIn">
+      <b-button v-if="$auth.user.groups[0] == 'Admin' || $auth.user.groups[0] == 'ProfissionalSaude'" to="/doentes">
+        Back
+      </b-button>
+      <b-button :to="`/doentes/${id}/dadosbiomedicos`">Dados Biomedicos</b-button>
+      <b-button variant="info" :to=editUrl>Edit</b-button>
+      <b-button variant="success" v-if="$auth.user.groups[0] == 'Admin' || $auth.user.groups[0] == 'ProfissionalSaude'"
+                :to="newPrescricao">Associar prescrição
+      </b-button>
       <p v-show="errorMsg">{{ errorMsg }}</p>
-      <button style="float: right" @click.prevent="deleteDoente">Delete</button>
+      <b-button variant="danger" v-if="$auth.user.groups[0] == 'Admin' || $auth.user.groups[0] == 'ProfissionalSaude'"
+                style="float: right" @click.prevent="deleteDoente">Delete
+      </b-button>
     </div>
   </b-container>
 </template>
 <script>
+import { BIcon, BIconPlus, BIconDash, BIconEyeFill } from 'bootstrap-vue'
 
 export default {
+  components: {
+    BIcon,
+    BIconPlus,
+    BIconDash,
+    BIconEyeFill
+  },
   data() {
     return {
       doente: {},
-      prescricoesFields: ['descricao', 'actions'],
+      prescricoesFields: [{
+        key: "descricao",
+        label: "Descrição"
+      },
+      {
+        key: "actions",
+        label: "Detalhes"
+      }
+      ],
       errorMsg: false,
     }
   },
-  methods:{
-    back(){
+  methods: {
+    back() {
       this.$router.go(-1)
     },
-    deleteDoente(){
+    deleteDoente() {
       this.$axios.$delete(`api/doentes/${this.id}`)
         .then(() => {
           this.$toast.success('Doente successfully deleted!').goAway(2000)
@@ -56,10 +92,10 @@ export default {
     id() {
       return this.$route.params.id
     },
-    editUrl(){
+    editUrl() {
       return this.id + "/edit"
     },
-    newPrescricao(){
+    newPrescricao() {
       return this.id + "/associateDoenteWithPrescricao"
     },
     prescricoes() {

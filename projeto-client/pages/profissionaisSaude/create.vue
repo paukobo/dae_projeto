@@ -11,7 +11,7 @@
         <b-form-group description="The email is required" label="Enter your email" label-for="email"
                       :invalid-feedback="invalidEmailFeedback" :state="isEmailValid">
           <b-input ref="email" v-model.trim="email" type="email" :state="isEmailValid" required
-                   pattern=".+@my.ipleiria.pt" placeholder="Enter your e-mail"/>
+                   placeholder="Enter your e-mail"/>
         </b-form-group>
 
         <b-form-group description="The password is required" label="Enter your password" label-for="password"

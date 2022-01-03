@@ -1,10 +1,12 @@
 package pt.ipleiria.estg.dei.ei.dae.dae_project.ws;
 
 import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.DoenteDTO;
+import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.PlanoDTO;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.PrescricaoDTO;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.PrescricaoDTO;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.ejbs.PrescricaoBean;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Doente;
+import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Plano;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Prescricao;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityExistsException;
@@ -42,6 +44,17 @@ public class PrescricaoService {
         Prescricao prescricao = prescricaoBean.findPrescricao(id);
         if (prescricao != null) {
             var dtos = doentesToDTOs(prescricao.getDoentes());
+            return Response.ok(dtos).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).entity("ERROR_FINDING_PRESCRICAO").build();
+    }
+
+    @GET
+    @Path("{id}/planos")
+    public Response getPrescricoesPlano(@PathParam("id") int id) {
+        Prescricao prescricao = prescricaoBean.findPrescricao(id);
+        if (prescricao != null) {
+            var dtos = planosToDTOs(prescricao.getPlanos());
             return Response.ok(dtos).build();
         }
         return Response.status(Response.Status.NOT_FOUND).entity("ERROR_FINDING_PRESCRICAO").build();
@@ -118,7 +131,9 @@ public class PrescricaoService {
                 prescricao.getDescricao(),
                 prescricao.getDataInicio(),
                 prescricao.getDataFim(),
-                prescricao.getDuracao()
+                prescricao.getDuracao(),
+                doentesToDTOs(prescricao.getDoentes()),
+                planosToDTOs(prescricao.getPlanos())
         );
     }
 
@@ -133,12 +148,23 @@ public class PrescricaoService {
                 doente.getPassword(),
                 doente.getContact(),
                 doente.getAddress(),
-                doente.getProfissionalSaude().getEmail(),
-                toDTOs(doente.getPrescricoes())
+                doente.getProfissionalSaude().getEmail()
         );
     }
 
     private List<DoenteDTO> doentesToDTOs(List<Doente> doentes){
         return doentes.stream().map(this::doenteToDTO).collect(Collectors.toList());
+    }
+
+    private PlanoDTO planoToDTO(Plano plano){
+        return new PlanoDTO(
+                plano.getIdPlano(),
+                plano.getDescricao(),
+                plano.getDuracao()
+        );
+    }
+
+    private List<PlanoDTO> planosToDTOs(List<Plano> planos){
+        return planos.stream().map(this::planoToDTO).collect(Collectors.toList());
     }
 }

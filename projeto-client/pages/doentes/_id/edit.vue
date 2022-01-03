@@ -1,13 +1,13 @@
 <template>
   <div>
 
-    <h1>Edit Doente</h1>
+    <h1>Editar Doente</h1>
 
     <form @submit.prevent="create" :disabled="!isFormValid" style="margin-left: 30px">
       <b-form-group
         id="name"
-        description="The name is required"
-        label="Name"
+        description="O nome é obrigatório"
+        label="Nome"
         label-for="name"
         :invalid-feedback="invalidNameFeedback"
         :state="isNameValid">
@@ -16,18 +16,20 @@
         <label>Email</label>
         <b-input  v-model="email" required disabled/>
         <br>
-        <label>Address</label>
+        <label>Morada</label>
         <b-input type="text" v-model.trim="address" :state="isAddressValid"/>
         <br>
-        <label>Contact</label>
-        <b-input v-model.trim="contact" required/>
+        <label>Contacto</label>
+        <b-input type="tel" pattern="[9]{1}[1|2|3|6]{1}[0-9]{8}" v-model.trim="contact" required/>
         <br>
+        <label>Profissional de Saúde</label>
+        <b-input v-model="profissionalEmail" disabled/>
       </b-form-group>
       <p v-show="errorMsg">{{ errorMsg }}</p>
-      <a href="#" @click.prevent="back()">Cancel</a>
-      <button type="reset" @click="reset">RESET</button>
-      <button @click.prevent="create"
-              :disabled="!isFormValid">SAVE</button>
+      <b-button variant="danger" href="#" @click.prevent="back()">Cancel</b-button>
+      <b-button type="reset" @click="reset">Reset</b-button>
+      <b-button variant="success" @click.prevent="create"
+              :disabled="!isFormValid">Save</b-button>
     </form>
   </div>
 </template>
@@ -48,8 +50,10 @@ export default {
       address: null,
       contact: null,
       password: null,
+      profissionalEmail: null,
       errorMsg: false,
-      doente: {}
+      doente: {},
+      profissionais: [],
     }
   },
 
@@ -57,17 +61,37 @@ export default {
     id() {
       return this.$route.params.id
     },
-    invalidNameFeedback () {
-      if (!this.name) {
+    invalidPasswordFeedback() {
+      if (!this.password) {
         return null
       }
-      let usernameLen = this.name.length
-      if (usernameLen < 3 || usernameLen > 25) {
-        return 'The Name must be between [3, 25] characters.'
+      let passwordLen = this.password.length
+      if (passwordLen < 8) {
+        return 'The password must have at least 8 characters.'
       }
       return ''
     },
-    isNameValid () {
+    isPasswordValid() {
+      if (!this.password) {
+        return null
+      }
+      let passwordLen = this.password.length
+      if (passwordLen < 3 || passwordLen > 255) {
+        return false
+      }
+      return true
+    },
+    invalidNameFeedback() {
+      if (!this.name) {
+        return null
+      }
+      let nameLen = this.name.length
+      if (nameLen < 2) {
+        return 'The name must have at least 2 characters.'
+      }
+      return ''
+    },
+    isNameValid() {
       if (!this.name) {
         return null
       }
@@ -77,19 +101,57 @@ export default {
       }
       return true
     },
-    isAddressValid(){
-      if (!this.address) {
+    invalidContactFeedback() {
+      if (!this.contact) {
         return null
       }
-      let addressLen = this.address.length
-      if (addressLen < 3 || addressLen > 50) {
+      let contactLen = this.contact.length
+      if (contactLen != 9) {
+        return 'The contact must have 9 digits.'
+      }
+      return ''
+    },
+    isContactValid() {
+      if (!this.contact) {
+        return null
+      }
+      let contactLen = this.contact.length
+      if (contactLen != 9) {
         return false
       }
       return true
     },
-    isFormValid () {
-
-      if (! this.isNameValid) {
+    invalidAddressFeedback() {
+      if (!this.address) {
+        return null
+      }
+      let addressLen = this.address.length
+      if (addressLen < 2 || addressLen > 75) {
+        return 'The adress must have between [2-75] characters.'
+      }
+      return ''
+    },
+    isAddressValid() {
+      if (!this.address) {
+        return null
+      }
+      let addressLen = this.address.length
+      if (addressLen < 2 || addressLen > 75) {
+        return false
+      }
+      return true
+    },
+    isFormValid() {
+      if (!this.isPasswordValid) {
+        return false
+      }
+      if (!this.isNameValid) {
+        return false
+      }
+      if (!this.isContactValid) {
+        return false
+      }
+      if (!this.isAddressValid) {
         return false
       }
       return true
@@ -107,6 +169,7 @@ export default {
       this.contact = this.doente.contact;
       this.password = this.doente.password;
       this.address = this.doente.address;
+      this.profissionalEmail = this.doente.profissionalEmail;
     },
 
     create() {
@@ -116,6 +179,7 @@ export default {
         password: this.password,
         address: this.address,
         contact: this.contact,
+        profissionalEmail: this.profissionalEmail
       }
 
       console.log(data)
@@ -136,6 +200,11 @@ export default {
       .then((doente) => {
         this.doente = doente || {}
         this.reset()
+      })
+
+    this.$axios.$get('/api/profissionaisSaude')
+      .then(profissionais => {
+        this.profissionais = profissionais
       })
   },
 }

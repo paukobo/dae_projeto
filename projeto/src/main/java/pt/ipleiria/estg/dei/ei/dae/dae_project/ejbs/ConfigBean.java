@@ -1,5 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.dae_project.ejbs;
 
+import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.Plano;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
@@ -29,6 +31,9 @@ public class ConfigBean {
     @EJB
     private PrescricaoBean prescricaoBean;
 
+    @EJB
+    private PlanoBean planoBean;
+
     private static final Logger logger = Logger.getLogger("ejbs.ConfigBean");
 
 
@@ -49,6 +54,11 @@ public class ConfigBean {
             prescricaoBean.disassociatePrescricaoWithDoente(2, "joao2@mail.pt");
             prescricaoBean.associatePrescricaoWithDoente(2, "joao3@mail.pt");
 
+            planoBean.create("teste", 12);
+            planoBean.create("teste2", 21);
+            planoBean.associatePlanoWithPrescricao(3, 2);
+            planoBean.associatePlanoWithPrescricao(4, 2);
+            planoBean.disassociatePlanoWithPrescricao(4, 2);
 
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage());
