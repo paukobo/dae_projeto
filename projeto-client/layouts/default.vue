@@ -37,6 +37,8 @@ export default {
       this.$auth.logout()
       this.$router.push('/')
     }
+  }, mounted() {
+    console.log(this.$auth.user)
   }
 }
 </script>

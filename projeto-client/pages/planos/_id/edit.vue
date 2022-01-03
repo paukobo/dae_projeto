@@ -80,8 +80,8 @@ export default {
     },
     reset () {
       this.errorMsg = false
-      this.descricao = this.prescricao.descricao;
-      this.duracao = this.prescricao.duracao;
+      this.descricao = this.plano.descricao;
+      this.duracao = this.plano.duracao;
     },
 
     create() {
