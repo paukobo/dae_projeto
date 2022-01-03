@@ -4,14 +4,23 @@
       <h2>Sem dados!</h2>
     </div>
     <div v-else>
-      <p class="mt-3">Current Page: {{ currentPage }}</p>
+      <label>Dado Type</label>
+      <b-select v-model="tipoId" :options="tipos" value-field="id" text-field="nome">
+        <template v-slot:first>
+          <option :value="null">-- No Type Filter --</option>
+        </template>
+      </b-select>
 
+      <p class="mt-3">Current Page: {{ currentPage }}</p>
       <b-table
         id="my-table"
         :items="dados"
         :fields="fields"
         :per-page="perPage"
         :current-page="currentPage"
+        :filter="String(tipoId)"
+        :filter-function="filterTipo"
+        @filtered="onFiltered"
         small
       ></b-table>
 
@@ -35,6 +44,8 @@ export default {
       perPage: 10,
       currentPage: 1,
       dados: [],
+      tipos: [],
+      tipoId: null,
       fields: ['nome', 'valorQuantitativo','valorQuantitativo', 'unidade', 'valorQualitativo', 'date']
     }
   },
@@ -49,10 +60,29 @@ export default {
   created() {
     this.$axios.$get(`/api/doentes/${this.id}/dadosbiomedicos`)
       .then((dados) => {
-        console.log(dados)
         this.dados = dados
       })
+    this.$axios.$get(`/api/dadosbiomedicos`)
+      .then((tipos) => {
+        this.tipos = tipos
+      })
   },
+  methods:{
+    filterTipo(row, filter){
+      if(filter == "null"){
+        return true
+      }else if(row.tipoId == filter){
+        return true
+      }else{
+        return false
+      }
+    },
+    onFiltered(filteredItems) {
+      // Trigger pagination to update the number of buttons/pages due to filtering
+      this.totalRows = filteredItems.length
+      this.currentPage = 1
+    }
+  }
 }
 </script>
 

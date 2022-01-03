@@ -21,6 +21,13 @@
     "_name": "_c335498c"
   },
   {
+    "name": "prescricoes",
+    "path": "/prescricoes",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\prescricoes\\\\index.vue",
+    "chunkName": "pages/prescricoes/index",
+    "_name": "_7a2730e4"
+  },
+  {
     "name": "profissionaisSaude",
     "path": "/profissionaisSaude",
     "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\profissionaisSaude\\\\index.vue",
@@ -33,6 +40,20 @@
     "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\admins\\\\create.vue",
     "chunkName": "pages/admins/create",
     "_name": "_29f70f54"
+  },
+  {
+    "name": "admins-remove",
+    "path": "/admins/remove",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\admins\\\\remove.vue",
+    "chunkName": "pages/admins/remove",
+    "_name": "_4a3a6844"
+  },
+  {
+    "name": "admins-update",
+    "path": "/admins/update",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\admins\\\\update.vue",
+    "chunkName": "pages/admins/update",
+    "_name": "_f0773cba"
   },
   {
     "name": "auth-login",
@@ -56,11 +77,46 @@
     "_name": "_55fa56c4"
   },
   {
+    "name": "doentes-remove",
+    "path": "/doentes/remove",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\doentes\\\\remove.vue",
+    "chunkName": "pages/doentes/remove",
+    "_name": "_45d8aa4c"
+  },
+  {
+    "name": "doentes-update",
+    "path": "/doentes/update",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\doentes\\\\update.vue",
+    "chunkName": "pages/doentes/update",
+    "_name": "_1a8b7fde"
+  },
+  {
+    "name": "prescricoes-create",
+    "path": "/prescricoes/create",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\prescricoes\\\\create.vue",
+    "chunkName": "pages/prescricoes/create",
+    "_name": "_1b19934c"
+  },
+  {
     "name": "profissionaisSaude-create",
     "path": "/profissionaisSaude/create",
     "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\profissionaisSaude\\\\create.vue",
     "chunkName": "pages/profissionaisSaude/create",
     "_name": "_cc409332"
+  },
+  {
+    "name": "profissionaisSaude-remove",
+    "path": "/profissionaisSaude/remove",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\profissionaisSaude\\\\remove.vue",
+    "chunkName": "pages/profissionaisSaude/remove",
+    "_name": "_ec83ec22"
+  },
+  {
+    "name": "profissionaisSaude-update",
+    "path": "/profissionaisSaude/update",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\profissionaisSaude\\\\update.vue",
+    "chunkName": "pages/profissionaisSaude/update",
+    "_name": "_369f9fb4"
   },
   {
     "name": "admins-id",
@@ -84,6 +140,13 @@
     "_name": "_458ce620"
   },
   {
+    "name": "prescricoes-id",
+    "path": "/prescricoes/:id",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\prescricoes\\\\_id\\\\index.vue",
+    "chunkName": "pages/prescricoes/_id/index",
+    "_name": "_34c00ab6"
+  },
+  {
     "name": "profissionaisSaude-id",
     "path": "/profissionaisSaude/:id",
     "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\profissionaisSaude\\\\_id\\\\index.vue",
@@ -105,6 +168,13 @@
     "_name": "_0c855e4d"
   },
   {
+    "name": "doentes-id-associateDoenteWithPrescricao",
+    "path": "/doentes/:id/associateDoenteWithPrescricao",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\doentes\\\\_id\\\\associateDoenteWithPrescricao.vue",
+    "chunkName": "pages/doentes/_id/associateDoenteWithPrescricao",
+    "_name": "_253b59c4"
+  },
+  {
     "name": "doentes-id-dadosbiomedicos",
     "path": "/doentes/:id/dadosbiomedicos",
     "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\doentes\\\\_id\\\\dadosbiomedicos\\\\index.vue",
@@ -117,6 +187,13 @@
     "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\doentes\\\\_id\\\\edit.vue",
     "chunkName": "pages/doentes/_id/edit",
     "_name": "_2969f92c"
+  },
+  {
+    "name": "prescricoes-id-edit",
+    "path": "/prescricoes/:id/edit",
+    "component": "C:\\\\DAE\\\\dae_projeto\\\\projeto-client\\\\pages\\\\prescricoes\\\\_id\\\\edit.vue",
+    "chunkName": "pages/prescricoes/_id/edit",
+    "_name": "_00d62c54"
   },
   {
     "name": "profissionaisSaude-id-edit",
