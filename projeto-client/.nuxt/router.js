@@ -16,8 +16,6 @@ const _7bbf9be8 = () => interopDefault(import('..\\pages\\admins\\update.vue' /*
 const _026a29b6 = () => interopDefault(import('..\\pages\\auth\\login.vue' /* webpackChunkName: "pages/auth/login" */))
 const _565a709e = () => interopDefault(import('..\\pages\\dadosbiomedicos\\create.vue' /* webpackChunkName: "pages/dadosbiomedicos/create" */))
 const _3d3335c2 = () => interopDefault(import('..\\pages\\doentes\\create.vue' /* webpackChunkName: "pages/doentes/create" */))
-const _5d768eb2 = () => interopDefault(import('..\\pages\\doentes\\remove.vue' /* webpackChunkName: "pages/doentes/remove" */))
-const _7e264e6c = () => interopDefault(import('..\\pages\\doentes\\update.vue' /* webpackChunkName: "pages/doentes/update" */))
 const _0da94e38 = () => interopDefault(import('..\\pages\\planos\\create.vue' /* webpackChunkName: "pages/planos/create" */))
 const _9baac196 = () => interopDefault(import('..\\pages\\prescricoes\\create.vue' /* webpackChunkName: "pages/prescricoes/create" */))
 const _6624b12c = () => interopDefault(import('..\\pages\\profissionaisSaude\\create.vue' /* webpackChunkName: "pages/profissionaisSaude/create" */))
@@ -100,14 +98,6 @@ export const routerOptions = {
     path: "/doentes/create",
     component: _3d3335c2,
     name: "doentes-create"
-  }, {
-    path: "/doentes/remove",
-    component: _5d768eb2,
-    name: "doentes-remove"
-  }, {
-    path: "/doentes/update",
-    component: _7e264e6c,
-    name: "doentes-update"
   }, {
     path: "/planos/create",
     component: _0da94e38,

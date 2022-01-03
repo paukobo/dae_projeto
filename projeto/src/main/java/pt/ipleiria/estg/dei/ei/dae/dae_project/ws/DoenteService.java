@@ -95,12 +95,6 @@ public class DoenteService {
     @GET
     @Path("/{email}")
     public Response getDoenteDetails(@PathParam("email") String id) {
-
-        Principal principal = securityContext.getUserPrincipal();
-        if(!(securityContext.isUserInRole("Admin") || securityContext.isUserInRole("Doente") || securityContext.isUserInRole("ProfissionalSaude") && principal.getName().equals(id))) {
-            return Response.status(Response.Status.FORBIDDEN).build();
-        }
-
         Doente doente = doenteBean.findDoente(id);
         if (doente != null) {
             return Response.ok(toDTO(doente)).build();

@@ -23,6 +23,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
         </web-resource-collection>
         <auth-constraint>
             <role-name>Admin</role-name>
+            <role-name>ProfissionalSaude</role-name>
         </auth-constraint>
     </security-constraint>
     <security-constraint>
@@ -34,6 +35,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
         </web-resource-collection>
         <auth-constraint>
             <role-name>Admin</role-name>
+            <role-name>ProfissionalSaude</role-name>
         </auth-constraint>
     </security-constraint>
     <security-role>
@@ -41,7 +43,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
         <role-name>Admin</role-name>
     </security-role>
     <security-role>
-        <description>Profissional Saúde role</description>
+        <description>ProfissionalSaude role</description>
         <role-name>ProfissionalSaude</role-name>
     </security-role>
     <login-config>

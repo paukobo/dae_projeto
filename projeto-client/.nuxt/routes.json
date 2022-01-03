@@ -72,18 +72,6 @@
     "chunkName": "pages/doentes/create"
   },
   {
-    "name": "doentes-remove",
-    "path": "/doentes/remove",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\doentes\\\\remove.vue",
-    "chunkName": "pages/doentes/remove"
-  },
-  {
-    "name": "doentes-update",
-    "path": "/doentes/update",
-    "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\doentes\\\\update.vue",
-    "chunkName": "pages/doentes/update"
-  },
-  {
     "name": "planos-create",
     "path": "/planos/create",
     "component": "E:\\\\AULAS\\\\IPL\\\\20212022\\\\DAE\\\\projetoDAE\\\\projeto-client\\\\pages\\\\planos\\\\create.vue",

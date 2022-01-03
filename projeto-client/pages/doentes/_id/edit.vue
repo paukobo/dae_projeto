@@ -1,12 +1,12 @@
 <template>
   <div>
 
-    <h1>Edit Doente</h1>
+    <h1>Editar Doente</h1>
 
     <form @submit.prevent="create" :disabled="!isFormValid" style="margin-left: 30px">
       <b-form-group
         id="name"
-        description="The name is required"
+        description="O nome é obrigatório"
         label="Nome"
         label-for="name"
         :invalid-feedback="invalidNameFeedback"
@@ -20,16 +20,16 @@
         <b-input type="text" v-model.trim="address" :state="isAddressValid"/>
         <br>
         <label>Contacto</label>
-        <b-input type="number" pattern="[9]{1}[1|2|3|6]{1}[0-9]{8}" v-model.trim="contact" required/>
+        <b-input type="tel" pattern="[9]{1}[1|2|3|6]{1}[0-9]{8}" v-model.trim="contact" required/>
         <br>
         <label>Profissional de Saúde</label>
         <b-input v-model="profissionalEmail" disabled/>
       </b-form-group>
       <p v-show="errorMsg">{{ errorMsg }}</p>
-      <a href="#" @click.prevent="back()">Cancel</a>
-      <button type="reset" @click="reset">RESET</button>
-      <button @click.prevent="create"
-              :disabled="!isFormValid">SAVE</button>
+      <b-button variant="danger" href="#" @click.prevent="back()">Cancel</b-button>
+      <b-button type="reset" @click="reset">Reset</b-button>
+      <b-button variant="success" @click.prevent="create"
+              :disabled="!isFormValid">Save</b-button>
     </form>
   </div>
 </template>

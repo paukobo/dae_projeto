@@ -5,10 +5,12 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav v-if="$auth.loggedIn">
-          <b-nav-item href="/dadosbiomedicos">Dados Biomédicos</b-nav-item>
-          <b-nav-item href="/doentes">Doentes</b-nav-item>
-          <b-nav-item href="/admins">Administradores</b-nav-item>
-          <b-nav-item href="/profissionaisSaude">Profissionais de Saúde</b-nav-item>
+          <b-container v-if="$auth.user.groups[0] == 'Admin' || $auth.user.groups[0] == 'ProfissionalSaude'">
+              <b-nav-item href="/dadosbiomedicos">Dados Biomédicos</b-nav-item>
+              <b-nav-item href="/doentes">Doentes</b-nav-item>
+              <b-nav-item href="/admins">Administradores</b-nav-item>
+              <b-nav-item href="/profissionaisSaude">Profissionais de Saúde</b-nav-item>
+          </b-container>
         </b-navbar-nav>
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
@@ -17,6 +19,7 @@
             <template #button-content>
               <em>{{ $auth.user.sub }}</em>
             </template>
+            <b-dropdown-item @click.prevent="profile">Profile</b-dropdown-item>
             <b-dropdown-item @click.prevent="signOut">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
           <li class="nav-item" v-else>
@@ -36,9 +39,18 @@ export default {
     signOut() {
       this.$auth.logout()
       this.$router.push('/')
+    },
+    profile() {
+      if (this.$auth.loggedIn){
+        if (this.$auth.user.groups[0] == 'Doente'){
+          this.$router.push('/doentes/' + this.$auth.user.sub)
+        } else if (this.$auth.user.groups[0] == 'Admin') {
+          this.$router.push('/admins/' + this.$auth.user.sub)
+        } else {
+          this.$router.push('/profissionaisSaude/' + this.$auth.user.sub)
+        }
+      }
     }
-  }, mounted() {
-    console.log(this.$auth.user)
   }
 }
 </script>
