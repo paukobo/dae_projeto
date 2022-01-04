@@ -1,10 +1,10 @@
 <template>
   <div>
-  <h1>Add a new Dado Biomedico Info</h1>
+  <h1>Adicionar novo Dado Biomedico</h1>
 
   <form @submit.prevent="create" :disabled="!isFormValid" style="margin-left: 30px">
     <b-form-group>
-      <label>Dado Type</label>
+      <label>Tipo</label>
       <b-select v-model="tipoId" :options="tipos"
                 :state="isTipoValid" required value-field="id" text-field="nome">
         <template v-slot:first>
@@ -14,24 +14,24 @@
       <div v-if="isTipoValid">
         <br>
         <div v-if="selectedTipo.valorMax != 0 && selectedTipo.valorMin != 0">
-          <label>Quantitative Value([{{this.selectedTipo.valorMin}} - {{this.selectedTipo.valorMax}}] {{this.selectedTipo.unidades}})</label>
+          <label>Valor Quantitativo([{{this.selectedTipo.valorMin}} - {{this.selectedTipo.valorMax}}] {{this.selectedTipo.unidades}})</label>
           <b-input type="number" :state="isValueValid" v-model.trim="valor"/>
           <br>
         </div>
         <div v-if="selectedTipo.valoresQualitativos != null && selectedTipo.valoresQualitativos.length !== 0">
-          <label>Qualitative Value</label>
+          <label>Valor Qualitativo</label>
           <b-select v-model="valorQualitativo" :options="selectedTipo.valoresQualitativos"
                     :state="isQualitativeValid" required>
             <template v-slot:first>
-              <option :value="null">-- Please select the Qualitative Value --</option>
+              <option :value="null">-- Selecione um Valor Qualitativo --</option>
             </template>
           </b-select>
           <br>
         </div>
-        <label>Date</label>
+        <label>Data</label>
         <b-input type="date" v-model.trim="date" :state="isDateValid" :max="today" required/>
         <br>
-        <label>Time</label>
+        <label>Hora</label>
         <b-input type="time" v-model.trim="time" :state="isTimeValid" required/>
       </div>
 

@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.dae_project.ejbs;
 
 import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.TipoDadoBiomedico;
+import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.DuplicateKeyException;
@@ -31,7 +32,7 @@ public class TipoDadoBiomedicoBean {
         em.persist(d);
     }
 
-    public void update(int id, String newNome, String descricao, double valorMin, double valorMax, String unidades, List<String> valorQualitativo) throws MyEntityNotFoundException, DuplicateKeyException {
+    public void update(int id, String newNome, String descricao, double valorMin, double valorMax, String unidades, List<String> valorQualitativo) throws MyEntityNotFoundException, MyEntityExistsException {
         TipoDadoBiomedico dadoBiomedico = findTipoDadoBiomedico(id);
 
         if(dadoBiomedico == null) {
@@ -39,7 +40,7 @@ public class TipoDadoBiomedicoBean {
         }
 
         if(newNome != dadoBiomedico.getNome() && findTipoDadoBiomedico(newNome) != null){
-            throw new DuplicateKeyException();
+            throw new MyEntityExistsException();
         }
         em.lock(dadoBiomedico, LockModeType.PESSIMISTIC_WRITE);
 

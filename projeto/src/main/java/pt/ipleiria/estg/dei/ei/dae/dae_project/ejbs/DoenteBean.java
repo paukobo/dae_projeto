@@ -102,8 +102,6 @@ public class DoenteBean {
         return true;
     }
 
-
-
     public List<Doente> getAllDoentes() {
         return (List<Doente>) em.createNamedQuery("getAllDoentes").getResultList();
     }

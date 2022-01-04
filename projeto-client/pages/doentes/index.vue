@@ -22,7 +22,7 @@
     <div v-if="$auth.user.groups[0] == 'Admin' || $auth.user.groups[0] == 'ProfissionalSaude'">
       <b-button style="float: right" variant="success" to="/doentes/create">Novo doente</b-button>
     </div>
-    <b-button to="/">Back</b-button>
+    <b-button to="/">Voltar</b-button>
   </b-container>
 </template>
 <script>

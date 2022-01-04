@@ -20,18 +20,18 @@ public class DadoBiomedicoBean {
     @PersistenceContext
     private EntityManager em;
 
-    public void create(DadoBiomedicoDTO dado, String doenteId) throws MyEntityNotFoundException, ParseException {
+    public void create(int tipoId, double valorQuantitativo, String valorQualitativo, Date date, String doenteId) throws MyEntityNotFoundException {
         Doente doente = em.find(Doente.class, doenteId);
         if(doente == null){
             throw new MyEntityNotFoundException("Doente Not Found");
         }
 
-        TipoDadoBiomedico tipo = em.find(TipoDadoBiomedico.class, dado.getTipoId());
+        TipoDadoBiomedico tipo = em.find(TipoDadoBiomedico.class, tipoId);
         if(tipo == null){
             throw new MyEntityNotFoundException("Tipo Dado Not Found");
         }
-        Date date = new SimpleDateFormat("yyyy/MM/dd HH:mm").parse(dado.getDate());
-        DadoBiomedico d = new DadoBiomedico(tipo.getNome(), doente, tipo, tipo.getUnidades(), dado.getValorQuantitativo(),dado.getValorQualitativo(), date);
+
+        DadoBiomedico d = new DadoBiomedico(tipo.getNome(), doente, tipo, tipo.getUnidades(), valorQuantitativo,valorQualitativo, date);
         em.persist(d);
     }
 
@@ -39,4 +39,5 @@ public class DadoBiomedicoBean {
         Doente doente = em.find(Doente.class, doenteId);
         return (List<DadoBiomedico>) em.createNamedQuery("getAllDadoBiomedicoDoente").setParameter("doente", doente).getResultList();
     }
+
 }

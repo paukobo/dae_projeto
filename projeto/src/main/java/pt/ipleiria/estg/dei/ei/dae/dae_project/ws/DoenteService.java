@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.dae_project.ws;
 
 import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.DadoBiomedicoDTO;
+import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.DadoBiomedicoStatsDTO;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.DoenteDTO;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.ejbs.DadoBiomedicoBean;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.PrescricaoDTO;
@@ -23,6 +24,7 @@ import javax.ws.rs.core.SecurityContext;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -75,9 +77,15 @@ public class DoenteService {
 
     @POST
     @Path("/{email}/dadosbiomedicos")
-    public Response createNewDadoBiomedico (@PathParam("email") String id,DadoBiomedicoDTO dadoBiomedicoDTO) throws MyEntityNotFoundException, ParseException {
-        dadoBiomedicoBean.create(dadoBiomedicoDTO,id);
-        return Response.status(Response.Status.CREATED).build();
+    public Response createNewDadoBiomedico (@PathParam("email") String id,DadoBiomedicoDTO dadoBiomedicoDTO) throws MyEntityNotFoundException {
+        try{
+            Date formatedDate = new SimpleDateFormat("yyyy/MM/dd HH:mm").parse(dadoBiomedicoDTO.getDate());
+            dadoBiomedicoBean.create(dadoBiomedicoDTO.getTipoId(), dadoBiomedicoDTO.getValorQuantitativo(), dadoBiomedicoDTO.getValorQualitativo(), formatedDate, id);
+            return Response.status(Response.Status.CREATED).build();
+        }catch (ParseException e){
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+
     }
 
     @GET

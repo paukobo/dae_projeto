@@ -42,7 +42,7 @@ export default {
   methods: {
     signOut() {
       this.$auth.logout()
-      this.$router.push('/')
+      this.$router.push('/auth/login')
     },
     profile() {
       if (this.$auth.loggedIn){

@@ -1,33 +1,33 @@
 <template>
   <div>
 
-    <h1>Create a new Dado Biomedico</h1>
+    <h1>Criar novo Tipo de Dado Biomedico</h1>
 
     <form @submit.prevent="create" :disabled="!isFormValid" style="margin-left: 30px">
       <b-form-group
         id="name"
-        description="The name is required"
-        label="Enter the name"
+        description="Nome é obrigatorio"
+        label="Nome"
         label-for="name"
         :invalid-feedback="invalidNameFeedback"
         :state="isNameValid">
         <b-input id="name" v-model.trim="name" :state="isNameValid" trim/>
         <br>
-        <label>Description</label>
+        <label>Descrição</label>
         <b-input  v-model="description"  required/>
         <br>
-        <label>Minimum value</label>
+        <label>Valor Minimo</label>
         <b-input type="number" :state="isValuesValid" v-model.trim="valorMin"/>
         <br>
-        <label>Max value</label>
+        <label>Valor Maximo</label>
         <b-input type="number" v-model.trim="valorMax" :state="isValuesValid"/>
         <br>
         <label>Unidades</label>
         <b-input v-model.trim="unidades" required/>
         <br>
-        <label>Qualitative Values</label>
+        <label>Valores Qualitativos</label>
         <div v-for="(dado, index) in qualitativos" style="display: grid;grid-template-columns: 40px 500px 40px 50px">
-          <label style="grid-row-start:1; grid-column-start:2">{{index + 1}}º Qualitative Value</label>
+          <label style="grid-row-start:1; grid-column-start:2">{{index + 1}}º Valor Qualitativo</label>
           <b-input v-model.trim="dado.dadoText" required style="grid-row-start:2; grid-column-start:2"/>
           <b-button v-on:click="remove(index)" style="grid-row-start:2; grid-column-start:4"><b-icon icon="dash"/></b-button>
         </div>
@@ -139,7 +139,7 @@ export default {
   methods: {
     reset () {
       this.errorMsg = false
-      this.qualitativos.splice(1,this.qualitativos.length -1)
+      this.qualitativos= []
     },
 
     create() {

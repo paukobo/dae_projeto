@@ -47,7 +47,7 @@
       </b-button>
     </div>
     <br>
-    <b-button @click.prevent="$router.go(-1)">Voltar</b-button>
+    <b-button @click.prevent="back()">Voltar</b-button>
   </b-container>
 </template>
 <script>
@@ -77,7 +77,10 @@ export default {
   },
   methods: {
     back() {
-      this.$router.go(-1)
+      if(this.$auth.user.groups[0] == "Doente"){
+        this.$router.push("/")
+      }
+      else this.$router.go(-1)
     },
     deleteDoente() {
       this.$axios.$delete(`api/doentes/${this.id}`)

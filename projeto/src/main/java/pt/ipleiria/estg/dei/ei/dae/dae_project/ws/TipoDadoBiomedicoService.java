@@ -3,9 +3,9 @@ package pt.ipleiria.estg.dei.ei.dae.dae_project.ws;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.dtos.TipoDadoBiomedicoDTO;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.ejbs.TipoDadoBiomedicoBean;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.entities.TipoDadoBiomedico;
+import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.dae_project.exceptions.MyEntityNotFoundException;
 
-import javax.ejb.DuplicateKeyException;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -63,7 +63,7 @@ public class TipoDadoBiomedicoService {
 
     @PUT
     @Path("{id}")
-    public Response updateTipoDadoBiomedico (@PathParam("id") int id, TipoDadoBiomedicoDTO dadoBiomedicoDTO) throws MyEntityNotFoundException, DuplicateKeyException {
+    public Response updateTipoDadoBiomedico (@PathParam("id") int id, TipoDadoBiomedicoDTO dadoBiomedicoDTO) throws MyEntityNotFoundException, MyEntityExistsException {
 
         biomedicoBean.update(id, dadoBiomedicoDTO.getNome(), dadoBiomedicoDTO.getDescricao(),  dadoBiomedicoDTO.getValorMin(), dadoBiomedicoDTO.getValorMax(),dadoBiomedicoDTO.getUnidades(),dadoBiomedicoDTO.getValoresQualitativos());
         TipoDadoBiomedico dadoBiomedico = biomedicoBean.findTipoDadoBiomedico(id);

@@ -8,6 +8,9 @@ import java.util.Date;
 @NamedQueries({
         @NamedQuery(
                 name = "getAllDadoBiomedicoDoente", query = "SELECT s FROM DadoBiomedico s WHERE s.doente = :doente ORDER BY s.date DESC"
+        ),
+        @NamedQuery(
+                name = "getDadoBiomedicoStats", query = "SELECT s FROM DadoBiomedico s WHERE s.date > :dateI AND s.date < :dateF"
         )
 })
 public class DadoBiomedico {
